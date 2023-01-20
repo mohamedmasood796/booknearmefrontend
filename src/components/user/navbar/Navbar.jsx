@@ -1,6 +1,7 @@
 import React from 'react'
 import "./navbar.css"
 import { useState } from "react"
+import {Link} from "react-router-dom"
 
 
 function Navbar() {
@@ -8,7 +9,9 @@ function Navbar() {
     return (
         <div className='navbar h-12  bg-[#003580] flex justify-center'>
             <div className="navContainer w-full container text-white flex items-center justify-between">
-                <div className="logo  font-medium">BookNearMe</div>
+                <Link to='/'>
+                    <div className="logo  font-medium">BookNearMe</div>
+                </Link>
                 <div className="navItems flex ">
                     <button className="hidden md:block py-1 px-4 border-2 border-white text-white">List Your Property</button>
                     <button className="navButton hidden md:block ml-5 py-1 px-4 bg-white text-blue-700 cursor-pointer">Register</button>
