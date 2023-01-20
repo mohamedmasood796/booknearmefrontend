@@ -1,9 +1,16 @@
 import React from 'react'
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import useFetch from '../../../hooks/useFetch';
 
 function HotelPage() {
+    const location=useLocation()
+    const id=location.split('/',[2])
+    console.log("masood location",location)
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
+
+    const {data,loading,error}=useFetch(`/hotels/${id}`)
     const photos = [
         {
             src: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/213687017.jpg?k=ac75774c4c0288b621c3ad8d5faeec6cb08e23836cb4daccc537b01ed9582ae4&o=&hp=1'

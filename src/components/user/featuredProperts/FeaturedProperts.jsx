@@ -6,7 +6,7 @@ function FeaturedProperts() {
 
     return (
         <div className='fp w-full container flex justify-between gap-5'>
-            {loading ? ("Loading") :( <>
+            {loading ? ("Loading") : (<>
                 {data.map(item => (
 
                     <div className="fpItem flex-1 gap-3 flex flex-col" key={item._id}>
@@ -14,7 +14,7 @@ function FeaturedProperts() {
                         <span className="fpName font-bold ">{item.name}</span>
                         <span className="fpCity font-light">{item.city}</span>
                         <span className="fpPrice font-medium">Starting from ${item.cheapestPrice}</span>
-                        { item.rating && <div className="fpRating">
+                        {item.rating && <div className="fpRating">
                             <button className='bg-[#003580] text-white p-1 font-semibold' >{item.rating}</button>
                             <span>Excellent</span>
                         </div>}

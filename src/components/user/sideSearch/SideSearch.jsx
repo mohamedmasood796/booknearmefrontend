@@ -5,6 +5,8 @@ import { useState } from 'react'
 import { format } from 'date-fns'
 import { DateRange } from 'react-date-range'
 import SearchItem from '../searchItem/SearchItem'
+import useFetch from '../../../hooks/useFetch'
+
 
 
 function SideSearch() {
@@ -13,6 +15,14 @@ function SideSearch() {
     const [date, setDate] = useState(location.state.date)
     const [openDate, setOpenDate] = useState(false)
     const [options, setOptions] = useState(location.state.options)
+    const [min, setMin] = useState(undefined)
+    const [max, setMax] = useState(undefined)
+    const { data, loading, error, reFetch } = useFetch(`http://localhost:5000/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999999}`)
+    console.log("mubu pottan ennpottan",data) 
+
+    const handleClick=()=>{
+        reFetch()
+    }
     return (
         <div className='listContainer '>
             <div className='listWrapper '>
@@ -20,7 +30,7 @@ function SideSearch() {
                     <h1 className="lsTitle ">Search</h1>
                     <div className="lsItem">
                         <label htmlFor="">Destination</label>
-                        <input type="text" placeholder={destination} />
+                        <input type="text"  placeholder={destination} />
                     </div>
                     <div className="lsItem">
                         <label htmlFor="">Check-in Date</label>
@@ -38,11 +48,11 @@ function SideSearch() {
                         <div className="lsOptions">
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Min Price <small>per night</small></span>
-                                <input type="number" className='isOptionInput' />
+                                <input type="number" onChange={e=>setMin(e.target.value)} className='isOptionInput' />
                             </div>
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Max Price <small>per night</small></span>
-                                <input type="number" className='isOptionInput' />
+                                <input type="number" onChange={e=>setMax(e.target.value)} className='isOptionInput' />
                             </div>
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Adult</span>
@@ -58,15 +68,15 @@ function SideSearch() {
                             </div>
                         </div>
                     </div>
-                    <button>Search</button>
+                    <button onClick={handleClick}>Search</button>
                 </div>
                 <div className="listResult ">
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
+                    {loading ? "loading " : <>
+                        {data.map(item => (
+                            <SearchItem  item={item} key={item._id} />
+                        ))}
+                    </>
+                    }
                 </div>
             </div>
         </div>
