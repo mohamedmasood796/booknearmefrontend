@@ -1,0 +1,10 @@
+.siDesc{
+    flex:2
+}
+
+/* .siTexiOp{
+    width: max-content;
+} */
+.siDetails{
+    flex: 1;
+}
