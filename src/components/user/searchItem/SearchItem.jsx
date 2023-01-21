@@ -9,7 +9,7 @@ function searchItem({ item }) {
                 className='siImg w-52 h-52 object-cover gap-2.5 ' />
             <div className="siDesc flex flex-col gap-y-1">
                 <h1 className="siTitle font-bold text-xl text-[#0071c2]">{item.name}</h1>
-                <span className="siDistance text-xs">{item.distance}m frm center</span>
+                <span className="siDistance text-xs">{item.distance}m from center</span>
                 <span className="siTexiOp text-xs bg-[#008009] text-white max-w-fit p-1 rounded">Free airport taxi</span>
                 <span className="siSubtitle font-bold text-xs pt-2">
                     Studio Apartment with Air conditioning

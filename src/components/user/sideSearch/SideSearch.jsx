@@ -48,23 +48,23 @@ function SideSearch() {
                         <div className="lsOptions">
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Min Price <small>per night</small></span>
-                                <input type="number" onChange={e=>setMin(e.target.value)} className='isOptionInput' />
+                                <input  onChange={e=>setMin(e.target.value)} className='isOptionInput' />
                             </div>
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Max Price <small>per night</small></span>
-                                <input type="number" onChange={e=>setMax(e.target.value)} className='isOptionInput' />
+                                <input  onChange={e=>setMax(e.target.value)} className='isOptionInput' />
                             </div>
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Adult</span>
-                                <input type="number" min={1} className='isOptionInput' placeholder={options.adult} />
+                                <input  min={1} className='isOptionInput' placeholder={options.adult} />
                             </div>
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Children</span>
-                                <input type="number" min={0} className='isOptionInput' placeholder={options.children} />
+                                <input  min={0} className='isOptionInput' placeholder={options.children} />
                             </div>
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Room</span>
-                                <input type="number" min={1} className='isOptionInput' placeholder={options.room} />
+                                <input  min={1} className='isOptionInput' placeholder={options.room} />
                             </div>
                         </div>
                     </div>
