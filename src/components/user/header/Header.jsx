@@ -6,8 +6,11 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns'
 import {useNavigate} from "react-router-dom"
+import {useDispatch} from "react-redux"
+import { searchbarAction } from '../../../redux/Searchbar';
 
 function Header({ type }) {
+    const dispatch=useDispatch()
     const [destination, setDestination] = useState('')
     const [openDate, setOpenDate] = useState(false)
     const [dates, setDates] = useState([
@@ -35,6 +38,8 @@ function Header({ type }) {
     }
 
     const handleSearch =()=>{
+        
+        dispatch(searchbarAction.newSearch({city:destination,options:options,dates:dates[0]}))
         navigate('/hotels',{state:{destination,dates,options}})
     }
     return (
@@ -68,7 +73,7 @@ function Header({ type }) {
 
                         <div className="headerSearchItem">
                             <ion-icon className='headerIcon' name="calendar-number-outline"></ion-icon>
-                            <span onClick={() => setOpenDate(!openDate)} className='headerSearchText'> {`${format(dates[0].startDate, 'MM/dd/yyyy')} to ${format(dates[0].endDate, 'MM/dd/yyyy')} `} </span>
+                            <span onClick={() => setOpenDate(!openDate)} className='headerSearchText'> {`${format(dates[0]?.startDate, 'MM/dd/yyyy')} to ${format(dates[0]?.endDate, 'MM/dd/yyyy')} `} </span>
 
                             {openDate && <DateRange
                                 editableDateInputs={true}

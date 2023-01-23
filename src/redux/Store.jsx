@@ -1,8 +1,9 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import searchbar from "./Searchbar";
+import { configureStore } from "@reduxjs/toolkit";
+import searchbar from "./Searchbar";
+import Authuser from "./Authuser";
 
 
-// const Store=configureStore({
-//     reducer:{searchresult:searchbar}
-// })
-// export default Store;
+const Store=configureStore({
+    reducer:{searchresult:searchbar.reducer,user:Authuser.reducer}
+})
+export default Store;

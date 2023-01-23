@@ -12,13 +12,12 @@ import useFetch from '../../../hooks/useFetch'
 function SideSearch() {
     const location = useLocation()
     const [destination, setDestination] = useState(location.state.destination)
-    const [dates, setDates] = useState(location.state.date)
+    const [dates, setDates] = useState(location.state.dates)
     const [openDate, setOpenDate] = useState(false)
     const [options, setOptions] = useState(location.state.options)
     const [min, setMin] = useState(undefined)
     const [max, setMax] = useState(undefined)
     const { data, loading, error, reFetch } = useFetch(`http://localhost:5000/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999999}`)
-    console.log("mubu pottan ennpottan",data) 
 
     const handleClick=()=>{
         reFetch()
@@ -34,8 +33,8 @@ function SideSearch() {
                     </div>
                     <div className="lsItem">
                         <label htmlFor="">Check-in Date</label>
-                        <span onClick={() => setOpenDate(!openDate)}>{`${format(dates[0].startDate, 'MM/dd/yyyy')} to ${format(
-                            dates[0].endDate,
+                        <span onClick={() => setOpenDate(!openDate)}>{`${format(dates[0]?.startDate, 'MM/dd/yyyy')} to ${format(
+                            dates[0]?.endDate,
                             'MM/dd/yyyy'
                         )}`}</span>
 

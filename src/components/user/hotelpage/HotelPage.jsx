@@ -2,10 +2,12 @@ import React from 'react'
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import useFetch from '../../../hooks/useFetch';
+import {useSelector} from "react-redux"
 
 function HotelPage() {
     const location = useLocation()
     const id=location.pathname.split('/')[2]
+
             // or
     // const fulllocation = document.location + '';
     // let id = fulllocation.split('/', [5])
@@ -14,9 +16,27 @@ function HotelPage() {
     const [open, setOpen] = useState(false);
 
     const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/find/${id}`)
-    console.log("last data", data)
-
     
+    console.log("adsssssffffffffffffffffffffffffffffffffffffffffffffffsssssssssssssssss")
+    console.log(id)
+    console.log("hamras data",data)
+    const property=useSelector((state)=>state.searchresult)
+
+    console.log("dddddddddddddddddddddd",property)
+    
+
+    const MILLISECONDS_PER_DAY=1000*60*60*24;
+    function dayDifference(date1,date2){
+        console.log("kkkkkkkkkkkkkkkkk",date1,date2)
+        const timeDiff=Math.abs(date2.getTime()-date1.getTime());
+        const diffDays=Math.ceil(timeDiff/MILLISECONDS_PER_DAY)
+        return diffDays;
+    }
+
+
+    const days=dayDifference(property?.dates?.endDate,property?.dates?.startDate)
+
+
     const handleOpen = (i) => {
         setSlideNumber(i)
         setOpen(true)
@@ -67,7 +87,7 @@ function HotelPage() {
                             </button>
                             <h1 className="hotelTitle text-2xl	fontbol">{data.name}</h1>
                             <div className="hotelAddress text-sm flex items-center gap-2.5 ">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                                 </svg>
@@ -95,12 +115,12 @@ function HotelPage() {
                                     </p>
                                 </div>
                                 <div className="hotelDetailsPrice bg-[#ebf3ff] p-5 flex flex-col gap-5 w-[25%]" >
-                                    <h1 className='text-lg font-bold text-[#555]'>Perfect for a 9-night stay!</h1>
+                                    <h1 className='text-lg font-bold text-[#555]'>Perfect for a {days}-night stay!</h1>
                                     <span className='text-sm '>
                                         Obcaecati eveniet iure sint, esse voluptatibus nobis aspernatur ipsam accusamus similique necessitatibus molestias dicta voluptate coempore unde consequuntur!
                                     </span>
                                     <h2 className='font-light	'>
-                                        <b>$945</b>(9 night)
+                                        <b>${days*data.cheapestPrice*property.options.room}</b>({days} night)
                                     </h2>
                                     <button className='border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded '>Reserve or Book Now</button>
                                 </div>
