@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom"
 function Header({ type }) {
     const [destination, setDestination] = useState('')
     const [openDate, setOpenDate] = useState(false)
-    const [date, setDate] = useState([
+    const [dates, setDates] = useState([
         {
             startDate: new Date(),
             endDate: new Date(),
@@ -35,7 +35,7 @@ function Header({ type }) {
     }
 
     const handleSearch =()=>{
-        navigate('/hotels',{state:{destination,date,options}})
+        navigate('/hotels',{state:{destination,dates,options}})
     }
     return (
         <div className='header bg-[#003580] text-white flex justify-center relative'>
@@ -68,13 +68,13 @@ function Header({ type }) {
 
                         <div className="headerSearchItem">
                             <ion-icon className='headerIcon' name="calendar-number-outline"></ion-icon>
-                            <span onClick={() => setOpenDate(!openDate)} className='headerSearchText'> {`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(date[0].endDate, 'MM/dd/yyyy')} `} </span>
+                            <span onClick={() => setOpenDate(!openDate)} className='headerSearchText'> {`${format(dates[0].startDate, 'MM/dd/yyyy')} to ${format(dates[0].endDate, 'MM/dd/yyyy')} `} </span>
 
                             {openDate && <DateRange
                                 editableDateInputs={true}
-                                onChange={item => setDate([item.selection])}
+                                onChange={item => setDates([item.selection])}
                                 moveRangeOnFirstSelection={false}
-                                ranges={date}
+                                ranges={dates}
                                 className='date'
                                 minDate={new Date()}
                             />}
@@ -161,13 +161,13 @@ function Header({ type }) {
                                         <div className="flex justify-between px-4">
                                             <div className="grid">
                                                 <ion-icon className='headerIcon' name="calendar-number-outline"></ion-icon>
-                                                <span onClick={() => setOpenDate(!openDate)} className='headerSearchText'> {`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(date[0].endDate, 'MM/dd/yyyy')} `} </span>
+                                                <span onClick={() => setOpenDate(!openDate)} className='headerSearchText'> {`${format(dates[0].startDate, 'MM/dd/yyyy')} to ${format(dates[0].endDate, 'MM/dd/yyyy')} `} </span>
 
                                                 {openDate && <DateRange
                                                     editableDateInputs={true}
-                                                    onChange={item => setDate([item.selection])}
+                                                    onChange={item => setDates([item.selection])}
                                                     moveRangeOnFirstSelection={false}
-                                                    ranges={date}
+                                                    ranges={dates}
                                                     className='datem'
                                                     minDate={new Date()}
                                                 />}
