@@ -4,6 +4,6 @@ import Authuser from "./Authuser";
 
 
 const Store=configureStore({
-    reducer:{searchresult:searchbar.reducer,user:Authuser.reducer}
+    reducer:{searchresult:searchbar.reducer,userAuth:Authuser.reducer}
 })
 export default Store;
