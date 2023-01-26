@@ -21,15 +21,16 @@
 
 
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../../../api/authReq'
 
 function Signup() {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [existError, setExistError] = useState('')
+  const [msg,setMsg]=useState('')
   const emailOnChange = (e)=>{
     setEmail(e.target.value)
   }
@@ -45,7 +46,8 @@ function Signup() {
     const {data} = await registerUser({username,email,password})
     console.log(data);
     if(data === 'User has been created'){
-      navigate('/')
+      // navigate('/')
+      setMsg(res.message)
     }else if(data.userExist){
       setExistError(data.message)
       console.log('errorr');
@@ -56,6 +58,7 @@ function Signup() {
       <input type="text" onChange={usernameOnChange} className='userinupt' name='username' placeholder='Username' />
       <input type="email" onChange={emailOnChange} name='email' placeholder='Email' />
       {existError&& <p className='text-red-600 text-6xl'>{existError}</p>}
+      {msg && <p className='text-green-600 text-6xl'>{msg}</p>}
       <input type="password" onChange={passwordOnChange} name='password' placeholder='Password' />
       <button onClick={handleSignup} type='submit' >Signup</button>
     </div>

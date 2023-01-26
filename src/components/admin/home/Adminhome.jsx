@@ -11,10 +11,10 @@ function Adminhome() {
       <div className="homeContainer">
         <Navbar/>
         <div className="widgets">
-          <Widget/>
-          <Widget/>
-          <Widget/>
-          <Widget/>
+          <Widget type="user"/>
+          <Widget type="order"/>
+          <Widget type="erarning"/>
+          <Widget type="profit"/>
         </div>
       </div>
     </div>

@@ -8,22 +8,18 @@ const Authuser=createSlice({
         loading:false,
         error:null,
     },
-    reducer:{
+    reducers:{
         loginSuccess(state,actions){
              const newItem=actions.payload;
-             state.user=newItem.user
-             state.userToken=newItem.token
+             console.log("redux console",newItem)
+             state.user=newItem.username
+            //  state.userToken=newItem.token
              state.loading=false
              state.error=null  
 
         },
-        loginFailure(state,actions){
-            const newItem=actions.payload
-            state.user=null
-            state.loading=false
-            state.error=newItem.actions
-        },
-        userLogout(state){
+    
+        userLogout(state,actions){
             state.user=null;
             state.userToken=null;
             state.error=null
@@ -31,6 +27,6 @@ const Authuser=createSlice({
     }
 })
 
-export const userActions = Authuser.actions;
+export const {loginSuccess, userLogout} = Authuser.actions;
 
 export default Authuser;

@@ -2,10 +2,15 @@ import React from 'react'
 import "./navbar.css"
 import { useState } from "react"
 import {Link} from "react-router-dom"
+import {useSelector} from "react-redux"
 
 
 function Navbar() {
     const [open, setOpen] = useState(false)
+    const user=  useSelector((state)=>state.userAuth)
+    
+    console.log("user2345t",user)
+    const userlocal= localStorage.getItem("user")//local store 
     return (
         <div className='navbar h-12  bg-[#003580] flex justify-center'>
             <div className="navContainer w-full container text-white flex items-center justify-between">
@@ -14,8 +19,10 @@ function Navbar() {
                 </Link>
                 <div className="navItems flex ">
                     <button className="hidden md:block py-1 px-4 border-2 border-white text-white">List Your Property</button>
-                    <button className="navButton hidden md:block ml-5 py-1 px-4 bg-white text-blue-700 cursor-pointer">Register</button>
-                    <button className="navButton hidden md:block ml-5 py-1 px-4 bg-white text-blue-700 cursor-pointer">Login</button>
+                    {/* <button className="navButton hidden md:block ml-5 py-1 px-4 bg-white text-blue-700 cursor-pointer">Register</button>
+                    <button className="navButton hidden md:block ml-5 py-1 px-4 bg-white text-blue-700 cursor-pointer">Login</button> */}
+                    {user ? <p className="">{user.name}</p> : (<><button className="navButton hidden md:block ml-5 py-1 px-4 bg-white text-blue-700 cursor-pointer">Register</button>
+                    <button className="navButton hidden md:block ml-5 py-1 px-4 bg-white text-blue-700 cursor-pointer">Login</button></>)}
                     <div className="md:hidden z-50   text-gray-600  cursor-pointer text-3xl" onClick={() => setOpen(!open)}>
                         <ion-icon name={open ? 'close' : 'menu'}></ion-icon>
                     </div>

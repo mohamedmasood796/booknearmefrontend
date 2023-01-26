@@ -77,10 +77,13 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../../../api/authReq'
+import {useDispatch} from "react-redux"
+import { loginSuccess } from '../../../redux/Authuser'
 import './login.css' 
 
 
 function Login() {
+    const dispatch=useDispatch()
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -98,8 +101,15 @@ function Login() {
         e.preventDefault()
         console.log("hai hamras")
         const {data} = await loginUser({username,password})
-        console.log(data.mesaage, 998)
+        console.log(data, 998)
         if(data.status){
+            console.log("first");
+            console.log(data)
+            dispatch(loginSuccess(data))
+            console.log("seo");
+            localStorage.setItem("user",data.username)
+            localStorage.setItem("jwt",data.token)
+
             navigate('/')
         }else{
             console.log(data.message," 099");

@@ -28,5 +28,25 @@
             font-size: 12px;
             border-bottom: 1px solid gray;
         }
+        .percentage{
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+
+             &.positive{
+                color: green;
+             }
+
+             &.negative{
+                color: red ;
+             }
+        }
+        .icon{
+            font-size: 28px;
+            padding: 5px;
+            // background-color: rgba(128, 0, 128, 0.221);
+            border-radius: 5px;
+            align-self: flex-end;
+        }
     }
 }

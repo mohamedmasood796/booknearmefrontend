@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useFetch from '../../../hooks/useFetch';
 import {useSelector} from "react-redux"
+import Reserve from '../reserve/Reserve';
 
 function HotelPage() {
     const location = useLocation()
@@ -14,12 +15,13 @@ function HotelPage() {
     // id = id[4]
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
 
     const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/find/${id}`)
-    
-    console.log("adsssssffffffffffffffffffffffffffffffffffffffffffffffsssssssssssssssss")
-    console.log(id)
-    console.log("hamras data",data)
+
+    const user=  useSelector((state)=>state.userAuth)
+    console.log("user2345t",user)
+    const navigate=useNavigate()
     const property=useSelector((state)=>state.searchresult)
 
     console.log("dddddddddddddddddddddd",property)
@@ -51,6 +53,14 @@ function HotelPage() {
 
         }
         setSlideNumber(newSlideNumber)
+    }
+
+    const handleClick=()=>{
+        if(user){
+            setOpenModal(true)
+        }else{
+            navigate("/login")
+        }
     }
     return (
         <div>
@@ -122,13 +132,14 @@ function HotelPage() {
                                     <h2 className='font-light	'>
                                         <b>${days*data.cheapestPrice*property.options.room}</b>({days} night)
                                     </h2>
-                                    <button className='border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded '>Reserve or Book Now</button>
+                                    <button onClick={handleClick} className='border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded '>Reserve or Book Now</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </>
             )}
+            {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
         </div>
     )
 }
