@@ -1,8 +1,8 @@
-.list {
+.home{
     display: flex;
     width: 100%;
+    .homeContainer{
+        flex: 6 ;
 
-    .listContainer{
-        flex: 6;
     }
-}
+} 

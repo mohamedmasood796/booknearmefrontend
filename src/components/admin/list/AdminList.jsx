@@ -6,13 +6,15 @@ import "./list.scss"
 
 function AdminList() {
   return (
-    <div className='list'>
-      <Sidebar/>
-      <div className="listContainer">
-        <Navbar/>
-        <Users/>
-      </div>   
+    <div className='home'>
+    <Sidebar />
+    <div className="homeContainer">
+      <Navbar/>
+      <div className="">
+       <Users/>
+      </div>
     </div>
+  </div>
   )
 }
 

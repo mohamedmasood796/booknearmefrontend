@@ -3,7 +3,7 @@ import useFetch from '../../../hooks/useFetch'
 
 function Reserve({ setOpen, hotelId }) {
     console.log(hotelId ,"466626266262622625525")
-    const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/room/63c7c3339a55a2c49f8c618d`)
+    const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/room/${hotelId}`)
     // const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/room/63c7c3339a55a2c49f8c618d`)
     console.log(data,'mubashir kasssssssssssss')
     console.log(loading,'mubashir kaddddddddddddddd')
@@ -15,7 +15,8 @@ function Reserve({ setOpen, hotelId }) {
                     <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" />
                 </svg>
                 <span>Select your rooms:</span>
-                {data.map(item=>{
+                {data.map((item)=>{
+                    console.log(item,"kondottyee");
                     <div className="rItem">
                         <div className="rItemInfo">
                             <div className="rTitle">{item.title}</div>
