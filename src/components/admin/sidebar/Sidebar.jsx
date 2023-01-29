@@ -7,46 +7,54 @@ import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { Link } from "react-router-dom"
+
 
 function Sidebar() {
     return (
         <div className='sidebar'>
             <div className="top">
-                <span className="logo">BookNearMe</span>
+                <Link to='/admin' style={{ textDecoration: "none" }}>
+                    <span className="logo">BookNearMe</span>
+                </Link>
             </div>
             <hr />
             <div className="center">
                 <ul>
                     <li>
-                        <DashboardIcon className='icon'/>
+                        <DashboardIcon className='icon' />
                         <span>Dashboard</span>
                     </li>
+                    <Link to='/admin/users' style={{ textDecoration: "none" }}>
+                        <li>
+                            <PersonIcon className='icon' />
+                            <span>Users</span>
+                        </li>
+                    </Link>
+                    <Link to='/admin/addProduct' style={{ textDecoration: "none" }}>
+                        <li>
+                            <Inventory2OutlinedIcon className='icon' />
+                            <span>Hotels</span>
+                        </li>
+                    </Link>
                     <li>
-                        <PersonIcon className='icon'/>
-                        <span>Users</span>
-                    </li>
-                    <li>
-                        <Inventory2OutlinedIcon className='icon'/>
-                        <span>Products</span>
-                    </li>
-                    <li>
-                        <StorefrontOutlinedIcon className='icon'/>
+                        <StorefrontOutlinedIcon className='icon' />
                         <span>Booking</span>
                     </li>
                     <li>
-                        <NotificationsOutlinedIcon className='icon'/>
+                        <NotificationsOutlinedIcon className='icon' />
                         <span>Notifications</span>
                     </li>
-                    
+
                     <li>
-                        <PersonOutlinedIcon className='icon'/>
+                        <PersonOutlinedIcon className='icon' />
                         <span>Profile</span>
                     </li>
                     <li>
-                        <LogoutOutlinedIcon className='icon'/>
+                        <LogoutOutlinedIcon className='icon' />
                         <span>Logout</span>
                     </li>
-                    
+
                 </ul>
             </div>
             <div className="bottom">

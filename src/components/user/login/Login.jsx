@@ -77,56 +77,57 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../../../api/authReq'
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux"
 import { loginSuccess } from '../../../redux/Authuser'
-import './login.css' 
+import './login.css'
 
 
 function Login() {
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [errMess, setErrMess] =useState('')
+    const [errMess, setErrMess] = useState('')
 
-    const usernameOnchage =(e)=>{
+    const usernameOnchage = (e) => {
         setUsername(e.target.value)
     }
 
-    const userpasswordOnchage=(e)=>{
+    const userpasswordOnchage = (e) => {
         setPassword(e.target.value)
     }
 
-    const handleLogin=async (e)=>{
+    const handleLogin = async (e) => {
         e.preventDefault()
         console.log("hai hamras")
-        const {data} = await loginUser({username,password})
+        const { data } = await loginUser({ username, password })
         console.log(data, 998)
-        if(data.status){
+        if (data.status) {
             console.log("first");
             console.log(data)
             dispatch(loginSuccess(data))
             console.log("seo");
-            localStorage.setItem("user",data.username)
-            localStorage.setItem("jwt",data.token)
+            localStorage.setItem("user", data.username)
+            localStorage.setItem("jwt", data.token)
 
             navigate('/')
-        }else{
-            console.log(data.message," 099");
-            setErrMess(data.mesaage)        
+        } else {
+            console.log(data.message, " 099");
+            setErrMess(data.message)
             console.log("error")
         }
     }
-console.log(errMess);
+    console.log(errMess, 'jjjj');
 
     return (
         <div className="login">
             <div className="lContainer border flex justify-center items-center h-screen">
                 <div className='grid items-center gap-5 border py-10 px-10'>
-                <input  type="text" placeholder='username' id='username' onChange={usernameOnchage} className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput"  name='username'/>
-                <input  type="password" placeholder='password' id='password' onChange={userpasswordOnchage} className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='password' />
-                <button onClick={handleLogin} className="lButton">Login</button>
-                {errMess && <small className='text-red-600 text-6xl'>{errMess}</small>}
+                <h1 className='	font-weight: 400; text-4xl ml-3'>Login</h1>
+                    <input type="text" placeholder='username' id='username' onChange={usernameOnchage} className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='username' />
+                    <input type="password" placeholder='password' id='password' onChange={userpasswordOnchage} className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='password' />
+                    <button onClick={handleLogin} className="lButton">Login</button>
+                    {errMess ? <small className='text-red-600 text-xl'>{errMess}</small>:null}
                 </div>
             </div>
         </div>

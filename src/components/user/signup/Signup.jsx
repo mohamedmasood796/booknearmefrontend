@@ -21,46 +21,78 @@
 
 
 import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import validator from 'validator'
 import { registerUser } from '../../../api/authReq'
+import './signup.css'
 
 function Signup() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [existError, setExistError] = useState('')
-  const [msg,setMsg]=useState('')
-  const emailOnChange = (e)=>{
+  const [msg, setMsg] = useState('')
+  const [submit,setSubmit] = useState(false)
+  const [isUserName, setIsUserName] = useState(false)
+  const [isEmail, setIsEmail] = useState(false)
+  const [isPassword, setIsPassword] = useState(false)
+  const emailOnChange = (e) => {
     setEmail(e.target.value)
+    setIsEmail(validator.isEmail(email))
   }
-  const usernameOnChange =(e) =>{
+  const usernameOnChange = (e) => {
     setUsername(e.target.value)
+    setIsUserName(username.length > 1)
   }
-  const passwordOnChange =(e) =>{
+  const passwordOnChange = (e) => {
     setPassword(e.target.value)
+    setIsPassword(validator.isStrongPassword(password, {
+      minLength: 6, minLowercase: 1,
+      minUppercase: 1, minNumbers: 1, minSymbols: 1
+    }))
   }
-  const handleSignup = async (e)=>{
+  const handleSignup = async (e) => {
     e.preventDefault()
-    console.log('hello');
-    const {data} = await registerUser({username,email,password})
-    console.log(data);
-    if(data === 'User has been created'){
-      // navigate('/')
-      setMsg(res.message)
-    }else if(data.userExist){
-      setExistError(data.message)
-      console.log('errorr');
+    setSubmit(true)
+    if (isEmail && isPassword && isUserName) {
+      console.log('njam ethi');
+      const { data } = await registerUser({ username, email, password })
+      console.log(data, "678");
+      if (data.status) {
+        navigate('/')
+        setMsg(data.message)
+        // console.log(res.message,'hai res') 
+        console.log(data.message, "hai data")
+      } else {
+        setExistError(data.message)
+        console.log(data.message, "789")
+        console.log('errorr');
+      }
     }
   }
+  console.log(isEmail, 'isEeeeeeeeeeeeeeemail');
+  console.log(isUserName, 'isUserrrrrrr');
+  console.log(isPassword, 'isPassssss');
   return (
-    <div>
-      <input type="text" onChange={usernameOnChange} className='userinupt' name='username' placeholder='Username' />
-      <input type="email" onChange={emailOnChange} name='email' placeholder='Email' />
-      {existError&& <p className='text-red-600 text-6xl'>{existError}</p>}
-      {msg && <p className='text-green-600 text-6xl'>{msg}</p>}
-      <input type="password" onChange={passwordOnChange} name='password' placeholder='Password' />
-      <button onClick={handleSignup} type='submit' >Signup</button>
+    <div className='signup'>
+      <div className="sContainer  border flex justify-center items-center h-screen">
+        <div className='grid items-center gap-2 border py-10  px-10 '>
+          {existError && <p className='text-red-600 text'>{existError}</p>}
+          {msg && <p className='text-green-600 text'>{msg}</p>}
+          <h1 className='	font-weight: 400; text-4xl ml-3'>Signup</h1>
+          <input type="text" onChange={usernameOnChange} className='userinupt sInput border mx-3 outline rounded-lg outline-gray-300' name='username' placeholder='Username' />
+          {username && !isUserName ? <p className='font-normal text-sm text-red-600 ml-4 '>please enter correct name</p> : null}
+          {!username && submit ? <p className='font-normal text-sm text-red-600 ml-4 '> please enter and name</p> : null}
+          <input type="email" onChange={emailOnChange} name='email' placeholder='Email' className='sInput border my-2 mx-3 outline rounded-lg outline-gray-300' />
+          {email && !isEmail ? <p className='font-normal text-sm text-red-600 ml-4 '>please enter correct email</p> : null}
+          {!email && submit ? <p className='font-normal text-sm text-red-600 ml-4 '>please enter correct email</p> : null}
+          <input type="password" onChange={passwordOnChange} name='password' placeholder='Password' className='sInput border my-2 mx-3 outline rounded-lg outline-gray-300' />
+          {password && !isPassword ? <p className='font-normal text-sm text-red-600 ml-4 '>please enter a strong password</p> : null}
+          {!password && submit ? <p className='font-normal text-sm text-red-600 ml-4 '>please enter a strong password</p> : null}
+          <button className='sButton' onClick={handleSignup} type='submit' >Signup</button>
+        </div>
+      </div>
     </div>
   )
 }
