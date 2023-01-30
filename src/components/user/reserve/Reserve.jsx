@@ -1,34 +1,36 @@
 import React from 'react'
 import "./reserve.css"
-import { useState } from 'react'
 import useFetch from '../../../hooks/useFetch'
+import { useState } from 'react'
 import { useSelector } from "react-redux"
+import axios from 'axios'
 
 function Reserve({ setOpen, hotelId }) {
 
+    const [roomId, setRoomId] = useState('')
     const [selectedRooms, setSelectedRooms] = useState([])
     const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/room/${hotelId}`)
     const dates = useSelector((state) => state.searchresult.dates)
-    console.log(dates, 'mubashir kasssssssssssss')
+    
 
     const getDatesInRange = (startDate, endDate) => {
         const start = new Date(startDate)
         const end = new Date(endDate)
         const date = new Date(start.getTime())
 
-        let list = []
+        let dates = []
         while (date <= end) {
-            list.push(new Date(date).getTime())
+            dates.push(new Date(date).getTime())
             date.setDate(date.getDate() + 1)
         }
-        return list
+        return dates
     }
     const alldates = getDatesInRange(dates.startDate, dates.endDate)
 
     const isAvailable = (roomNumber) => {
-        const isFound = roomNumber.unavailableDates.some((date) => {
+        const isFound = roomNumber.unavailableDates.some((date) => 
             alldates.includes(new Date(date).getTime())
-        })
+        )
         return !isFound
     }
     const handleSelect = (e) => {
@@ -36,8 +38,17 @@ function Reserve({ setOpen, hotelId }) {
         const value = e.target.value
         setSelectedRooms(checked ? [...selectedRooms, value] : selectedRooms.filter((item) => item !== value))
     }
-    const handleClick = () => {
 
+    const handleClick = async () => {
+        try {
+            await Promise.all(
+                selectedRooms.map((roomNumberId)=>{
+                const res=axios.put(`http://localhost:5000/api/rooms/availability/${roomId}/${roomNumberId}`,{dates:alldates})
+                return res.data
+            }))
+        } catch (error) {
+
+        }
     }
     return (
         <div className='reserve'>
@@ -47,7 +58,7 @@ function Reserve({ setOpen, hotelId }) {
                 </svg>
                 <span>Select your rooms:</span>
                 {data?.map((item) => (
-                    <div className="rItem">
+                    <div className="rItem">     
                         <div className="rItemInfo">
                             <div className="rTitle">{item?.title}</div>
                             <div className="rDesc">{item?.desc}</div>
@@ -60,7 +71,7 @@ function Reserve({ setOpen, hotelId }) {
                             {item?.roomNumbers.map((roomNumber, _id) => (
                                 <div className="room">
                                     <label>{roomNumber?.number}</label>
-                                    <input type="checkbox" value={roomNumber?._id} onChange={handleSelect} disabled={!isAvailable(roomNumber)} />
+                                    <input type="checkbox" value={roomNumber?._id} onChange={handleSelect} disabled={!isAvailable(roomNumber)} onClick={()=>setRoomId(item._id)}/>
                                 </div>
                             ))}
                         </div>

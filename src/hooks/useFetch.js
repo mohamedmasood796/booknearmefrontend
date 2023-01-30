@@ -20,6 +20,20 @@ const useFetch = (url) => {
         fetchData()
     }, [url])
 
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true)
+            try {
+                const res = await axios.put(url)
+                setData(res.data)
+            } catch (err) {
+                setError(err)
+            }
+            setLoading(false)
+        }
+        fetchData()
+    }, [url])
+
     const reFetch = async () => {
         setLoading(true)
         try {
