@@ -46,35 +46,37 @@ export const userColumns=[
 ]
 
 
+//=============hotel list
+
 export const hotelColumns=[
     { field: 'id', headerName: 'ID', width: 70 },{
         field:"name", headerName:"user",width:230,renderCell:(params)=>{
             return(
                 <div className="cellWithImg">
-                    <img className="cellImg " src={params.row.img || "https://i.ibb.co/MBtjqXO/no-avatar.gif"} alt="avatar" />
-                    {params.row.username}
+                    <img className="cellImg " src={params.row.photos || "https://i.ibb.co/MBtjqXO/no-avatar.gif"} alt="avatar" />
+                    {params.row.name}
                 </div>
             )
         }
     },
     {
-        field:"email",
-        headerName:"Email",
+        field:"type",
+        headerName:"Type",
         width:230,
     },
     {
-        field:"country",
-        headerName:"Country",
+        field:"address",
+        headerName:"Address",
+        width:100,
+    },
+    {
+        field:"cheapestPrice",
+        headerName:"Price",
         width:100,
     },
     {
         field:"city",
         headerName:"City",
-        width:100,
-    },
-    {
-        field:"phone",
-        headerName:"Phone",
         width:100,
     },
     {
