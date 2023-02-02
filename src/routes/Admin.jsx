@@ -13,7 +13,7 @@ function Admin() {
                 <Route exact path='/login' element={<AdminLogin/>} />
                 <Route exact path='/' element={<Adminhomepage />} />
                 <Route exact path='/users' element={<User/>} />
-                <Route exact path='/addProduct' element={<AddProduct/>} />
+                <Route exact path='/addhotels' element={<AddProduct/>} />
 
             </Routes>
         </>

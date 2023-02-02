@@ -31,7 +31,13 @@ function Sidebar() {
                             <span>Users</span>
                         </li>
                     </Link>
-                    <Link to='/admin/addProduct' style={{ textDecoration: "none" }}>
+                    <Link to='/admin/addhotels' style={{ textDecoration: "none" }}>
+                        <li>
+                            <Inventory2OutlinedIcon className='icon' />
+                            <span>Add Hotels</span>
+                        </li>
+                    </Link>
+                    <Link to='/admin/hotels' style={{ textDecoration: "none" }}>
                         <li>
                             <Inventory2OutlinedIcon className='icon' />
                             <span>Hotels</span>

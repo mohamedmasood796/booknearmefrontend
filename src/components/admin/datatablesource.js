@@ -3,20 +3,35 @@ export const userColumns=[
         field:"name", headerName:"user",width:230,renderCell:(params)=>{
             return(
                 <div className="cellWithImg">
-                    <img className="cellImg " src={params.row.img} alt="avatar" />
+                    <img className="cellImg " src={params.row.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="avatar" />
                     {params.row.username}
                 </div>
             )
         }
     },
+    // {
+    //     field:"_id",
+    //     headerName:"user id",
+    //     width:230,
+    // },
     {
         field:"email",
         headerName:"Email",
-        width:230,
+        width:200,
     },
     {
-        field:"age",
-        headerName:"age",
+        field:"country",
+        headerName:"Country",
+        width:100,
+    },
+    {
+        field:"city",
+        headerName:"City",
+        width:100,
+    },
+    {
+        field:"phone",
+        headerName:"Phone",
         width:100,
     },
     {
@@ -31,61 +46,44 @@ export const userColumns=[
 ]
 
 
-export const userRows=[
-    {
-        id:1,
-        username:"masood",
-        img:'https://www.google.com/search?q=men+photo&sxsrf=AJOqlzVHOouUlKtmPzpKsJKXrzXcSbnFLQ:1674760878945&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiuvZe6-uX8AhXy93MBHSRHAZcQ_AUoAXoECAEQAw&biw=1536&bih=718&dpr=1.25#imgrc=VfUSn8lU_-9w0M',
-        status:'active',
-        email:'masood@mail.com',
-        age:35
+export const hotelColumns=[
+    { field: 'id', headerName: 'ID', width: 70 },{
+        field:"name", headerName:"user",width:230,renderCell:(params)=>{
+            return(
+                <div className="cellWithImg">
+                    <img className="cellImg " src={params.row.img || "https://i.ibb.co/MBtjqXO/no-avatar.gif"} alt="avatar" />
+                    {params.row.username}
+                </div>
+            )
+        }
     },
     {
-        id:2,
-        username:"masood",
-        img:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fmale%2520face%2F&psig=AOvVaw0t1B9Y8mZdEN_jwaML6v1u&ust=1674847282873000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNiw3Lz65fwCFQAAAAAdAAAAABAE',
-        status:'active',
-        email:'masood@mail.com',
-        age:35
+        field:"email",
+        headerName:"Email",
+        width:230,
     },
     {
-        id:3,
-        username:"masooafdd",
-        img:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fmale%2520face%2F&psig=AOvVaw0t1B9Y8mZdEN_jwaML6v1u&ust=1674847282873000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNiw3Lz65fwCFQAAAAAdAAAAABAE',
-        status:'active',
-        email:'masood@mail.com',
-        age:35
+        field:"country",
+        headerName:"Country",
+        width:100,
     },
     {
-        id:4,
-        username:"masood",
-        img:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fmale%2520face%2F&psig=AOvVaw0t1B9Y8mZdEN_jwaML6v1u&ust=1674847282873000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNiw3Lz65fwCFQAAAAAdAAAAABAE',
-        status:'active',
-        email:'masood@mail.com',
-        age:35
+        field:"city",
+        headerName:"City",
+        width:100,
     },
     {
-        id:5,
-        username:"masoodfads",
-        img:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fmale%2520face%2F&psig=AOvVaw0t1B9Y8mZdEN_jwaML6v1u&ust=1674847282873000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNiw3Lz65fwCFQAAAAAdAAAAABAE',
-        status:'active',
-        email:'masood@mail.com',
-        age:35
+        field:"phone",
+        headerName:"Phone",
+        width:100,
     },
     {
-        id:6,
-        username:"masooddf",
-        img:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fmale%2520face%2F&psig=AOvVaw0t1B9Y8mZdEN_jwaML6v1u&ust=1674847282873000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNiw3Lz65fwCFQAAAAAdAAAAABAE',
-        status:'active',
-        email:'masood@mail.com',
-        age:35
+        field:"status",
+        headerName:"Status",
+        width:160,
+        renderCell:(params)=>{
+            return <div className={`cellWithStatus ${params.row.status}`}>{params.row.status}</div>
+        }
     },
-    {
-        id:7,
-        username:"masood",
-        img:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fmale%2520face%2F&psig=AOvVaw0t1B9Y8mZdEN_jwaML6v1u&ust=1674847282873000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNiw3Lz65fwCFQAAAAAdAAAAABAE',
-        status:'active',
-        email:'masood@mail.com',
-        age:35
-    },
+    
 ]
