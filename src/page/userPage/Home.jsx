@@ -12,11 +12,13 @@ function Home() {
             <Navbar />
             <Header />
             <div className='homeContainer mt-12 flex flex-col items-center gap-11'>
-                <Featured />
+                <div>
+                    <Featured />
+                </div>
                 <h1 className='homeTitle container text-2xl font-bold '>Browse by property type</h1>
                 <PropertyList />
                 <h1 className='homeTitle container text-2xl font-bold '>Homes guests love</h1>
-                <FeaturedProperts/>
+                <FeaturedProperts />
             </div>
         </div>
     )

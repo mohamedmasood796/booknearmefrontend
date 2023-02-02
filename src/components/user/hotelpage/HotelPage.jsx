@@ -68,7 +68,7 @@ function HotelPage() {
                 "loading"
             ) : (
                 <>
-                    <div className='hotelContainer flex items-center mt-5 flex-col '>
+                    <div className='hotelContainer flex items-center mt-5 flex-col px-2'>
                         {open && <div className="slider sticky top-0 left-0 w-full h-full bg-transparent z-50 flex items-center">
 
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className='close text-gray-500 w-10 h-10 cursor-pointer absolute top-5 right-5' onClick={() => setOpen(false)}>
@@ -116,7 +116,7 @@ function HotelPage() {
                                     </div>
                                 ))}
                             </div>
-                            <div className="hotelDetails flex justify-between gap-5 mt-5">
+                            <div className="hotelDetails  md:flex justify-between gap-5 mt-5">
                                 <div className="hotelDetailsTexts  ">
                                     {/* flex:3 */}
                                     <h1 className='hotelTitle font-bold text-4xl'>{data.title} </h1>
@@ -124,7 +124,7 @@ function HotelPage() {
                                         {data.desc}
                                     </p>
                                 </div>
-                                <div className="hotelDetailsPrice bg-[#ebf3ff] p-5 flex flex-col gap-5 w-[25%]" >
+                                <div className="hotelDetailsPrice bg-[#ebf3ff] mt-3 p-5 flex flex-col gap-5 md:w-[25%]" >
                                     <h1 className='text-lg font-bold text-[#555]'>Perfect for a {days}-night stay!</h1>
                                     <span className='text-sm '>
                                         Obcaecati eveniet iure sint, esse voluptatibus nobis aspernatur ipsam accusamus similique necessitatibus molestias dicta voluptate coempore unde consequuntur!

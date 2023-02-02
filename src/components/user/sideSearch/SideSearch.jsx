@@ -24,8 +24,8 @@ function SideSearch() {
     }
     return (
         <div className='listContainer '>
-            <div className='listWrapper '>
-                <div className="listSearch ">
+            <div className='listWrapper md:flex md:gap-5'>
+                <div className="listSearch md:sticky md:top-5">
                     <h1 className="lsTitle ">Search</h1>
                     <div className="lsItem">
                         <label htmlFor="">Destination</label>
