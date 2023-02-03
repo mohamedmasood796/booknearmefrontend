@@ -5,6 +5,7 @@ import Home from '../page/userPage/Home'
 import Hotel from '../page/userPage/Hotel'
 import Signup from '../page/userPage/Signup'
 import Login from '../page/userPage/Login'
+import Verifypage from '../components/user/verifypage/Verifypage'
 
 function User() {
   return (
@@ -15,6 +16,7 @@ function User() {
             <Route exact path='/' element={<Home />} />
             <Route exact path='/hotels' element={<List />} />
             <Route exact path='/hotels/:id' element={<Hotel />} />
+            <Route exact path='/verify/:id' element={<Verifypage/>} />
         </Routes>
     </>
   )

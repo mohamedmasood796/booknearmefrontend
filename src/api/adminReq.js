@@ -7,3 +7,4 @@ const API = axios.create({
 export const getAllUserAPI = () => API.get('/users')
 export const getAllHotelAPI = () => API.get('/hotels')
 export const loginAdmin = (adminData) => API.post('/admin/adminlogin',adminData)
+export const blockUser = (userBlock) => API.put('/admin/changestatus',userBlock)

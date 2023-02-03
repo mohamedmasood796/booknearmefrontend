@@ -37,6 +37,7 @@ function Signup() {
   const [isUserName, setIsUserName] = useState(false)
   const [isEmail, setIsEmail] = useState(false)
   const [isPassword, setIsPassword] = useState(false)
+  const [emailMessage,setEmailMessage] = useState(false)
   const emailOnChange = (e) => {
     setEmail(e.target.value)
     setIsEmail(validator.isEmail(email))
@@ -60,9 +61,11 @@ function Signup() {
       const { data } = await registerUser({ username, email, password })
       console.log(data, "678");
       if (data.status) {
-        navigate('/')
+
+      setEmailMessage(true)
         setMsg(data.message)
-        // console.log(res.message,'hai res') 
+        // navigate('/verifypage')
+        // console.log(res.message,'hai res')  
         console.log(data.message, "hai data")
       } else {
         setExistError(data.message)
@@ -91,6 +94,7 @@ function Signup() {
           {password && !isPassword ? <p className='font-normal text-sm text-red-600 ml-4 '>please enter a strong password</p> : null}
           {!password && submit ? <p className='font-normal text-sm text-red-600 ml-4 '>please enter a strong password</p> : null}
           <button className='sButton' onClick={handleSignup} type='submit' >Signup</button>
+          {emailMessage && <small>please verify your accout </small>}
         </div>
       </div>
     </div>
