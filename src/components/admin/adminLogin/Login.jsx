@@ -1,19 +1,70 @@
+
 import React from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { loginAdmin } from '../../../api/adminReq'
+import { useDispatch } from "react-redux"
+import { loginSuccess } from '../../../redux/Authuser'
+import './login.scss'
+
 
 function Login() {
-  return (
-    <div className="login">
-    <div className="lContainer border flex justify-center items-center h-screen">
-        <div className='tdiv grid items-center gap-5 border py-10 px-10'>
-        <h1 className='	font-weight: 400; text-4xl ml-3'>Login</h1>
-            <input type="text" placeholder='username' id='username'  className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='username' />
-            <input type="password" placeholder='password' id='password'  className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='password' />
-            <button  className="lButton">Login</button>
-            {/* {errMess ? <small className='text-red-600 text-xl'>{errMess}</small>:null} */}
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [errMess, setErrMess] = useState('')
+    const [submit, setSubmit] = useState(false)
+
+    const usernameOnchage = (e) => {
+        setUsername(e.target.value)
+    }
+
+    const userpasswordOnchage = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        setSubmit(true)
+        if (username && password) {
+            const { data } = await loginAdmin({ email:username, password })
+            console.log(data, 998)
+            if (data.status) {
+                console.log("first");
+                console.log(data)
+                dispatch(loginSuccess(data))
+                console.log("seo");
+                localStorage.setItem("user", data)
+                localStorage.setItem("jwt", data.token)
+
+                navigate('/admin')
+            } else {
+                console.log(data.message, " 099");
+                setErrMess(data.message)
+                console.log("error")
+            }
+        }
+    }
+    console.log(errMess, 'jjjj');
+
+    return (
+        <div className="login">
+            <div className="lContainer border flex justify-center items-center h-screen">
+                <div className='grid items-center gap-5 border py-10 px-10'>
+                    <h1 className='	font-weight: 400; text-4xl ml-3'>Login</h1>
+                    {errMess ? <small className='text-red-600 text-xl'>{errMess}</small> : null}
+                    <input type="email" placeholder='username' id='username' onChange={usernameOnchage} className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='email' />
+                    {!username && submit ? <p className='font-normal text-sm text-red-600 ml-4 '> please enter and name</p> : null}
+
+                    <input type="password" placeholder='password' id='password' onChange={userpasswordOnchage} className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='password' />
+                    {!password && submit ? <p className='font-normal text-sm text-red-600 ml-4 '>please enter password</p> : null}
+
+                    <button onClick={handleLogin} className="lButton">Login</button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-  )
+    )
 }
 
 export default Login
