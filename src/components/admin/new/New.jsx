@@ -1,20 +1,21 @@
-import React ,{useState} from 'react'
+import React, { useState } from 'react'
 import './new.scss'
 import Sidebar from '../sidebar/Sidebar'
 import Navbar from '../navbar/Navbar'
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 // import { AddHomeOutlined } from '@mui/icons-material';
-import {addHotel} from '../../../api/adminReq.js'
+import { addHotel } from '../../../api/adminReq.js'
 
 function New() {
-    const [formData,setFormData]=useState([])
-    const handleChange=(e)=>{
-        const {value,name}=e.target
-        setFormData({...formData,[name]:value})
+    const [formData, setFormData] = useState([])
+    const handleChange = (e) => {
+        const { value, name } = e.target
+        setFormData({ ...formData, [name]: value })
     }
-    const handleSubmit=async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        const response=await addHotel(formData)
+        console.log(formData,"formdata")
+        const response = await addHotel(formData)
     }
     return (
         <div className='home'>
@@ -33,9 +34,9 @@ function New() {
                         <form action="">
                             <div className="formInput">
                                 <label htmlFor="file">
-                                   Image <UploadFileIcon className='icon'/>
+                                    Image <UploadFileIcon className='icon' />
                                 </label>
-                                <input type="file" style={{display:'none'}} id='file'/>
+                                <input type="file" style={{ display: 'none' }} id='file' />
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Hotel name</label>
@@ -43,7 +44,14 @@ function New() {
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Type</label>
-                                <input type="text" onChange={handleChange} name="type" placeholder='Type' />
+                                {/* <input type="text" onChange={handleChange} name="type" placeholder='Type' /> */}
+                                <select  className="dropdown">
+                                    <option onChange={handleChange} type="text" name="type">Apartments</option>
+                                    <option onChange={handleChange} type="text" name="type"> Hotels</option>
+                                    <option onChange={handleChange} type="text" name="type"> Resorts</option>
+                                    <option onChange={handleChange} type="text" name="type">villas</option>
+                                </select>
+                              
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">City</label>

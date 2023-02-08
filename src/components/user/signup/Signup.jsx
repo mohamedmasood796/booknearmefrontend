@@ -57,26 +57,19 @@ function Signup() {
     e.preventDefault()
     setSubmit(true)
     if (isEmail && isPassword && isUserName) {
-      console.log('njam ethi');
       const { data } = await registerUser({ username, email, password })
-      console.log(data, "678");
       if (data.status) {
 
       setEmailMessage(true)
         setMsg(data.message)
         // navigate('/verifypage')
         // console.log(res.message,'hai res')  
-        console.log(data.message, "hai data")
       } else {
         setExistError(data.message)
-        console.log(data.message, "789")
-        console.log('errorr');
       }
     }
   }
-  console.log(isEmail, 'isEeeeeeeeeeeeeeemail');
-  console.log(isUserName, 'isUserrrrrrr');
-  console.log(isPassword, 'isPassssss');
+
   return (
     <div className='signup'>
       <div className="sContainer  border flex justify-center items-center h-screen">
