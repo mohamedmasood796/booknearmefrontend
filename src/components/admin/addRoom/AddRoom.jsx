@@ -6,6 +6,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 // import { AddHomeOutlined } from '@mui/icons-material';
 import {addRoom} from '../../../api/adminReq.js'
 import { useParams } from 'react-router-dom';
+import RoomTable from '../roomTable/RoomTable';
 
 function    AddRoom() {
     let params = useParams()
@@ -51,11 +52,15 @@ function    AddRoom() {
                            
                             <div className="formInput">
                                 <label htmlFor="">Room Number</label>
-                                <input type="number" onChange={handleChange} name="cheapestPrice" placeholder='Room Number' />
+                                <input type="number" onChange={handleChange} name="che" placeholder='Room Number' />
                             </div>
                             <button onClick={handleSubmit}>send</button>
                         </form>
                     </div>
+                </div>
+
+                <div>
+                    <RoomTable/>
                 </div>
             </div>
         </div>

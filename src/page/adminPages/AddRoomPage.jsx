@@ -6,7 +6,6 @@ function AddRoomPage() {
   return (
     <div>
       <AddRoom/>
-      <RoomTable/>
     </div>
   )
 }
