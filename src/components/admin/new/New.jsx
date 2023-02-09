@@ -86,7 +86,7 @@ function New() {
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Hotel name</label>
-                                <input type="text" onChange={handleChange} name="name" placeholder='Hotel name' />
+                                <input type="text" onChange={handleChange} className="name" placeholder='Hotel name' />
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Type</label>

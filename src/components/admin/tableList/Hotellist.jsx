@@ -19,7 +19,7 @@ function Hotellist({ hotel }) {
     }
     return (
         <div>
-            <li class="table-row">
+            <li className="table-row">
                 <div className="col col-1" data-label="Job Id">{hotel.name}</div>
                 <div className="col col-4" data-label="Payment Status">{hotel.type}</div>
                 <div className="col col-2" data-label="Customer Name">{hotel.address}</div>

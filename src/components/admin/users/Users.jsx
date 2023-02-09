@@ -102,7 +102,7 @@ import React from 'react'
 import { getAllUserAPI, blockUser } from '../../../api/adminReq';
 
 import "./users.scss"
-import Userlist from '../userlist/Userlist';
+import Userlist from '../tableList/Userlist';
 
 
 function Users() {

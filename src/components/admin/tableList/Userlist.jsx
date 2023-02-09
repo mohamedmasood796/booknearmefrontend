@@ -15,7 +15,7 @@ function Userlist({user}) {
     }
     return (
         <div>
-            <li class="table-row">
+            <li className="table-row">
                 <div className="col col-1" data-label="Job Id">{user.username}</div>
                 <div className="col col-4" data-label="Payment Status">{user.email}</div>
                 <div className="col col-2" data-label="Customer Name">{user.country}</div>

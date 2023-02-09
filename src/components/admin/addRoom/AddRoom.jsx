@@ -28,18 +28,10 @@ function    AddRoom() {
                     <h1>Add New Room</h1>
                 </div>
                 <div className="bottom">
-                    {/* <div className='left'>
-                        <img src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg" alt="" />
-
-                    </div> */}
+                   
                     <div className='right'>
                         <form action="">
-                            {/* <div className="formInput">
-                                <label htmlFor="file">
-                                   Image <UploadFileIcon className='icon'/>
-                                </label>
-                                <input type="file" style={{display:'none'}} id='file'/>
-                            </div> */}
+                            
                             <div className="formInput">
                                 <label htmlFor="">Room title</label>
                                 <input type="text" onChange={handleChange} name="title" placeholder='Room title' />
@@ -56,18 +48,7 @@ function    AddRoom() {
                                 <label htmlFor="">maxPeople</label>
                                 <input type="text" onChange={handleChange} name="maxPeople" placeholder='maxPeople' />
                             </div>
-                            {/* <div className="formInput">
-                                <label htmlFor="">distance</label>
-                                <input type="text" onChange={handleChange} name="distance" placeholder='distance' />
-                            </div>
-                            <div className="formInput">
-                                <label htmlFor="">Title</label>
-                                <input type="text" onChange={handleChange} name="title" placeholder=' Title' />
-                            </div>
-                            <div className="formInput">
-                                <label htmlFor="">Description</label>
-                                <input type="text" onChange={handleChange} name="desc" placeholder=' Description' />
-                            </div> */}
+                           
                             <div className="formInput">
                                 <label htmlFor="">Room Number</label>
                                 <input type="number" onChange={handleChange} name="cheapestPrice" placeholder='Room Number' />

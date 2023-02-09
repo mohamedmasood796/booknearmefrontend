@@ -79,11 +79,10 @@
 
 import { useState, useEffect } from 'react'
 import React from 'react'
-import { getAllHotelAPI, blockUser } from '../../../api/adminReq';
-
+import { getAllHotelAPI } from '../../../api/adminReq';
 import "./hotelList.scss"
-import Userlist from '../userlist/Userlist';
-import Hotellist from '../userlist/Hotellist';
+import Userlist from '../tableList/Userlist';
+import Hotellist from '../tableList/Hotellist';
 
 
 function HotelList() {
@@ -104,16 +103,16 @@ function HotelList() {
 
     return (
         <div>
-            <div class="container">
+            <div className="container">
                 <h2>HOTEL LIST </h2>
-                <ul class="responsive-table">
+                <ul className="responsive-table">
 
-                    <li class="table-header">
-                        <div class="col col-1">Hotel Name</div>
-                        <div class="col col-2">Type</div>
-                        <div class="col col-3">address</div>
-                        <div class="col col-4">Description</div>
-                        <div class="col col-4">Price</div>
+                    <li className="table-header">
+                        <div className="col col-1">Hotel Name</div>
+                        <div className="col col-2">Type</div>
+                        <div className="col col-3">address</div>
+                        <div className="col col-4">Description</div>
+                        <div className="col col-4">Price</div>
                     </li>
 
 
