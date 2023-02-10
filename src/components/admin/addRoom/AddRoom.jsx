@@ -19,6 +19,7 @@ function    AddRoom() {
         e.preventDefault()
         console.log(formData,"formdataan")
         const response=await addRoom(formData,params.id)
+        setFormData(formData)
     }
     return (
         <div className='home'>
@@ -60,7 +61,7 @@ function    AddRoom() {
                 </div>
 
                 <div>
-                    <RoomTable/>
+                    <RoomTable />
                 </div>
             </div>
         </div>

@@ -112,7 +112,7 @@ function HotelPage() {
                             <div className="hotelImages flex flex-wrap justify-between	">
                                 {data.photos?.map((photos, i) => (
                                     <div className="hotelImageWrapper w-[33%]  ">
-                                        <img onClick={() => handleOpen(i)} src={photos} alt="" className="hotelImg w-full object-cover pb-1.5" />
+                                        <img onClick={() => handleOpen(i)} src={photos} alt="" className="hotelImg w-full object-cover pb-1.5 h-72" />
                                     </div>
                                 ))}
                             </div>

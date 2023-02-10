@@ -17,7 +17,6 @@ function Admin() {
                 <Route exact path='/addhotels' element={<AddProduct/>} />
                 <Route exact path='/hotels' element={<HotelsPage/>} />
                 <Route exact path='/addRoom/:id' element={<AddRoomPage/>} />
-
             </Routes>
         </>
     )

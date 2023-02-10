@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import S3 from "aws-sdk/clients/s3";
 import './new.scss'
+import axios from "axios";
 import Sidebar from '../sidebar/Sidebar'
 import Navbar from '../navbar/Navbar'
 import UploadFileIcon from '@mui/icons-material/UploadFile';
@@ -11,24 +11,51 @@ function New() {
 
 
     const [formData, setFormData] = useState([])
-    const [files, setFile] = useState([]);
+    const [image, setImage] = useState([]);
     const [message, setMessage] = useState()
-    const [imageLinks, setImageLinks] = useState([])
+    // const [imageLinks, setImageLinks] = useState([])
     const handleChange = (e) => {
         const { value, name } = e.target
-        console.log(value,name )
+        console.log(value, name)
         setFormData({ ...formData, [name]: value })
-        console.log(formData,"hoooi")
+        console.log(formData, "hoooi")
     }
     const handleFile = (e) => {
-        
-       
+
+
     }
+    const cloudAPI = process.env.REACT_APP_CLOUD_NAME
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log(formData,"formdataan")
-        const response=await addHotel(formData)
-        
+        e.preventDefault();
+        const result = new FormData()
+
+        let photos = []
+        for (let i = 0; i < image.length; i++) {
+            console.log(image[i])
+            result.append('file', image[i]);
+            result.append('upload_preset', "booknearme");
+            console.log(result);
+            const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudAPI}/image/upload`, result)
+            console.log(response, "haid amir")
+            const imageUrl = response.data.url
+            console.log(imageUrl,)
+            photos.push(imageUrl)
+        }
+        if (photos.length) {
+            // const contents = {
+            //     formData,
+            //     photos
+            // }
+            formData.photos=photos
+            console.log(formData,"hai hotel full datas")
+            const response = await addHotel(formData)
+        }
+        // data.append("file",image)
+        // data.append("upload_preset",c)
+        // data.append("cloud_name",process.env.REACT_APP_CLOUD_NAME)
+
+        // fetch("https://api.cloudinary.com/v1_1/booknearme/image/upload",formData)
+
     }
     return (
         <div className='home'>
@@ -49,7 +76,7 @@ function New() {
                                 <label htmlFor="file">
                                     Image <UploadFileIcon className='icon' />
                                 </label>
-                                <input type="file" onChange={handleFile} style={{ display: 'none' }} id='file' />
+                                <input type="file" onChange={(e) => setImage([...image, e.target.files[0]])} style={{ display: 'none' }} id='file' />
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Hotel name</label>
