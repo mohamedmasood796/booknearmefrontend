@@ -3,8 +3,8 @@ import useFetch from '../../../hooks/useFetch'
 
 function Featured() {
 
-  const { data, loading, error } = useFetch('http://localhost:5000/api/hotels/countByCity?cities=kondottye,madrid,london')
-  console.log("masood", data, loading, error)
+  const { data, loading, error } = useFetch('http://localhost:5000/api/hotels/countByCity?cities=kondotty,malappuram,london')
+  console.log("masood kooi", data, loading, error)
   return (
     <div>
     {loading ? ("Loading please wait"):(<> 

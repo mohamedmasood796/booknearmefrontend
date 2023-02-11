@@ -5,11 +5,11 @@ import Navbar from '../../components/user/navbar/Navbar'
 
 function Hotel() {
   return (
-    <div>
+    <>
       <Navbar/>
       <Header type='list'/>
       <HotelPage/>
-    </div>
+    </>
   )
 }
 

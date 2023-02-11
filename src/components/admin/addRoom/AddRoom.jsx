@@ -44,11 +44,11 @@ function    AddRoom() {
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Price</label>
-                                <input type="text" onChange={handleChange} name="price" placeholder='price' />
+                                <input type="number" onChange={handleChange} name="price" placeholder='price' />
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">maxPeople</label>
-                                <input type="text" onChange={handleChange} name="maxPeople" placeholder='maxPeople' />
+                                <input type="number" onChange={handleChange} name="maxPeople" placeholder='maxPeople' />
                             </div>
                            
                             <div className="formInput">
