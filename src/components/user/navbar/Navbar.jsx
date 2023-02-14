@@ -13,7 +13,6 @@ function Navbar() {
 
     console.log("user2345t", user)
     const userlocal = localStorage.getItem("user")//local store 
-    console.log(userlocal, "userlocaljasir")
     return (
         <div className='navbar h-12  bg-[#003580] flex justify-center'>
             <div className="navContainer w-full container text-white flex items-center justify-between">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 import './new.scss'
 import axios from "axios";
 import Sidebar from '../sidebar/Sidebar'
@@ -46,17 +47,15 @@ function New() {
             //     formData,
             //     photos
             // }
-            formData.photos=photos
-            console.log(formData,"hai hotel full datas")
+            formData.photos = photos
+            console.log(formData, "hai hotel full datas")
             const response = await addHotel(formData)
         }
-        // data.append("file",image)
-        // data.append("upload_preset",c)
-        // data.append("cloud_name",process.env.REACT_APP_CLOUD_NAME)
-
-        // fetch("https://api.cloudinary.com/v1_1/booknearme/image/upload",formData)
 
     }
+    const removeImage = (i) => {
+        setImage(image.filter((x) => x.name !== i));
+    };
     return (
         <div className='home'>
             <Sidebar />
@@ -66,17 +65,39 @@ function New() {
                     <h1>Add New Hotel</h1>
                 </div>
                 <div className="bottom">
-                    <div className='left'>
-                        <img src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg" alt="" />
 
-                    </div>
                     <div className='right'>
                         <form action="">
                             <div className="formInput">
                                 <label htmlFor="file">
                                     Image <UploadFileIcon className='icon' />
                                 </label>
-                                <input type="file" onChange={(e) => setImage([...image, e.target.files[0]])} style={{ display: 'none' }} id='file' />
+                                <input type="file" onChange={(e) => setImage([...image, e.target.files[0]])} style={{ display: 'none' }} id='file' accept='image/*' />
+                                <div className=' flex'>
+
+                                    {image.length > 0 && image.map((file, key) => {
+                                        return (
+
+                                            <div className='left flex justify-end '>
+                                                <i
+                                                    onClick={() => {
+                                                        removeImage(file.name);
+                                                    }}
+                                                    className="mdi mdi-close absolute  hover:text-white cursor-pointer"
+                                                >
+                                                    <div className='flex'>
+                                                        {React.createElement(AiOutlineCloseCircle, {
+                                                            size: "20",
+                                                        })}
+                                                    </div>
+                                                </i>
+
+
+                                                <img src={URL.createObjectURL(image[key])} alt="" />
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Hotel name</label>

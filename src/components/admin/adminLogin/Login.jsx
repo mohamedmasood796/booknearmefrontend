@@ -54,7 +54,7 @@ function Login() {
                 <div className='grid items-center gap-5 border py-10 px-10'>
                     <h1 className='	font-weight: 400; text-4xl ml-3'>Login</h1>
                     {errMess ? <small className='text-red-600 text-xl'>{errMess}</small> : null}
-                    <input type="email" placeholder='username' id='username' onChange={usernameOnchage} className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='email' />
+                    <input type="email" placeholder='username' id='email' onChange={usernameOnchage} className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='email' />
                     {!username && submit ? <p className='font-normal text-sm text-red-600 ml-4 '> please enter and name</p> : null}
 
                     <input type="password" placeholder='password' id='password' onChange={userpasswordOnchage} className="border my-2 mx-3 outline rounded-lg outline-gray-300  lInput" name='password' />
