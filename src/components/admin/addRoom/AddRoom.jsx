@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 import './addroom.scss'
 import Sidebar from '../sidebar/Sidebar'
 import Navbar from '../navbar/Navbar'
@@ -21,7 +22,7 @@ function AddRoom() {
         e.preventDefault()
         console.log(formData, "formdataan")
         setFormData(formData)
-        
+
         //file upload to cloudnery
         const cloudAPI = process.env.REACT_APP_CLOUD_NAME
         const result = new FormData()
@@ -39,19 +40,21 @@ function AddRoom() {
             photos.push(imageUrl)
         }
         if (photos.length) {
-            
-            formData.photos=photos
-            console.log(formData,"hai hotel full datas")
+
+            formData.photos = photos
+            console.log(formData, "hai hotel full datas")
             // const response = await addHotel(formData)
             const response = await addRoom(formData, params.id)
-            
+
         }
     }
+    const removeImage = (i) => {
+        setImage(image.filter((x) => x.name !== i));
+    };
 
-   
-       
 
-    
+
+
     return (
         <div className='home'>
             <Sidebar />
@@ -69,6 +72,31 @@ function AddRoom() {
                                     Image <UploadFileIcon className='icon' />
                                 </label>
                                 <input type="file" onChange={(e) => setImage([...image, e.target.files[0]])} style={{ display: 'none' }} id='file' multiple accept='image/*' />
+                                <div className=' flex'>
+
+                                    {image.length > 0 && image.map((file, key) => {
+                                        return (
+
+                                            <div className='left flex justify-end '>
+                                                <i
+                                                    onClick={() => {
+                                                        removeImage(file.name);
+                                                    }}
+                                                    className="mdi mdi-close absolute  hover:text-white cursor-pointer"
+                                                >
+                                                    <div className='flex'>
+                                                        {React.createElement(AiOutlineCloseCircle, {
+                                                            size: "20",
+                                                        })}
+                                                    </div>
+                                                </i>
+
+
+                                                <img src={URL.createObjectURL(image[key])} alt="" />
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                             </div>
 
                             <div className="formInput">
