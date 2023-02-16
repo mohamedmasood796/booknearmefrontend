@@ -9,6 +9,8 @@ import { addRoom } from '../../../api/adminReq.js'
 import { useParams } from 'react-router-dom';
 import RoomTable from '../roomTable/RoomTable';
 import axios from "axios";
+import toast from 'react-hot-toast';
+
 
 function AddRoom() {
     let params = useParams()
@@ -22,6 +24,7 @@ function AddRoom() {
         e.preventDefault()
         console.log(formData, "formdataan")
         setFormData(formData)
+        
 
         //file upload to cloudnery
         const cloudAPI = process.env.REACT_APP_CLOUD_NAME
@@ -45,6 +48,11 @@ function AddRoom() {
             console.log(formData, "hai hotel full datas")
             // const response = await addHotel(formData)
             const response = await addRoom(formData, params.id)
+            console.log(response,"hai respose")
+
+            if(response.data.message){
+                toast.success(response.data.message)
+            }
 
         }
     }

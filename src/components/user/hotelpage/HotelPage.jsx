@@ -2,14 +2,15 @@ import React from 'react'
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useFetch from '../../../hooks/useFetch';
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 import Reserve from '../reserve/Reserve';
+import Banner from '../../admin/banner/Banner';
 
 function HotelPage() {
     const location = useLocation()
-    const id=location.pathname.split('/')[2]
+    const id = location.pathname.split('/')[2]
 
-            // or
+    // or
     // const fulllocation = document.location + '';
     // let id = fulllocation.split('/', [5])
     // id = id[4]
@@ -19,24 +20,24 @@ function HotelPage() {
 
     const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/find/${id}`)
 
-    const user=  useSelector((state)=>state.userAuth)
-    console.log("user2345t",user)
-    const navigate=useNavigate()
-    const property=useSelector((state)=>state.searchresult)
+    const user = useSelector((state) => state.userAuth)
+    console.log("user2345t", user)
+    const navigate = useNavigate()
+    const property = useSelector((state) => state.searchresult)
 
-    console.log("dddddddddddddddddddddd",property)
-    
+    console.log("dddddddddddddddddddddd", property)
 
-    const MILLISECONDS_PER_DAY=1000*60*60*24;
-    function dayDifference(date1,date2){
-        console.log("kkkkkkkkkkkkkkkkk",date1,date2)
-        const timeDiff=Math.abs(date2.getTime()-date1.getTime());
-        const diffDays=Math.ceil(timeDiff/MILLISECONDS_PER_DAY)
+
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+    function dayDifference(date1, date2) {
+        console.log("kkkkkkkkkkkkkkkkk", date1, date2)
+        const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY)
         return diffDays;
     }
 
 
-    const days=dayDifference(property?.dates?.endDate,property?.dates?.startDate)
+    const days = dayDifference(property?.dates?.endDate, property?.dates?.startDate)
 
 
     const handleOpen = (i) => {
@@ -55,10 +56,10 @@ function HotelPage() {
         setSlideNumber(newSlideNumber)
     }
 
-    const handleClick=()=>{
-        if(user){
+    const handleClick = () => {
+        if (user) {
             setOpenModal(true)
-        }else{
+        } else {
             navigate("/login")
         }
     }
@@ -108,7 +109,7 @@ function HotelPage() {
                             </span>
                             <span className="hotelPrceHighlight text-[#008009] font-medium">
                                 Book a stay over ${data.cheapestPrice} at this property and get a free airport taxi
-                            </span>  
+                            </span>
                             <div className="hotelImages flex flex-wrap justify-between	">
                                 {data.photos?.map((photos, i) => (
                                     <div className="hotelImageWrapper w-[33%]  ">
@@ -116,6 +117,7 @@ function HotelPage() {
                                     </div>
                                 ))}
                             </div>
+                            
                             <div className="hotelDetails  md:flex justify-between gap-5 mt-5">
                                 <div className="hotelDetailsTexts  ">
                                     {/* flex:3 */}
@@ -130,16 +132,17 @@ function HotelPage() {
                                         Obcaecati eveniet iure sint, esse voluptatibus nobis aspernatur ipsam accusamus similique necessitatibus molestias dicta voluptate coempore unde consequuntur!
                                     </span>
                                     <h2 className='font-light	'>
-                                        <b>${days*data.cheapestPrice*property.options.room}</b>({days} night)
+                                        <b>${days * data.cheapestPrice * property.options.room}</b>({days} night)
                                     </h2>
                                     <button onClick={handleClick} className='border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded '>Reserve or Book Now</button>
                                 </div>
                             </div>
                         </div>
+                       
                     </div>
                 </>
             )}
-            {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
+            {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
         </div>
     )
 }

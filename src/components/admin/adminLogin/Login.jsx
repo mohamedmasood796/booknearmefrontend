@@ -35,8 +35,8 @@ function Login() {
                 console.log(data)
                 dispatch(loginSuccess(data))
                 console.log("seo");
-                localStorage.setItem("user", data)
-                localStorage.setItem("jwt", data.token)
+                // localStorage.setItem("user", data)
+                localStorage.setItem("jwtadmin", data.token)
 
                 navigate('/admin')
             } else {

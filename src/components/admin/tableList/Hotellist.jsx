@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { getAllHotelAPI } from '../../../api/adminReq';
 import { useNavigate } from "react-router-dom"
+import { deleteHotel } from '../../../api/adminReq';
 
 function Hotellist({ hotel }) {
 
@@ -14,8 +15,10 @@ function Hotellist({ hotel }) {
     const addRoom = (e) => {
         console.log(e, "userid and hotel id")
         navigate(`/admin/addRoom/${e}`)
-
-
+    }
+    const deleteRoombyid =async(id)=>{
+        console.log(id,"it is hotel id")
+        const response = await deleteHotel(id)
     }
     return (
         <div>
@@ -28,7 +31,7 @@ function Hotellist({ hotel }) {
 
 
                 <div className="unblockButton" onClick={() => addRoom(hotel._id)} >Add Room</div>
-                <div className="blockButton"  >Delete</div>
+                <div className="blockButton" onClick={()=>deleteRoombyid(hotel._id)} >Delete</div>
 
             </li>
         </div>

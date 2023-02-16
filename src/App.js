@@ -4,10 +4,12 @@ import { Route, Routes, BrowserRouter as Router } from 'react-router-dom'
 import './App.css';
 import Admin from './routes/Admin';
 import User from './routes/User'
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div >
+       <Toaster position="top-center" />
      <Router>
       <Routes>
         <Route path="/*" element={<User/>}/>

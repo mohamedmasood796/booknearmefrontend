@@ -44,7 +44,7 @@ function RoomTable() {
 
 
                     {roomData.map((room) => (
-                        <Roomlist room={room}/>
+                        <Roomlist room={room} hotelid={id}/>
                     ))}
 
                    

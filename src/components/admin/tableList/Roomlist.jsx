@@ -1,21 +1,20 @@
 import React, { useState } from 'react'
 import { getAllHotelAPI } from '../../../api/adminReq';
 import { useNavigate } from "react-router-dom"
+import { deleteRoom } from '../../../api/adminReq';
 
-function Roomlist({ room }) {
+function Roomlist({ room ,hotelid}) {
 
     const navigate = useNavigate();
-    // const [isBlock,setIsBlock]=useState(user.isBlock)
-
-    // const Blockuser=async(e)=>{
-    //     setIsBlock(false)
-    //     await blockUser({ Status: false,e});
+    console.log(hotelid,"hai this is params in readt thats all thans")
+    
+    // const addRoom = (e) => {
+    //     console.log(e, "userid and hotel id")
+    //     navigate(`/admin/addRoom/${e}`)
     // }
-    const addRoom = (e) => {
-        console.log(e, "userid and hotel id")
-        navigate(`/admin/addRoom/${e}`)
-
-
+    const deleteRoomById=async(id)=>{
+        console.log(id,"hai this is room id thats all ")
+        const response = await deleteRoom(id,hotelid)
     }
     return (
         <div>
@@ -28,7 +27,7 @@ function Roomlist({ room }) {
 
 
                 {/* <div className="unblockButton" onClick={() => addRoom(hotel._id)} >Add Room</div> */}
-                <div className="blockButton"  >Delete</div>
+                <div className="blockButton" onClick={()=>deleteRoomById(room._id)}  >Delete</div>
 
             </li>
         </div>

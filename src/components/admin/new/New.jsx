@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import './new.scss'
 import axios from "axios";
+import toast from 'react-hot-toast';
 import Sidebar from '../sidebar/Sidebar'
 import Navbar from '../navbar/Navbar'
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 // import { AddHomeOutlined } from '@mui/icons-material';
 import { addHotel } from '../../../api/adminReq.js'
+
+
 
 function New() {
 
@@ -28,8 +31,19 @@ function New() {
     const cloudAPI = process.env.REACT_APP_CLOUD_NAME
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = new FormData()
 
+        // toast.success('Hotel added!', {
+        //     position: "top-right",
+        //     autoClose: 5000,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     progress: undefined,
+        //     theme: "colored",
+        // });
+
+        const result = new FormData()
         let photos = []
         for (let i = 0; i < image.length; i++) {
             console.log(image[i])
@@ -50,6 +64,10 @@ function New() {
             formData.photos = photos
             console.log(formData, "hai hotel full datas")
             const response = await addHotel(formData)
+            if(response.data.message){
+                toast.success(response.data.message)
+            }
+
         }
 
     }
@@ -101,7 +119,7 @@ function New() {
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Hotel name</label>
-                                <input type="text" onChange={handleChange} name="name" className="name" placeholder='Hotel name' />
+                                <input type="text" value={formData.name} onChange={handleChange} name="name" className="name" placeholder='Hotel name' />
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Type</label>

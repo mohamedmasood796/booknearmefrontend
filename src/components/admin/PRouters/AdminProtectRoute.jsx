@@ -3,11 +3,11 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 function AdminProtectedRouter(props) {
 
-  if (localStorage.getItem("jwt")) {
+  if (localStorage.getItem("jwtadmin")) {
     return props.children;
   }
-  if (!localStorage.getItem("token")) {
-    return <Navigate to="/login" />;
+  if (!localStorage.getItem("jwtadmin")) {
+    return <Navigate to="/admin/login" />;
   }
 
   
