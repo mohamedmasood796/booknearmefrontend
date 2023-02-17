@@ -5,8 +5,10 @@ import useFetch from '../../../hooks/useFetch';
 import { useSelector } from "react-redux"
 import Reserve from '../reserve/Reserve';
 import Banner from '../../admin/banner/Banner';
+import {differenceInCalendarDays} from "date-fns";
+import axios from "axios";
 
-function HotelPage() {
+function HotelPage({setCheckInglo}) {
     const location = useLocation()
     const id = location.pathname.split('/')[2]
 
@@ -17,6 +19,30 @@ function HotelPage() {
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+
+    const [checkIn, setCheckIn] = useState('');
+    const [checkOut, setCheckOut] = useState('');
+    const [numberOfGuests, setNumberOfGuests] = useState(1);
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [redirect,setRedirect] = useState('');
+    console.log(checkIn,"checkIn")
+
+    let numberOfNights = 0;
+    if (checkIn && checkOut) {
+        numberOfNights = differenceInCalendarDays(new Date(checkOut), new Date(checkIn));
+    }
+
+    async function bookThisPlace() {
+        // const response = await axios.post('/bookings', {
+        //     checkIn, checkOut, numberOfGuests, name, phone,
+        //     // place: place._id,
+        //     // price: numberOfNights * place.price,
+        // });
+        setCheckInglo({checkIn, checkOut, numberOfGuests, name, phone, numberOfNights})
+        // const bookingId = response.data._id;
+        // setRedirect(`/account/bookings/${bookingId}`);
+    }
 
     const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/find/${id}`)
 
@@ -117,16 +143,16 @@ function HotelPage() {
                                     </div>
                                 ))}
                             </div>
-                            
+
                             <div className="hotelDetails  md:flex justify-between gap-5 mt-5">
                                 <div className="hotelDetailsTexts  ">
-                                    {/* flex:3 */}
+
                                     <h1 className='hotelTitle font-bold text-4xl'>{data.title} </h1>
                                     <p className='hotelDesc text-sm mt-5 '>
                                         {data.desc}
                                     </p>
                                 </div>
-                                <div className="hotelDetailsPrice bg-[#ebf3ff] mt-3 p-5 flex flex-col gap-5 md:w-[25%]" >
+                                {/* <div className="hotelDetailsPrice bg-[#ebf3ff] mt-3 p-5 flex flex-col gap-5 md:w-[25%]" >
                                     <h1 className='text-lg font-bold text-[#555]'>Perfect for a {days}-night stay!</h1>
                                     <span className='text-sm '>
                                         Obcaecati eveniet iure sint, esse voluptatibus nobis aspernatur ipsam accusamus similique necessitatibus molestias dicta voluptate coempore unde consequuntur!
@@ -135,10 +161,107 @@ function HotelPage() {
                                         <b>${days * data.cheapestPrice * property.options.room}</b>({days} night)
                                     </h2>
                                     <button onClick={handleClick} className='border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded '>Reserve or Book Now</button>
+                                </div> */}
+
+
+                                                    {/* //////////////////////////////// */}
+
+                                {/* <div className="bg-white shadow p-4 rounded-2xl">
+                                    <div className="text-2xl text-center">
+                                        Price: $778 / per night
+                                    </div>
+                                    <div className="border rounded-2xl mt-4">
+                                        <div className="flex">
+                                            <div className="py-3 px-4 ">
+                                                <label>Check in:</label>
+                                                <input type="date"
+                                                    value={checkIn}
+                                                    onChange={ev => setCheckIn(ev.target.value)} />
+                                            </div>
+                                            <div className="py-3 px-4 border-l">
+                                                <label>Check out:</label>
+                                                <input type="date" value={checkOut}
+                                                    onChange={ev => setCheckOut(ev.target.value)} />
+                                            </div>
+                                        </div>
+                                        <div className="py-3 px-4 border-t">
+                                            <label>Number of guests:</label>
+                                            <input type="number"
+                                                value={numberOfGuests}
+                                                onChange={ev => setNumberOfGuests(ev.target.value)} />
+                                        </div>
+                                        {numberOfNights > 0 && (
+                                            <div className="py-3 px-4 border-t">
+                                                <label>Your full name:</label>
+                                                <input type="text"
+                                                    value={name}
+                                                    onChange={ev => setName(ev.target.value)} />
+                                                <label>Phone number:</label>
+                                                <input type="tel"
+                                                    value={phone}
+                                                    onChange={ev => setPhone(ev.target.value)} />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <button onClick={bookThisPlace} className="primary mt-4 border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">
+                                        Book this place
+                                        {numberOfNights > 0 && (
+                                            <span> $100</span>
+                                        )}
+                                    </button>
+                                </div> */}
+
+                                <div className="bg-white shadow p-4 rounded-2xl">
+                                    <div className="text-2xl text-center">
+                                    Check your room availability
+                                    </div>
+                                    <div className="border rounded-2xl mt-4">
+                                        <div className="flex">
+                                            <div className="py-3 px-4 ">
+                                                <label>Check in:</label>
+                                                <input type="date"
+                                                    value={checkIn}
+                                                    onChange={ev => setCheckIn(ev.target.value)} />
+                                            </div>
+                                            <div className="py-3 px-4 border-l">
+                                                <label>Check out:</label>
+                                                <input type="date" value={checkOut}
+                                                    onChange={ev => setCheckOut(ev.target.value)} />
+                                            </div>
+                                        </div>
+                                        <div className="py-3 px-4 border-t">
+                                            <label>Number of guests:</label>
+                                            <input type="number"
+                                                value={numberOfGuests}
+                                                onChange={ev => setNumberOfGuests(ev.target.value)} />
+                                        </div>
+                                        {numberOfNights > 0 && (
+                                            <div className="py-3 px-4 border-t">
+                                                <label>Your full name:</label>
+                                                <input type="text"
+                                                    value={name}
+                                                    onChange={ev => setName(ev.target.value)} />
+                                                <label>Phone number:</label>
+                                                <input type="tel"
+                                                    value={phone}
+                                                    onChange={ev => setPhone(ev.target.value)} />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <button onClick={bookThisPlace} className="primary mt-4 border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">
+                                        Book this place
+                                        {numberOfNights > 0 && (
+                                            <span> $100</span>
+                                        )}
+                                    </button>
                                 </div>
+
+
+
+
                             </div>
                         </div>
-                       
+
                     </div>
                 </>
             )}

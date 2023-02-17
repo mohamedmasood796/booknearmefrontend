@@ -2,16 +2,27 @@
 
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 import { getRoomDataById } from "../../../api/authReq";
 
-function Banner() {
+function Banner({ checkInglo }) {
+    const navigate = useNavigate();
     let params = useParams()
     // export default function Gridcards({ hotel }) {
     const [room, setRoom] = useState([]);
 
     console.log(room, "Rooms");
+
+    const { checkIn, checkOut, numberOfGuests, name, phone, numberOfNights } = checkInglo
+    console.log(checkIn, "checkin user date")
+    useEffect(() => {
+        console.log(checkInglo, "masooooo po");
+
+    }, [checkInglo])
+
+
 
     const location = useLocation();
     const data = location?.state?.hotelId;
@@ -38,6 +49,9 @@ function Banner() {
         console.log(params.id, "hari murathe dalam")
     }, []);
 
+    function handleClick() {
+        navigate("/checkout");
+    }
 
 
     return (
@@ -194,22 +208,22 @@ function Banner() {
             <div className="border w-full flex items-center justify-center ">
                 <div className=" border w-10/12  ">
                     {room?.map((room) => (
-                        <div class=" container border-4 ">
-                            <div class="flex flex-col md:flex-row   w-full rounded-lg bg-white shadow-lg">
-                                <img class=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg" src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg" alt="" />
-                        
-                                <div class="p-6 flex flex-col justify-start">
-                                    <h5 class="text-gray-900 text-xl font-medium mb-2">{room.title}</h5>
-                                    <p class="text-gray-700 text-base mb-4">
+                        <div className=" container border-4 ">
+                            <div className="flex flex-col md:flex-row  w-full rounded-lg bg-white shadow-lg">
+                                <img className=" w-full h-96  md:h-80 object-cover md:w-80 rounded-t-lg md:rounded-none md:rounded-l-lg " src={room.photos[0]} alt="" />
+
+                                <div className="p-6 flex flex-col justify-start">
+                                    <h5 className="text-gray-900 text-xl font-medium mb-2">{room.title}</h5>
+                                    <p className="text-gray-700 text-base mb-4">
                                         {room.desc}
                                     </p>
-                                    <p class="text-gray-600 text-xs">Max people : {room.maxPeople}</p>
-                                    <p class="text-gray-700 text-base mb-4">
-                                        {room.price}
+                                    <p className="text-gray-600 text-xs">Max people : {room.maxPeople}</p>
+                                    <p className="text-gray-700 text-base mb-4">
+                                        {room.price ? room.price : room.price * numberOfNights}
                                     </p>
                                 </div>
-                                <div className="items-center  flex">
-                                    <button className="border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">reserve here</button>
+                                <div className="items-center w-full px-3 justify-end  flex">
+                                    <button onClick={handleClick} className="border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">reserve here</button>
                                 </div>
 
                             </div>
