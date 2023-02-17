@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useParams, useNavigate } from 'react-router-dom';
+import {booking} from "../../../api/authReq.js"
 
 
 import { getRoomDataById } from "../../../api/authReq";
@@ -16,10 +17,10 @@ function Banner({ checkInglo }) {
     console.log(room, "Rooms");
 
     const { checkIn, checkOut, numberOfGuests, name, phone, numberOfNights } = checkInglo
+
     console.log(checkIn, "checkin user date")
     useEffect(() => {
         console.log(checkInglo, "masooooo po");
-
     }, [checkInglo])
 
 
@@ -49,8 +50,20 @@ function Banner({ checkInglo }) {
         console.log(params.id, "hari murathe dalam")
     }, []);
 
-    function handleClick() {
-        navigate("/checkout");
+    async function handleClick(oneroom) {
+
+        // navigate("/checkout");
+        console.log(oneroom,"room delat")
+        console.log(checkInglo,"checkIn glo")
+        const masoodnew={
+            ...oneroom,
+            ...checkInglo,
+            
+        }
+        const response = await booking(masoodnew)
+
+        console.log(response,"good rsponse")
+
     }
 
 
@@ -223,7 +236,7 @@ function Banner({ checkInglo }) {
                                     </p>
                                 </div>
                                 <div className="items-center w-full px-3 justify-end  flex">
-                                    <button onClick={handleClick} className="border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">reserve here</button>
+                                    <button onClick={()=>handleClick(room)} className="border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">reserve here</button>
                                 </div>
 
                             </div>
