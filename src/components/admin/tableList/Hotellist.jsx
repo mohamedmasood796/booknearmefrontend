@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { getAllHotelAPI } from '../../../api/adminReq';
 import { useNavigate } from "react-router-dom"
 import { deleteHotel } from '../../../api/adminReq';
+import './userlist.scss'
+
 
 function Hotellist({ hotel }) {
 
@@ -23,14 +25,14 @@ function Hotellist({ hotel }) {
     return (
         <div>
             <li className="table-row">
-                <div className="col col-1" data-label="Job Id">{hotel.name}</div>
-                <div className="col col-4" data-label="Payment Status">{hotel.type}</div>
-                <div className="col col-2" data-label="Customer Name">{hotel.address}</div>
-                <div className="col col-3" data-label="Amount">{hotel.desc}</div>
-                <div className="col col-3" data-label="Amount">{hotel.cheapestPrice}</div>
+                <div className="hotelcol1 col col-1" data-label="Job Id">{hotel.name}</div>
+                <div className="hotelcol2 col col-4" data-label="Payment Status">{hotel.type}</div>
+                <div className="hotelcol3 col col-2" data-label="Customer Name">{hotel.address}</div>
+                <div className="hotelcol4 col col-3" data-label="Amount">{hotel.desc}</div>
+                <div className="hotelcol5 col col-3" data-label="Amount">{hotel.cheapestPrice}</div>
 
 
-                <div className="unblockButton" onClick={() => addRoom(hotel._id)} >Add Room</div>
+                <div className="hotelcol6 unblockButton" onClick={() => addRoom(hotel._id)} >Add Room</div>
                 <div className="blockButton" onClick={()=>deleteRoombyid(hotel._id)} >Delete</div>
 
             </li>

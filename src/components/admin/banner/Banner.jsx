@@ -3,7 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useParams, useNavigate } from 'react-router-dom';
-import {booking} from "../../../api/authReq.js"
+import { booking } from "../../../api/authReq.js"
+
+// import "bootstrap/dist/css/bootstrap.min.css"; 
+// import Button from "react-bootstrap/Button"; 
+// import Card from "react-bootstrap/Card"; 
+import { loadStripe } from "@stripe/stripe-js";
 
 
 import { getRoomDataById } from "../../../api/authReq";
@@ -52,17 +57,50 @@ function Banner({ checkInglo }) {
 
     async function handleClick(oneroom) {
 
-        // navigate("/checkout");
-        console.log(oneroom,"room delat")
-        console.log(checkInglo,"checkIn glo")
-        const masoodnew={
+
+        console.log(oneroom, "room delat")
+        console.log(checkInglo, "checkIn glo")
+        const newOrder = {
             ...oneroom,
             ...checkInglo,
-            
-        }
-        const response = await booking(masoodnew)
 
-        console.log(response,"good rsponse")
+        }
+        // const BookingResponse = await booking(newOrder)
+
+        // console.log(BookingResponse, "good rsponse")
+
+
+
+        const stripe = await loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
+        console.log(stripe,"stripe good")
+        const body = { newOrder };
+        console.log(body,"this is b")
+        const headers = {
+            "Content-Type": "application/json",
+        };
+
+        const {data} = await booking(
+            body
+        );
+        if(data?.url){
+         window.location.href=data.url
+        }
+        console.log(data,"hai take of interview")
+
+        // const session = await response.json();
+
+        // const result = stripe.redirectToCheckout({
+        //     sessionId: session.id,
+        // });
+
+        // if (result.error) {
+        //     console.log(result.error);
+        // }
+
+
+
+        // navigate("/checkout");
+    
 
     }
 
@@ -236,7 +274,7 @@ function Banner({ checkInglo }) {
                                     </p>
                                 </div>
                                 <div className="items-center w-full px-3 justify-end  flex">
-                                    <button onClick={()=>handleClick(room)} className="border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">reserve here</button>
+                                    <button onClick={() => handleClick(room)} className="border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">reserve here</button>
                                 </div>
 
                             </div>

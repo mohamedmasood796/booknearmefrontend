@@ -125,13 +125,14 @@ function Users() {
         <div>
             <div class="container">
                 <h2>Responsive Tables Using LI <small>Triggers on 767px</small></h2>
-                <ul class="responsive-table">
+                <ul className="responsive-table">
 
                     <li class="table-header">
-                        <div class="col col-1">Name</div>
-                        <div class="col col-2">Email</div>
-                        <div class="col col-3">Country</div>
-                        <div class="col col-4">Phone</div>
+                        <div className="usercol1 col col-1">Name</div>
+                        <div className="usercol2 col col-2">Email</div>
+                        <div className="usercol3 col col-3">Country</div>
+                        <div className="usercol4 col col-4">Phone</div>
+                        <div className="usercol5 col col-4">status</div>
                     </li>
                     
 

@@ -108,11 +108,12 @@ function HotelList() {
                 <ul className="responsive-table">
 
                     <li className="table-header">
-                        <div className="col col-1">Hotel Name</div>
-                        <div className="col col-2">Type</div>
-                        <div className="col col-3">address</div>
-                        <div className="col col-4">Description</div>
-                        <div className="col col-4">Price</div>
+                        <div className="hotelcol1 col col-1">Hotel Name</div>
+                        <div className="hotelcol2 col col-2">Type</div>
+                        <div className="hotelcol3 col col-3">address</div>
+                        <div className="hotelcol4 col col-4">Description</div>
+                        <div className="hotelcol5 col col-4">Price</div>
+                        <div className="hotelcol6 col col-4">status</div>
                     </li>
 
 

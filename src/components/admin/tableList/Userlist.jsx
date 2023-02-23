@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {  blockUser } from '../../../api/adminReq';
 import Modal from '../modal/Modal';
+import './userlist.scss'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
@@ -44,10 +45,10 @@ function Userlist({user}) {
     return (
         <div>
             <li className="table-row">
-                <div className="col col-1" data-label="Job Id">{user.username}</div>
-                <div className="col col-4" data-label="Payment Status">{user.email}</div>
-                <div className="col col-2" data-label="Customer Name">{user.country}</div>
-                <div className="col col-3" data-label="Amount">{user.phone}</div>
+                <div className="usercol1 col col-1" data-label="Job Id">{user.username}</div>
+                <div className="usercol2 col col-4" data-label="Payment Status">{user.email}</div>
+                <div className="usercol3 col col-2" data-label="Customer Name">{user.country}</div>
+                <div className="usercol4 col col-3" data-label="Amount">{user.phone}</div>
 
 
                 {/* {isBlock ? <div className="unblockButton" onClick={()=>Blockuser(user._id)} >Unblock</div> :
