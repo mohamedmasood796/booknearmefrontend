@@ -5,6 +5,7 @@ import Navbar from '../../components/user/navbar/Navbar'
 import PropertyList from '../../components/user/propertyList/PropertyList'
 import FeaturedProperts from '../../components/user/featuredProperts/FeaturedProperts'
 import Banner from '../../components/admin/banner/Banner'
+import Addreview from '../../components/user/review/Addreview'
 
 
 function Home() {
@@ -20,6 +21,7 @@ function Home() {
                 <PropertyList />
                 <h1 className='homeTitle container text-2xl font-bold '>Homes guests love</h1>
                 <FeaturedProperts />
+                <Addreview/>
             </div>
         </div>
     )

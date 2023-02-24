@@ -17,7 +17,7 @@ function SideSearch() {
     const [options, setOptions] = useState(location.state.options)
     const [min, setMin] = useState(undefined)
     const [max, setMax] = useState(undefined)
-    const { data, loading, error, reFetch } = useFetch(`http://localhost:5000/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999999}`)
+    const { data, loading, error, reFetch } = useFetch(`https://booknearmeserver.hamrix.store/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999999}`)
 
     const handleClick=()=>{
         reFetch()

@@ -3,7 +3,7 @@ import useFetch from '../../../hooks/useFetch'
 
 function Featured() {
 
-  const { data, loading, error } = useFetch('http://localhost:5000/api/hotels/countByCity?cities=kondotty,malappuram,london')
+  const { data, loading, error } = useFetch('https://booknearmeserver.hamrix.store/api/hotels/countByCity?cities=kondotty,malappuram,london')
   console.log("masood kooi", data, loading, error)
   return (
     <div>

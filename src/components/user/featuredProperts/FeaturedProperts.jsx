@@ -2,7 +2,7 @@ import React from 'react'
 import useFetch from '../../../hooks/useFetch'
 
 function FeaturedProperts() {
-    const { data, loading, error } = useFetch('http://localhost:5000/api/hotels?featured=true&limit=4')
+    const { data, loading, error } = useFetch('https://booknearmeserver.hamrix.store/api/hotels?featured=true&limit=4')
     console.log(data,"chepest price")
 
     return (

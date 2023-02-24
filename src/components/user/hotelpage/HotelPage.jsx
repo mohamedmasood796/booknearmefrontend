@@ -44,7 +44,7 @@ function HotelPage({setCheckInglo}) {
         // setRedirect(`/account/bookings/${bookingId}`);
     }
 
-    const { data, loading, error } = useFetch(`http://localhost:5000/api/hotels/find/${id}`)
+    const { data, loading, error } = useFetch(`https://booknearmeserver.hamrix.store/api/hotels/find/${id}`)
 
     const user = useSelector((state) => state.userAuth)
     console.log("user2345t", user)
