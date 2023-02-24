@@ -44,7 +44,7 @@ function HotelPage({setCheckInglo}) {
         // setRedirect(`/account/bookings/${bookingId}`);
     }
 
-    const { data, loading, error } = useFetch(`https://booknearmeserver.hamrix.store/api/hotels/find/${id}`)
+    const { data, loading, error } = useFetch(`${process.env.REACT_APP_FRONT_END}/api/hotels/find/${id}`)
 
     const user = useSelector((state) => state.userAuth)
     console.log("user2345t", user)
@@ -119,9 +119,9 @@ function HotelPage({setCheckInglo}) {
 
                         </div>}
                         <div className="hotelWrapper w-full container flex flex-col gap-2.5 relative">
-                            <button className="bookNow absolute top-2 right-0 border-none px-2.5 py-2.5 bg-[#0071c2] text-white font-bold rounded cursor-pointer ">
+                            {/* <button className="bookNow absolute top-2 right-0 border-none px-2.5 py-2.5 bg-[#0071c2] text-white font-bold rounded cursor-pointer ">
                                 Reserve or Book Now!
-                            </button>
+                            </button> */}
                             <h1 className="hotelTitle text-2xl	fontbol">{data.name}</h1>
                             <div className="hotelAddress text-sm flex items-center gap-2.5 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">

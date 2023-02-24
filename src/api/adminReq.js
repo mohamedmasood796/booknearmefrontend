@@ -2,7 +2,7 @@ import { idID } from '@mui/material/locale'
 import axios from 'axios'
 
 const API = axios.create({
-    baseURL:'https://booknearmeserver.hamrix.store/api'
+    baseURL:`${process.env.REACT_APP_FRONT_END}/api`
 })
 
 export const getAllUserAPI = () => API.get('/users')

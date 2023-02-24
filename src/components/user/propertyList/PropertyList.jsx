@@ -3,7 +3,7 @@ import useFetch from '../../../hooks/useFetch'
 
 function PropertyList() {
 
-    const { data, loading, error } = useFetch('https://booknearmeserver.hamrix.store/api/hotels/countByType')
+    const { data, loading, error } = useFetch(`${process.env.REACT_APP_FRONT_END}/api/hotels/countByType`)
     console.log("masood kuta", data, loading, error)
 
     const images = [

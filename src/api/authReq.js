@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-    baseURL:'https://booknearmeserver.hamrix.store/api'
+    baseURL:`${process.env.REACT_APP_FRONT_END}/api`
 })
 API.interceptors.request.use((req) => {
     if (localStorage.getItem("jwt")) {
