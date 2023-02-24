@@ -21,7 +21,7 @@ function Home() {
                 <PropertyList />
                 <h1 className='homeTitle container text-2xl font-bold '>Homes guests love</h1>
                 <FeaturedProperts />
-                <Addreview/>
+                {/* <Addreview/> */}
             </div>
         </div>
     )
