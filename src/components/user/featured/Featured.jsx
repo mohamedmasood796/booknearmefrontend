@@ -1,6 +1,7 @@
 import React from 'react'
 import useFetch from '../../../hooks/useFetch'
 
+
 function Featured() {
 
   const { data, loading, error } = useFetch(`${process.env.REACT_APP_FRONT_END}/api/hotels/countByCity?cities=kondotty,malappuram,london`)
