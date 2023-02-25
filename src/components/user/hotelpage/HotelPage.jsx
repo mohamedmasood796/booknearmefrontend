@@ -44,7 +44,7 @@ function HotelPage({setCheckInglo}) {
         // setRedirect(`/account/bookings/${bookingId}`);
     }
 
-    const { data, loading, error } = useFetch(`${process.env.REACT_APP_FRONT_END}/api/hotels/find/${id}`)
+    const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/find/${id}`)
 
     const user = useSelector((state) => state.userAuth)
     console.log("user2345t", user)

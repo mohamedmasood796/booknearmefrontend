@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-    baseURL:`${process.env.REACT_APP_FRONT_END}/api`
+    baseURL:`${process.env.REACT_APP_BACK_END}/api`
 })
 API.interceptors.request.use((req) => {
     if (localStorage.getItem("jwt")) {

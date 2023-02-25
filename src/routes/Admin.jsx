@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import City from '../components/admin/city/City'
 import AdminProtectedRouter from '../components/admin/PRouters/AdminProtectRoute'
 import PublicRoute from '../components/admin/PRouters/PublicRoute'
 import AddProduct from '../page/adminPages/AddProduct'
@@ -18,6 +19,7 @@ function Admin() {
 
                 <Route exact path='/' element={<AdminProtectedRouter>    <Adminhomepage />  </AdminProtectedRouter>} />
                 <Route exact path='/users' element={ <AdminProtectedRouter> <User/>   </AdminProtectedRouter>} />
+                <Route exact path='/city' element={ <AdminProtectedRouter> <City/>   </AdminProtectedRouter>} />
                 <Route exact path='/addhotels' element={ <AdminProtectedRouter> <AddProduct/>   </AdminProtectedRouter>} />
                 <Route exact path='/hotels' element={ <AdminProtectedRouter> <HotelsPage/>  </AdminProtectedRouter>} />
                 <Route exact path='/addRoom/:id' element={ <AdminProtectedRouter> <AddRoomPage/>  </AdminProtectedRouter>} />

@@ -9,7 +9,7 @@ function Reserve({ setOpen, hotelId }) {
 
     const [roomId, setRoomId] = useState('')
     const [selectedRooms, setSelectedRooms] = useState([])
-    const { data, loading, error } = useFetch(`${process.env.REACT_APP_FRONT_END}/api/hotels/room/${hotelId}`)
+    const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/room/${hotelId}`)
     const dates = useSelector((state) => state.searchresult.dates)
     
 
@@ -43,7 +43,7 @@ function Reserve({ setOpen, hotelId }) {
         try {
             await Promise.all(
                 selectedRooms.map((roomNumberId)=>{
-                const res=axios.put(`${process.env.REACT_APP_FRONT_END}/api/rooms/availability/${roomId}/${roomNumberId}`,{dates:alldates})
+                const res=axios.put(`${process.env.REACT_APP_BACK_END}/api/rooms/availability/${roomId}/${roomNumberId}`,{dates:alldates})
                 return res.data
             }))
         } catch (error) {

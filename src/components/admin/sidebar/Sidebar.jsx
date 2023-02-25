@@ -31,6 +31,12 @@ function Sidebar() {
                             <span>Users</span>
                         </li>
                     </Link>
+                    <Link to='/admin/city' style={{ textDecoration: "none" }}>
+                        <li>
+                            <PersonIcon className='icon' />
+                            <span>Add City</span>
+                        </li>
+                    </Link>
                     <Link to='/admin/addhotels' style={{ textDecoration: "none" }}>
                         <li>
                             <Inventory2OutlinedIcon className='icon' />
