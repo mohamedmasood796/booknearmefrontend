@@ -6,6 +6,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import axios from "axios";
 import toast from 'react-hot-toast';
 import { addCity } from '../../../api/adminReq';
+import CityTable from './CityTable';
 
 const City = () => {
     const [name, setName] = useState("");
@@ -33,13 +34,15 @@ const City = () => {
             imageUrl,
             name
         }
-        console.log(data,"it si full data like url sn dndamd")
+        console.log(data, "it si full data like url sn dndamd")
         const cityadded = await addCity(data)
         console.log(cityadded, "hai respose")
 
-        // if(response.data.message){
-        //     toast.success(response.data.message)
-        // }
+        if (cityadded.data.status) {
+            toast.success(cityadded.data.message)
+        } else {
+            toast.error(cityadded.data.message)
+        }
 
 
 
@@ -100,7 +103,9 @@ const City = () => {
                             </form>
                         </div>
                     </div>
-
+                    <div>
+                        <CityTable />
+                    </div>
 
                 </div>
             </div>

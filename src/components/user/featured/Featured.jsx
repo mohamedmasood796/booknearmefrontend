@@ -1,46 +1,66 @@
 import React from 'react'
+import { getCity } from '../../../api/adminReq'
 import useFetch from '../../../hooks/useFetch'
+import { useState, useEffect } from 'react';
 
+import { searchbarAction } from '../../../redux/Searchbar';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Featured() {
+  const [city, setCity] = useState([])
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/countByCity?cities=dubai,munnar,london,maldives`)
-  console.log("masood kooi", data, loading, error)
+  // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/countByCity?cities=dubai,munnar,london,maldives`)
+  // console.log("masood kooi", data, loading, error)
+
+  const searchHotel = (name) => {
+    console.log(name);
+    const dates = new Date()
+    const options = new Date()
+    dispatch(searchbarAction.newSearch({ city: name, options: new Date(), dates: new Date() }))
+    navigate('/hotels', { state: { destination: name, dates: dates, options } })
+
+  }
+
+  useEffect(() => {
+    const fechData = async () => {
+      const { data } = await getCity()
+      setCity(data.city)
+      console.log(data.city, "eth fechData 243u899999999999999999999999999999999999999999")
+    }
+    fechData()
+  }, [])
+
   return (
     <div>
-    {loading ? ("Loading please wait"):(<> 
-    <div className='featured container flex flex-row gap-2 z-1'>
-      <div className="featuredItem relative text-black rounded-xl overflow-hidden">
-        <img src="https://www.mendix.com/wp-content/uploads/iStock-1309800161-scaled.jpg" alt="" className='featuredImg w-full object-cover h-64	' />
-        <div className="featuredTitles absolute mb-12 mt-3 font-medium">
-          <h1>Dubai</h1>
-          <h1>{data[0]} properties</h1>
+      {/* {loading ? ("Loading please wait"
+      ) : ( */}
+      <>
+        <div className='md:flex'>
+
+          {city.length > 0 && city.map((item) => (
+
+            <div onClick={() => searchHotel(item.name)} className='featured container flex flex-row gap-2 z-1'>
+              <div className="featuredItem relative text-black rounded-xl overflow-hidden">
+                <div>
+                  <img src={item?.imageUrl} alt="" className='featuredImg w-full object-cover h-64	' />
+                </div>
+                <div className="featuredTitle mb-12 mt-3 font-medium">
+                  <h3 className='font-bold text-xl'>{item?.name}</h3>
+                  <button > properties</button>
+                  {/* <h3> properties</h3> */}
+                </div>
+              </div  >
+
+
+            </div  >
+          ))}
         </div>
-      </div>
-      <div className="featuredItem relative text-black rounded-xl overflow-hidden">
-        <img src="https://oneday.travel/wp-content/uploads/one-day-munnar-local-sightseeing-tour-package-with-top-station-by-private-car-header.jpg" className='featuredImg w-full object-cover h-64	' />
-        <div className="featuredTitles absolute mb-12 mt-3 font-medium ">
-          <h1>Munnar</h1>
-          <h1>{data[1]} properties</h1>
-        </div>
-      </div>
-      <div className="featuredItem relative text-black rounded-xl overflow-hidden">
-        <img src="https://img.theculturetrip.com/wp-content/uploads/2016/12/15370068_1035790139884003_4402134645231811449_o.jpg" className='featuredImg w-full object-cover h-64	' />
-        <div className="featuredTitles absolute mt-3 font-medium ">
-          <h1>London</h1>
-          <h1>{data[2]} properties</h1>
-        </div>
-      </div>
-      <div className="featuredItem relative text-black rounded-xl overflow-hidden">
-        <img src="https://travellersworldwide.com/wp-content/uploads/2022/05/shutterstock_1938868960-2.png.webp" className='featuredImg w-full object-cover h-64	' />
-        <div className="featuredTitles mt-3 font-medium   ">
-          <h1>Maldives</h1>
-          <h1>{data[3]}  properties</h1>
-        </div>
-      </div>
+      </>
+      {/* )} */}
     </div>
-     </>)}
-     </div>
   )
 }
 

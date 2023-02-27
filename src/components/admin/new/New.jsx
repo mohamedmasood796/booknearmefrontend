@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import './new.scss'
 import axios from "axios";
@@ -7,17 +7,29 @@ import Sidebar from '../sidebar/Sidebar'
 import Navbar from '../navbar/Navbar'
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 // import { AddHomeOutlined } from '@mui/icons-material';
-import { addHotel } from '../../../api/adminReq.js'
+import { addHotel, getCity } from '../../../api/adminReq.js'
+import City from '../city/City';
 
 
 
 function New() {
-
+    console.log("kkok");
 
     const [formData, setFormData] = useState([])
     const [image, setImage] = useState([]);
     const [message, setMessage] = useState()
+    const [city, setCity] = useState([])
     // const [imageLinks, setImageLinks] = useState([])
+
+    useEffect(() => {
+        const fechData = async () => {
+            const { data } = await getCity()
+            setCity(data)
+            console.log(data, "eth fechData")
+        }
+        fechData()
+    }, [])
+
     const handleChange = (e) => {
         const { value, name } = e.target
         console.log(value, name)
@@ -64,7 +76,7 @@ function New() {
             formData.photos = photos
             console.log(formData, "hai hotel full datas")
             const response = await addHotel(formData)
-            if(response.data.message){
+            if (response.data.message) {
                 toast.success(response.data.message)
             }
 
@@ -74,6 +86,8 @@ function New() {
     const removeImage = (i) => {
         setImage(image.filter((x) => x.name !== i));
     };
+
+
     return (
         <div className='home'>
             <Sidebar />
@@ -134,7 +148,12 @@ function New() {
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">City</label>
-                                <input type="text" onChange={handleChange} name="city" placeholder='City' />
+                                {/* <input type="text" onChange={handleChange} name="city" placeholder='City' /> */}
+                                <select className="dropdown" name="city" placeholder='City' onChange={handleChange} >
+                                    {city.length > 0 && city.map((item) => (
+                                        <option key={item._id}>{item.name}</option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="formInput">
                                 <label htmlFor="">Address</label>

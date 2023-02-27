@@ -11,14 +11,16 @@ import useFetch from '../../../hooks/useFetch'
 
 function SideSearch() {
     const location = useLocation()
-    const [destination, setDestination] = useState(location.state.destination)
-    const [dates, setDates] = useState(location.state.dates)
+    const [destination, setDestination] = useState(location?.state?.destination)
+    const [dates, setDates] = useState(location?.state?.dates)
     const [openDate, setOpenDate] = useState(false)
-    const [options, setOptions] = useState(location.state.options)
+    const [options, setOptions] = useState(location?.state?.options)
     const [min, setMin] = useState(undefined)
     const [max, setMax] = useState(undefined)
+    console.log(destination,54544554);
     const { data, loading, error, reFetch } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999999}`)
-
+    console.log(data,4556545455444444444444444444444444444444);
+    console.log("kok");
     const handleClick=()=>{
         reFetch()
     }
@@ -55,15 +57,15 @@ function SideSearch() {
                             </div>
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Adult</span>
-                                <input  min={1} className='isOptionInput' placeholder={options.adult} />
+                                <input  min={1} className='isOptionInput' placeholder={options?.adult} />
                             </div>
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Children</span>
-                                <input  min={0} className='isOptionInput' placeholder={options.children} />
+                                <input  min={0} className='isOptionInput' placeholder={options?.children} />
                             </div>
                             <div className="lsOptionItem">
                                 <span className="lsOptionText">Room</span>
-                                <input  min={1} className='isOptionInput' placeholder={options.room} />
+                                <input  min={1} className='isOptionInput' placeholder={options?.room} />
                             </div>
                         </div>
                     </div>
@@ -71,7 +73,7 @@ function SideSearch() {
                 </div>
                 <div className="listResult ">
                     {loading ? "loading " : <>
-                        {data.map(item => (
+                        {data.length>0 && data?.map(item => (
                             <SearchItem  item={item} key={item._id} />
                         ))}
                     </>
