@@ -11,16 +11,26 @@ function Featured() {
   const [city, setCity] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
+  const [dates, setDates] = useState([
+    {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+    }
+]);
+const [options, setOptions] = useState({
+  adult: 1,
+  children: 0,
+  room: 1
+})
   // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/countByCity?cities=dubai,munnar,london,maldives`)
   // console.log("masood kooi", data, loading, error)
 
   const searchHotel = (name) => {
     console.log(name);
-    const dates = new Date()
-    const options = new Date()
-    dispatch(searchbarAction.newSearch({ city: name, options: new Date(), dates: new Date() }))
-    navigate('/hotels', { state: { destination: name, dates: dates, options } })
+   
+    dispatch(searchbarAction.newSearch({ city: name }))
+    navigate('/hotels', { state: { destination: name,dates,options} })
 
   }
 
@@ -49,12 +59,10 @@ function Featured() {
                 </div>
                 <div className="featuredTitle mb-12 mt-3 font-medium">
                   <h3 className='font-bold text-xl'>{item?.name}</h3>
-                  <button > properties</button>
-                  {/* <h3> properties</h3> */}
+                  {/* <button > properties</button> */}
+                  <h3> properties</h3>
                 </div>
               </div  >
-
-
             </div  >
           ))}
         </div>

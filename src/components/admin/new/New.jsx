@@ -24,7 +24,7 @@ function New() {
     useEffect(() => {
         const fechData = async () => {
             const { data } = await getCity()
-            setCity(data)
+            setCity(data.city)
             console.log(data, "eth fechData")
         }
         fechData()
