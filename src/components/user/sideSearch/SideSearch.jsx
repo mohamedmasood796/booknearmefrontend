@@ -11,6 +11,7 @@ import useFetch from '../../../hooks/useFetch'
 
 function SideSearch() {
     const location = useLocation()
+    const [type, setType] = useState(location?.state?.type)
     const [destination, setDestination] = useState(location?.state?.destination)
     const [showDate,setShowDate]=useState(location?.state?.showDate)
     const [dates, setDates] = useState(location?.state?.dates)
@@ -19,6 +20,7 @@ function SideSearch() {
     const [min, setMin] = useState(undefined)
     const [max, setMax] = useState(undefined)
     console.log(destination,54544554);
+    console.log(type,99999999999999999999999999999999)
     const { data, loading, error, reFetch } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels?city=${destination}`)
     console.log(data,"mt kkkoo data");
     console.log("kok");

@@ -9,8 +9,6 @@ function AdminProtectedRouter(props) {
   if (!localStorage.getItem("jwtadmin")) {
     return <Navigate to="/admin/login" />;
   }
-
-  
   
 }
 

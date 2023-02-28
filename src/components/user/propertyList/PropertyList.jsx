@@ -1,10 +1,16 @@
-import React from 'react'
+import React,{useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import useFetch from '../../../hooks/useFetch'
 
 function PropertyList() {
-
+    const navigate = useNavigate()
     const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/countByType`)
     console.log("masood kuta", data, loading, error)
+
+    const [type, setType] = useState('')
+    const handleSearch=()=>{
+        // navigate('/hotels', { state: { type,destination, dates, options } })
+    }
 
     const images = [
         "https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
@@ -22,7 +28,7 @@ function PropertyList() {
             ) : (
                 <>
                     { data.map(( data,i) => (
-                        <div className='pListItem rounded-xl overflow-hidden cursor-pointer ' key={i}>
+                        <div className='pListItem rounded-xl overflow-hidden cursor-pointer ' key={i} onClick={handleSearch}>
                             <img src={images[i]} alt="" className="pListImg  h-36 object-cover w-96 " />
                             <div className="pListTitles">
                                 <h1 className='font-bold mt-3'>{data.type}</h1>
