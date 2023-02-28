@@ -30,7 +30,7 @@ const [options, setOptions] = useState({
     console.log(name);
    
     dispatch(searchbarAction.newSearch({ city: name }))
-    navigate('/hotels', { state: { destination: name,dates,options} })
+    navigate('/hotels', { state: { destination: name,dates:[],options:[]} })
 
   }
 

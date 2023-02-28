@@ -5,12 +5,14 @@ import useFetch from '../../../hooks/useFetch';
 import { useSelector } from "react-redux"
 import Reserve from '../reserve/Reserve';
 import Banner from '../../admin/banner/Banner';
-import {differenceInCalendarDays} from "date-fns";
+import { differenceInCalendarDays } from "date-fns";
 import axios from "axios";
 
-function HotelPage({setCheckInglo}) {
+function HotelPage({ setCheckInglo }) {
     const location = useLocation()
-    const id = location.pathname.split('/')[2]
+    const [id,setId]=useState(location?.state?.id)
+    console.log(id,"it id 44443333333333334444444444443333333")
+    console.log(location,"location it id 44443333333333334444444444443333333")
 
     // or
     // const fulllocation = document.location + '';
@@ -20,13 +22,26 @@ function HotelPage({setCheckInglo}) {
     const [open, setOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
 
+
+    const [destination, setDestination] = useState(location?.state?.destination)
+    const [showDate,setShowDate]=useState(location?.state?.showDate)
+    const [dates, setDates] = useState(location?.state?.dates)
+    const [options, setOptions] = useState(location?.state?.options)
+
+
+
+
+
+
+
+
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [numberOfGuests, setNumberOfGuests] = useState(1);
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
-    const [redirect,setRedirect] = useState('');
-    console.log(checkIn,"checkIn")
+    const [redirect, setRedirect] = useState('');
+    console.log(checkIn, "checkIn")
 
     let numberOfNights = 0;
     if (checkIn && checkOut) {
@@ -39,31 +54,35 @@ function HotelPage({setCheckInglo}) {
         //     // place: place._id,
         //     // price: numberOfNights * place.price,
         // });
-        setCheckInglo({checkIn, checkOut, numberOfGuests, name, phone, numberOfNights})
+        setCheckInglo({ checkIn, checkOut, numberOfGuests, name, phone, numberOfNights })
         // const bookingId = response.data._id;
         // setRedirect(`/account/bookings/${bookingId}`);
     }
 
     const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/find/${id}`)
 
+    console.log(data,"3page data")
     const user = useSelector((state) => state.userAuth)
     console.log("user2345t", user)
     const navigate = useNavigate()
-    const property = useSelector((state) => state.searchresult)
+    // const property = useSelector((state) => state.searchresult)
 
-    console.log("dddddddddddddddddddddd", property)
-
-
-    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-    function dayDifference(date1, date2) {
-        console.log("kkkkkkkkkkkkkkkkk", date1, date2)
-        const timeDiff = Math.abs(date2.getTime() - date1.getTime());
-        const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY)
-        return diffDays;
-    }
+    // console.log("dddddddddddddddddddddd77777777777777777777777777777777", property)
+    console.log("dddddddddddddddddddddd777777777777777777777777777777788888888888888887", user)
 
 
-    const days = dayDifference(property?.dates?.endDate, property?.dates?.startDate)
+    // const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+    // function dayDifference(date1, date2) {
+    //     console.log("kkkkkkkkkkkkkkkkk", date1, date2)
+    //     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    //     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY)
+    //     return diffDays;
+    // }
+
+    // if (dates.length>0) {
+
+    //     const days = dayDifference(dates?.endDate, dates?.startDate)
+    // }
 
 
     const handleOpen = (i) => {
@@ -164,7 +183,7 @@ function HotelPage({setCheckInglo}) {
                                 </div> */}
 
 
-                                                    {/* //////////////////////////////// */}
+                                {/* //////////////////////////////// */}
 
                                 {/* <div className="bg-white shadow p-4 rounded-2xl">
                                     <div className="text-2xl text-center">
@@ -213,7 +232,7 @@ function HotelPage({setCheckInglo}) {
 
                                 <div className="bg-white shadow p-4 rounded-2xl">
                                     <div className="text-2xl text-center">
-                                    Check your room availability
+                                        Check your room availability
                                     </div>
                                     <div className="border rounded-2xl mt-4">
                                         <div className="flex">
@@ -265,7 +284,7 @@ function HotelPage({setCheckInglo}) {
                     </div>
                 </>
             )}
-            {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
+            {/* {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />} */}
         </div>
     )
 }

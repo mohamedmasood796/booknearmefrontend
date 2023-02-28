@@ -6,7 +6,9 @@ import { useSelector } from "react-redux"
 import axios from 'axios'
 
 function Reserve({ setOpen, hotelId }) {
-
+    
+console.log(hotelId,"hotail id naju")
+console.log(setOpen,"setOpen id naju")
     const [roomId, setRoomId] = useState('')
     const [selectedRooms, setSelectedRooms] = useState([])
     const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/room/${hotelId}`)

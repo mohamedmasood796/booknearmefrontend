@@ -1,8 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-function searchItem({ item }) {
+function SearchItem({ item ,destination, dates, options}) {
+    const navigate=useNavigate()
     console.log(item)
+   const newfunction=(id)=>{
+
+       navigate('/newhotel', { state: {id, destination, dates, options } })
+    }
+
     return (
         <div className='searchItem border border-gray-300 p-2.5 rounded flex justify-between gap-5 mb-5 '>
             <img src={item.photos[0]} alt=""
@@ -30,13 +36,14 @@ function searchItem({ item }) {
                 <div className="siDetailTexts text-right flex flex-col gap-2.5">
                     <span className="siPrice text-2xl">${item.cheapestPrice}</span>
                     <span className="siTaxOp text-xs text-gray-400">Includes taxes and fees</span>
-                    <Link to={`/hotels/${item._id}`}>
+                        <div onClick={()=>newfunction(item._id)}>
+
                         <button className='siCheckButton bg-[#0071c2] text-white  py-2.5 px-2.5 border-none cursor-pointer rounded'>See availability</button>
-                    </Link>
+                        </div>
                 </div>
             </div>
         </div>
     )
 }
 
-export default searchItem
+export default SearchItem

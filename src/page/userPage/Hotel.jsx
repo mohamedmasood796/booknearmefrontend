@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 function Hotel() {
   const [checkInglo, setCheckInglo] = useState([]);
+  console.log(checkInglo,"checkIngolo00000000000000000")
 
   return (
     <>

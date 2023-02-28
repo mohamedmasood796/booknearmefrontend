@@ -52,7 +52,10 @@ function Header({ type }) {
 
     const handleSearch = () => {
 
-        dispatch(searchbarAction.newSearch({ city: destination, options: options, dates: dates[0] }))
+        // dispatch(searchbarAction.newSearch({ city: destination, options: options, dates: dates[0] }))  //update to redex
+        // localStorage.setItem("city",destination)
+        // localStorage.setItem("options",options)
+        // localStorage.setItem("dates",dates[0])
         navigate('/hotels', { state: { destination, dates, options } })
     }
     return (
