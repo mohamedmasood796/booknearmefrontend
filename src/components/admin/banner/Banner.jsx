@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useParams, useNavigate } from 'react-router-dom';
 import { booking } from "../../../api/authReq.js"
 
@@ -14,11 +14,12 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getRoomDataById } from "../../../api/authReq";
 
 function Banner({ checkInglo }) {
+
     const navigate = useNavigate();
     const location = useLocation()
     const data = location?.state?.hotelId;
     const id = location?.state?.id
-    console.log(id,9876543211)
+    console.log(id, 9876543211)
     let params = useParams()
     // export default function Gridcards({ hotel }) {
     const [room, setRoom] = useState([]);
@@ -52,7 +53,7 @@ function Banner({ checkInglo }) {
         }
     };
     useEffect(() => {
-        getRooms( location?.state?.id);
+        getRooms(location?.state?.id);
         console.log(params.id, "hari murathe dalam")
     }, []);
 
@@ -106,6 +107,8 @@ function Banner({ checkInglo }) {
     }
 
 
+
+
     return (
         <>
             <div className=" w-full flex items-center justify-center ">
@@ -153,9 +156,11 @@ function Banner({ checkInglo }) {
                 </div>
 
             </div>
-            <div className="items-center container w-80 px-3 flex justify-end ">
-                <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded">Add Review</button>
-            </div>
+            <Link to="/AddBookingId">
+                <div className="items-center container w-80 px-3 flex justify-end  ">
+                    <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded">Add Review</button>
+                </div>
+            </Link>
 
         </>
     )

@@ -7,9 +7,10 @@ function PropertyList() {
     const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/countByType`)
     console.log("masood kuta", data, loading, error)
 
-    const [type, setType] = useState('')
-    const handleSearch=()=>{
-        // navigate('/hotels', { state: { type,destination, dates, options } })
+    // const [type, setType] = useState('')
+    const handleSearch=(type)=>{
+        console.log(type,88888888888888888)
+        navigate('/hotels', { state: { type} })
     }
 
     const images = [
@@ -28,7 +29,7 @@ function PropertyList() {
             ) : (
                 <>
                     { data.map(( data,i) => (
-                        <div className='pListItem rounded-xl overflow-hidden cursor-pointer ' key={i} onClick={handleSearch}>
+                        <div className='pListItem rounded-xl overflow-hidden cursor-pointer ' key={i} onClick={()=>handleSearch(data.type)}>
                             <img src={images[i]} alt="" className="pListImg  h-36 object-cover w-96 " />
                             <div className="pListTitles">
                                 <h1 className='font-bold mt-3'>{data.type}</h1>

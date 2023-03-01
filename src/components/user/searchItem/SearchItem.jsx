@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-function SearchItem({ item ,destination, dates, options}) {
-    const navigate=useNavigate()
+function SearchItem({ item, destination, dates, options }) {
+    const navigate = useNavigate()
     console.log(item)
-   const newfunction=(id)=>{
+    const newfunction = (id) => {
 
-       navigate('/newhotel', { state: {id, destination, dates, options } })
+        navigate('/newhotel', { state: { id, destination, dates, options } })
     }
 
     return (
@@ -36,10 +36,10 @@ function SearchItem({ item ,destination, dates, options}) {
                 <div className="siDetailTexts text-right flex flex-col gap-2.5">
                     <span className="siPrice text-2xl">${item.cheapestPrice}</span>
                     <span className="siTaxOp text-xs text-gray-400">Includes taxes and fees</span>
-                        <div onClick={()=>newfunction(item._id)}>
+                    <div onClick={() => newfunction(item._id)}>
 
                         <button className='siCheckButton bg-[#0071c2] text-white  py-2.5 px-2.5 border-none cursor-pointer rounded'>See availability</button>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

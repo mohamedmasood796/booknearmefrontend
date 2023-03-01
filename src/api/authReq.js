@@ -16,5 +16,7 @@ export const verifySignUp = (userId) => API.put(`/auth/verify/${userId}`)
 export const getRoomDataById = (id) => API.get(`/hotels/room/${id}`)
 export const booking = (formData) => API.post('/book/booking',formData)
 export const verify = (newOrder) => API.post('/book/verify',{newOrder})
-export const getBookings = () => API.get(`/book/bookings`)
+export const getBookings = () => API.get(`/book/bookings`)//set user id to backent
+export const typeSearchItem = (searchType) => API.get(`/hotels/type/${searchType}`)
+export const citySearchItem = (destination) => API.get(`/hotels?city=${destination}`)
 
