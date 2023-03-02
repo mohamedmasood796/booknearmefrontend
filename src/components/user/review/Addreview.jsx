@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import "./review.css"
+// import "./review.css"
 
 const Addreview = () => {
     const [number, setNumber] = useState(0)

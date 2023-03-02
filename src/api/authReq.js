@@ -18,5 +18,10 @@ export const booking = (formData) => API.post('/book/booking',formData)
 export const verify = (newOrder) => API.post('/book/verify',{newOrder})
 export const getBookings = () => API.get(`/book/bookings`)//set user id to backent
 export const typeSearchItem = (searchType) => API.get(`/hotels/type/${searchType}`)
-export const citySearchItem = (destination) => API.get(`/hotels?city=${destination}`)
+export const citySearchItem = (destination) => API.get(`/hotels/search?city=${destination}`)
+export const submintId = (bookingId) => API.post(`/book/bookingId`,bookingId)
+export const submintReview = (review) => API.post(`/hotels/review`,review)
+export const getReview = (id) => API.get(`/hotels/find/${id}`)
+export const getUser = (id) => API.get(`/users/profile`,id)
+export const getUserpro = (userId) => API.get(`/users/reviewprofile/${userId}`)
 

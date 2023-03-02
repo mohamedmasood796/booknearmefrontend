@@ -12,7 +12,6 @@ import Notfound from '../components/user/notfound/Notfound'
 import ProfilePage from '../page/userPage/ProfilePage'
 import Addreview from '../components/user/review/Addreview'
 import DisplayReview from '../components/user/displayReview/DisplayReview'
-import AddBookingId from '../components/user/review/AddBookingId'
 
 function User() {
   return (
@@ -28,7 +27,6 @@ function User() {
         <Route exact path="/cancel" element={<Cancel />} />
         <Route exact path="/profile" element={<ProfilePage />} />
         <Route exact path="/addreview" element={<Addreview />} />
-        <Route exact path="/addbookingid" element={<AddBookingId />} />
         <Route exact path="/displayReview" element={<DisplayReview />} />
         <Route exact path="*" element={<Notfound />} />
       </Routes>

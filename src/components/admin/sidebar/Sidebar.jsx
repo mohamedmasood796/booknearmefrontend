@@ -21,10 +21,12 @@ function Sidebar() {
             <hr />
             <div className="center">
                 <ul>
-                    <li>
-                        <DashboardIcon className='icon' />
-                        <span>Dashboard</span>
-                    </li>
+                    <Link to="/admin"style={{ textDecoration: "none" }} >
+                        <li>
+                            <DashboardIcon className='icon' />
+                            <span>Dashboard</span>
+                        </li>
+                    </Link>
                     <Link to='/admin/users' style={{ textDecoration: "none" }}>
                         <li>
                             <PersonIcon className='icon' />

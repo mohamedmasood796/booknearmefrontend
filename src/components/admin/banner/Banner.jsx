@@ -1,9 +1,12 @@
 
 
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { useParams, useNavigate } from 'react-router-dom';
-import { booking } from "../../../api/authReq.js"
+import { booking, getReview, submintId, submintReview } from "../../../api/authReq.js"
+
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import "./review.css"
 
 // import "bootstrap/dist/css/bootstrap.min.css"; 
 // import Button from "react-bootstrap/Button"; 
@@ -12,6 +15,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 
 import { getRoomDataById } from "../../../api/authReq";
+import DisplayReview from "../../user/displayReview/DisplayReview.jsx";
 
 function Banner({ checkInglo }) {
 
@@ -23,6 +27,13 @@ function Banner({ checkInglo }) {
     let params = useParams()
     // export default function Gridcards({ hotel }) {
     const [room, setRoom] = useState([]);
+    const [open, setOpen] = useState(false)
+    const [reviewopen, setReviewOpen] = useState(false)
+    const [number, setNumber] = useState(0)
+    const [bookingId, setBookingId] = useState()
+    const [status, setStatus] = useState()
+    const [review, setReview] = useState()
+    const [comment, setComment] = useState([])
 
     console.log(room, "Rooms");
 
@@ -57,9 +68,19 @@ function Banner({ checkInglo }) {
         console.log(params.id, "hari murathe dalam")
     }, []);
 
+
+
+    const reviewfun = async () => {
+        const { data } = await getReview(id)
+        console.log(data, "get reviewsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
+        setComment(data.review)
+    }
+    useEffect(() => {
+        reviewfun()
+    }, [])
+
+
     async function handleClick(oneroom) {
-
-
         console.log(oneroom, "room delat")
         console.log(checkInglo, "checkIn glo")
         const newOrder = {
@@ -67,11 +88,6 @@ function Banner({ checkInglo }) {
             ...checkInglo,
 
         }
-        // const BookingResponse = await booking(newOrder)
-
-        // console.log(BookingResponse, "good rsponse")
-
-
 
         const stripe = await loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
         console.log(stripe, "stripe good")
@@ -87,25 +103,38 @@ function Banner({ checkInglo }) {
         if (data?.url) {
             window.location.href = data.url
         }
-        console.log(data, "hai take of interview")
-
-        // const session = await response.json();
-
-        // const result = stripe.redirectToCheckout({
-        //     sessionId: session.id,
-        // });
-
-        // if (result.error) {
-        //     console.log(result.error);
-        // }
-
-
-
-        // navigate("/checkout");
-
 
     }
 
+
+
+    const handleChange = (e) => {
+        setBookingId(e.target.value)
+    }
+    console.log(bookingId, "it is booking id")
+
+    const handleSubmit = async () => {
+        const returndata = await submintId({ bookingId })
+        console.log(returndata, "it is order data")
+        setStatus(returndata.data.bookingid)
+        setOpen(false)
+        // error()
+    }
+    console.log(status, "eth status")
+
+
+    const handleComment = (e) => {
+        setReview(e.target.value)
+        console.log(e.target.value)
+    }
+    const handleReviewSubmit = async () => {
+        const reviewData = await submintReview({ id, number, review })
+        console.log(reviewData, "it si review data")
+        console.log(reviewData.data, "data .status")
+        if (reviewData.data.status) {
+            setStatus(false)
+        }
+    }
 
 
 
@@ -156,11 +185,60 @@ function Banner({ checkInglo }) {
                 </div>
 
             </div>
-            <Link to="/AddBookingId">
-                <div className="items-center container w-80 px-3 flex justify-end  ">
-                    <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded">Add Review</button>
+
+            <div className="items-center container w-80 px-3 flex justify-end  ">
+                <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={() => setOpen(true)}>Add Review</button>
+            </div>
+
+            {comment.map((item) => (
+                <DisplayReview item={item} />
+            ))}
+
+
+
+
+
+            {open && <div className="App">
+                <div className="popup">
+                    <div className="content ">
+                        <div className="product cursor-pointer" onClick={() => setOpen(false)}>
+                            <h1>X</h1>
+                        </div>
+
+                        <input placeholder="Booking Id here... " onChange={handleChange} />
+                        <button onClick={handleSubmit}>submit</button>
+                    </div>
                 </div>
-            </Link>
+            </div>}
+
+
+
+
+            {status && <div className="App">
+                <div className="popup">
+                    <div className="content">
+                        <div className="product">
+                            <img style={{ width: 60, heigh: 60, objectFit: 'cover' }} src="" alt="image" />
+                            <h1>hai Hotel</h1>
+                            <h1 className="cursor-pointer" onClick={() => { setStatus(false) }}>X</h1>
+                        </div>
+                        <div className='flex mb-3 mt-3'>
+                            {/* <h1>{handleText()}</h1> */}
+                            {Array(5).fill().map((_, index) => (
+                                number >= index + 1 ? (
+                                    <AiFillStar style={{ color: "orange" }} onClick={() => setNumber(index + 1)} />
+                                ) : (
+                                    <AiOutlineStar style={{ color: "orange" }} onClick={() => setNumber(index + 1)} />
+                                )
+                            ))}
+
+                        </div>
+                        <textarea placeholder="comment here... " onChange={handleComment}></textarea >
+                        <button onClick={handleReviewSubmit}>submit</button>
+                    </div>
+                </div>
+            </div>}
+
 
         </>
     )
