@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useFetch from '../../../hooks/useFetch';
 import { useSelector } from "react-redux"
@@ -10,9 +10,9 @@ import axios from "axios";
 
 function HotelPage({ setCheckInglo }) {
     const location = useLocation()
-    const [id,setId]=useState(location?.state?.id)
-    console.log(id,"it id 44443333333333334444444444443333333")
-    console.log(location,"location it id 44443333333333334444444444443333333")
+    const [id, setId] = useState(location?.state?.id)
+    console.log(id, "it id 44443333333333334444444444443333333")
+    console.log(location, "location it id 44443333333333334444444444443333333")
 
     // or
     // const fulllocation = document.location + '';
@@ -24,7 +24,7 @@ function HotelPage({ setCheckInglo }) {
 
 
     const [destination, setDestination] = useState(location?.state?.destination)
-    const [showDate,setShowDate]=useState(location?.state?.showDate)
+    const [showDate, setShowDate] = useState(location?.state?.showDate)
     const [dates, setDates] = useState(location?.state?.dates)
     const [options, setOptions] = useState(location?.state?.options)
 
@@ -61,7 +61,7 @@ function HotelPage({ setCheckInglo }) {
 
     const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/find/${id}`)
 
-    console.log(data,"3page data")
+    console.log(data, "3page dataUUUUUUUUUUUUUUUUUUUUUUUU")
     const user = useSelector((state) => state.userAuth)
     console.log("user2345t", user)
     const navigate = useNavigate()
@@ -108,6 +108,12 @@ function HotelPage({ setCheckInglo }) {
             navigate("/login")
         }
     }
+    const fetchRoom=()=>{
+        
+    }
+    useEffect(() => {
+        fetchRoom()
+    }, [])
     return (
         <div>
             {loading ? (
@@ -257,20 +263,29 @@ function HotelPage({ setCheckInglo }) {
                                         {numberOfNights > 0 && (
                                             <div className="py-3 px-4 border-t">
                                                 <label>Your full name:</label>
-                                                <input type="text"
+                                                <input type="text" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                                                     value={name}
                                                     onChange={ev => setName(ev.target.value)} />
                                                 <label>Phone number:</label>
-                                                <input type="tel"
+                                                <input type="tel" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                                                     value={phone}
                                                     onChange={ev => setPhone(ev.target.value)} />
+                                                <label>select Room</label>
+                                                {/* <input type="tel" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                                                    value={phone}
+                                                    onChange={ev => setPhone(ev.target.value)} /> */}
+                                                {/* <select className="dropdown" name="city" placeholder='City' onChange={handleChange} >
+                                                    {city.length > 0 && city.map((item) => (
+                                                        <option key={item._id}>{item.name}</option>
+                                                    ))}
+                                                </select> */}
                                             </div>
                                         )}
                                     </div>
                                     <button onClick={bookThisPlace} className="primary mt-4 border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">
                                         Book this place
                                         {numberOfNights > 0 && (
-                                            <span> $100</span>
+                                            <span></span>
                                         )}
                                     </button>
                                 </div>

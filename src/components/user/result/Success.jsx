@@ -5,7 +5,7 @@ import { verify } from "../../../api/authReq";
 function Success() {
   const [searchParams] = useSearchParams()
   const newOrder = searchParams.get('token')
-  console.log(newOrder, "eth varum mydoc");
+  console.log(newOrder, "eth varum mydoc00000000000000000000000000000000000000000000000000");
   useEffect(() => {
     verify(newOrder)
   }, [newOrder])
