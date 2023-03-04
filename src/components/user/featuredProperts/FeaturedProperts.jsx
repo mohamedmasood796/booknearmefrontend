@@ -1,19 +1,39 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getHotel } from '../../../api/authReq'
 import useFetch from '../../../hooks/useFetch'
 
 function FeaturedProperts() {
+    const [data,setData]= useState([])
     const navigate = useNavigate()
-    const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels`)
-    console.log(data,"chepest price")
-    const newfunction = (id) => {
+    // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels`)
+    console.log(data,"chepest priceeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+    // const newfunction = (id) => {
 
-        navigate('/newhotel', { state: { id } })
+    //     navigate('/newhotel', { state: { id } })
+    // }
+
+
+    const newfunction=async(id)=>{
+       
+        
+            navigate('/newhotel', { state: { id } })
+        
+
+
     }
+    useEffect(() => {
+    const getHot=async()=>{
+        const {data}=await getHotel()
+        console.log(data,'dataaaaaaaaadf');
+        setData(data)
+    }
+    getHot()
+    }, [])
 
     return (
         <div className='fp w-full container flex justify-between gap-5'>
-            {loading ? ("Loading") : (<>
+            <>
                 {data?.map(item => (
 
                     <div className="fpItem flex-1 gap-3 flex flex-col" key={item?._id}  onClick={() => newfunction(item._id)} >
@@ -28,7 +48,7 @@ function FeaturedProperts() {
                     </div>
                 ))}
             </>
-            )}
+            
         </div>
     )
 }

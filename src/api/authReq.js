@@ -25,4 +25,5 @@ export const getReview = (id) => API.get(`/hotels/find/${id}`)
 export const getUser = (id) => API.get(`/users/profile`,id)
 export const getUserpro = (userId) => API.get(`/users/reviewprofile/${userId}`)
 export const getbookingsDates = () => API.get(`/book/bookingdates`)
+export const getHotel = () => API.get(`/hotels`)
 
