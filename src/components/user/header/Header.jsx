@@ -8,7 +8,7 @@ import { format } from 'date-fns'
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { searchbarAction } from '../../../redux/Searchbar';
-import { getCity } from '../../../api/adminReq';
+import { getCountByCity } from '../../../api/authReq';
 
 function Header({ type }) {
     const dispatch = useDispatch()
@@ -26,9 +26,9 @@ function Header({ type }) {
 
     useEffect(() => {
         const fechData = async () => {
-            const { data } = await getCity()
-            setCity(data.city)
-            console.log(data, "eth fechData")
+            const { data } = await getCountByCity()
+            setCity(data)
+            console.log(data, "eth fechDataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         }
         fechData()
     }, [])
@@ -86,8 +86,8 @@ function Header({ type }) {
                                     {/* <input type="text" placeholder='Where are you going?' className='headerSearchInput' onChange={e => setDestination(e.target.value)} /> */}
 
                                     <select className="dropdown headerSearchInput w-48" name="city" placeholder='City' onChange={e => setDestination(e.target.value)}  >
-                                        {city.length > 0 && city.map((item) => (
-                                            <option >{item.name}</option>
+                                        {city?.length > 0 && city.map((item) => (
+                                            <option key={item?._id} >{item.name}</option>
                                         ))}
                                     </select>
 

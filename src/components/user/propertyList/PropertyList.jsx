@@ -33,10 +33,10 @@ function PropertyList() {
     // }
 
 
-    const handleSearch=async(id)=>{
+    const handleSearch=async(type)=>{
        
         
-            navigate('/hotels', { state: { id } })
+            navigate('/hotels', { state: { type } })
         
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { getCity } from '../../../api/adminReq'
+
 import useFetch from '../../../hooks/useFetch'
 import { useState, useEffect } from 'react';
 
@@ -38,8 +38,8 @@ function Featured() {
   useEffect(() => {
     const fechData = async () => {
       const { data } = await getCountByCity()
-      setCity(data.city)
-      console.log(data.city, "eth fechData 243u899999999999999999999999999999999999999999")
+      setCity(data)
+      console.log(data, "eth fechData 243u899999999999999999999999999999999999999999")
     }
     fechData()
   }, [])
@@ -53,7 +53,7 @@ function Featured() {
 
           {city?.length > 0 && city.map((item) => (
 
-            <div onClick={() => searchHotel(item.name)} className='featured container flex flex-row gap-2 z-1'>
+            <div onClick={() => searchHotel(item.name)}  key={item?._id}className='featured container flex flex-row gap-2 z-1'>
               <div className="featuredItem relative text-black rounded-xl overflow-hidden">
                 <div>
                   <img src={item?.imageUrl} alt="" className='featuredImg w-full object-cover h-64	' />

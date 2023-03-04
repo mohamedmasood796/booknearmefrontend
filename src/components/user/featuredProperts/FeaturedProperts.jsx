@@ -7,7 +7,7 @@ function FeaturedProperts() {
     const [data,setData]= useState([])
     const navigate = useNavigate()
     // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels`)
-    console.log(data.data,"chepest priceeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+    console.log(data,"PPPPPPPPPPPPPPchepest priceeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     // const newfunction = (id) => {
 
     //     navigate('/newhotel', { state: { id } })
@@ -24,9 +24,9 @@ function FeaturedProperts() {
     }
     useEffect(() => {
     const getHot=async()=>{
-        const data=await getHotel()
+        const {data}=await getHotel()
         console.log(data,'dataaaaaaaaadf');
-        setData(data.data)
+        setData(data)
     }
     getHot()
     }, [])
@@ -34,7 +34,7 @@ function FeaturedProperts() {
     return (
         <div className='fp w-full container flex justify-between gap-5'>
             <>
-                {data?.map(item => (
+                {data.length>0 && data?.map(item => (
 
                     <div className="fpItem flex-1 gap-3 flex flex-col" key={item?._id}  onClick={() => newfunction(item._id)} >
                         <img src={item?.photos[0]} alt="" className='fpImg w-80 ' />
