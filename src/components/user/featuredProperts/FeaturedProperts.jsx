@@ -14,7 +14,7 @@ function FeaturedProperts() {
     return (
         <div className='fp w-full container flex justify-between gap-5'>
             {loading ? ("Loading") : (<>
-                {data.map(item => (
+                {data?.map(item => (
 
                     <div className="fpItem flex-1 gap-3 flex flex-col" key={item._id}  onClick={() => newfunction(item._id)} >
                         <img src={item?.photos[0]} alt="" className='fpImg w-80 ' />

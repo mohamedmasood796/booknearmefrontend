@@ -28,7 +28,7 @@ function PropertyList() {
                 "loading"
             ) : (
                 <>
-                    { data.map(( data,i) => (
+                    { data?.map(( data,i) => (
                         <div className='pListItem rounded-xl overflow-hidden cursor-pointer ' key={i} onClick={()=>handleSearch(data.type)}>
                             <img src={images[i]} alt="" className="pListImg  h-36 object-cover w-96 " />
                             <div className="pListTitles">
