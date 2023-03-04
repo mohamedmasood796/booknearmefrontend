@@ -24,7 +24,7 @@ function FeaturedProperts() {
     }
     useEffect(() => {
     const getHot=async()=>{
-        const {data}=await getHotel()
+        const data=await getHotel()
         console.log(data,'dataaaaaaaaadf');
         setData(data)
     }
