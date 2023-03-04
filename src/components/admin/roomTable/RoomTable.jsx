@@ -18,8 +18,8 @@ function RoomTable() {
     const myFuc = async () => {
         console.log(id,"id");
         const { data } = await getRoomAPI(id)
-        setRoomData(data)
-        console.log(data, "datatablemasood")
+        setRoomData(data.rooms)
+        console.log(data.rooms, "datatablemasoodddddddddddddddDDDDDDDDDDDDDDDDDDDD")
 
     }
     useEffect(() => {

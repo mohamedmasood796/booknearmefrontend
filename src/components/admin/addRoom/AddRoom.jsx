@@ -48,7 +48,7 @@ function AddRoom() {
             console.log(formData, "hai hotel full datas")
             // const response = await addHotel(formData)
             const response = await addRoom(formData, params.id)
-            console.log(response,"hai respose")
+            console.log(response,"hai resposeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
 
             if(response.data.message){
                 toast.success(response.data.message)

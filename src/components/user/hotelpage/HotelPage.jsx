@@ -62,6 +62,7 @@ function HotelPage({ setCheckInglo }) {
     const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/find/${id}`)
 
     console.log(data, "3page dataUUUUUUUUUUUUUUUUUUUUUUUU")
+    
     const user = useSelector((state) => state.userAuth)
     console.log("user2345t", user)
     const navigate = useNavigate()
@@ -274,7 +275,7 @@ function HotelPage({ setCheckInglo }) {
                                                 {/* <input type="tel" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                                                     value={phone}
                                                     onChange={ev => setPhone(ev.target.value)} /> */}
-                                                {/* <select className="dropdown" name="city" placeholder='City' onChange={handleChange} >
+                                                {/* <select className="dropdown" name="hotel" placeholder='select your hotel...' onChange={handleChange} >
                                                     {city.length > 0 && city.map((item) => (
                                                         <option key={item._id}>{item.name}</option>
                                                     ))}

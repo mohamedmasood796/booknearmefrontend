@@ -59,8 +59,8 @@ function Banner({ checkInglo }) {
         try {
             console.log(id, "Hotel Id in grid hamras");
             const { data } = await getRoomDataById(id);
-            setRoom(data);
-            console.log(data, "ppppppppppp");
+            setRoom(data.rooms);
+            console.log(data.rooms, "pppppppppppPPPPPPPPPPPPPPPPPPPPPPP");
         } catch (err) {
             console.log(err);
         }
@@ -136,7 +136,7 @@ function Banner({ checkInglo }) {
 
 
 
-    //wanded code
+    // wanded code
     // const foundDates = []
     // for (const date1 of alldates) {
     //     for (const date2 of bookedDates.date) {
@@ -158,6 +158,9 @@ function Banner({ checkInglo }) {
             ...checkInglo,
             alldates
         }
+console.log(oneroom,'onerooom');
+console.log(checkInglo,'chekcingooo');
+        console.log(newOrder,'new ordererrrrersjdhhkfskjdfhajkhdfjkahkfhakjdhmashood kuattal');
 
         const stripe = await loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
         console.log(stripe, "stripe good")
@@ -242,23 +245,26 @@ function Banner({ checkInglo }) {
                         //     </div>
                         // </div>
 
+
+
+
                         <div className="container  rounded-md mt-10 ">
                             <div className="flex flex-col md:flex-row w-full rounded-lg bg-white shadow-lg">
-                                <img className="w-80 h-60  object-cover rounded-md m-3 " src={room.photos[0]} alt="" />
+                                <img className="w-80 h-60  object-cover rounded-md m-3 " src={room?.roomId?.photos[0]} alt="" />
 
                                 <div className="p-6 flex flex-col ">
-                                    <h5 className="text-gray-900 text-xl font-medium mb-2">{room.title}</h5>
+                                    <h5 className="text-gray-900 text-xl font-medium mb-2">{room?.roomId?.title}</h5>
                                     <p className="text-gray-700 text-base mb-4">
-                                        {room.desc}
+                                        {room?.roomId?.desc}
                                     </p>
-                                    <p className="text-gray-600 text-xs">Max people :  {room.maxPeople}</p>
+                                    <p className="text-gray-600 text-xs">Max people :  {room?.roomId?.maxPeople}</p>
                                     <p className="text-gray-700 text-base mb-4">
-                                        &#8377;{room.price ? room.price : room.price * numberOfNights}
+                                        &#8377;{room?.roomId?.price ? room?.roomId?.price : room?.roomId?.price * numberOfNights}
                                     </p>
                                 </div>
                                 
                                     <div className="items-center w-full px-3 flex justify-end ">
-                                        <button onClick={() => handleClick(room)} className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded">Book Now</button>
+                                        <button onClick={() => handleClick(room.roomId)} className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded">Book Now</button>
                                     </div>
                             </div>
                         </div>
@@ -269,9 +275,9 @@ function Banner({ checkInglo }) {
                     <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={() => setOpen(true)}>Add Review</button>
                 </div>
                 <div className="flex gap-2 container overflow-x-scroll md:mx-20 mt-5">
-                    {comment.map((item) => (
+                    {/* {comment.map((item) => (
                         <DisplayReview item={item} />
-                    ))}
+                    ))} */}
                 </div>
             </div>
 
