@@ -16,13 +16,13 @@ function FeaturedProperts() {
             {loading ? ("Loading") : (<>
                 {data?.map(item => (
 
-                    <div className="fpItem flex-1 gap-3 flex flex-col" key={item._id}  onClick={() => newfunction(item._id)} >
+                    <div className="fpItem flex-1 gap-3 flex flex-col" key={item?._id}  onClick={() => newfunction(item._id)} >
                         <img src={item?.photos[0]} alt="" className='fpImg w-80 ' />
-                        <span className="fpName font-bold  ">{item.name}</span>
-                        <span className="fpCity font-light">{item.city}</span>
-                        <span className="fpPrice font-medium">Starting from ${item.cheapestPrice}</span>
-                        {item.rating && <div className="fpRating">
-                            <button className='bg-[#003580] text-white p-1 font-semibold' >{item.rating}</button>
+                        <span className="fpName font-bold  ">{item?.name}</span>
+                        <span className="fpCity font-light">{item?.city}</span>
+                        <span className="fpPrice font-medium">Starting from ${item?.cheapestPrice}</span>
+                        {item?.rating && <div className="fpRating">
+                            <button className='bg-[#003580] text-white p-1 font-semibold' >{item?.rating}</button>
                             <span>Excellent</span>
                         </div>}
                     </div>
