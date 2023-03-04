@@ -17,8 +17,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getRoomDataById } from "../../../api/authReq";
 import DisplayReview from "../../user/displayReview/DisplayReview.jsx";
 
+// function Banner({ checkInglo }) {//this is importent
 function Banner({ checkInglo }) {
-
+    
     const navigate = useNavigate();
     const location = useLocation()
     const data = location?.state?.hotelId;

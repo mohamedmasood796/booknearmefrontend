@@ -14,7 +14,7 @@ function Hotel() {
       <Navbar/>
       <Header type='list'/>
       <HotelPage setCheckInglo={setCheckInglo}/>
-      <Banner checkInglo={checkInglo}/>
+      {/* <Banner checkInglo={checkInglo}/> */}
       
 
     </>

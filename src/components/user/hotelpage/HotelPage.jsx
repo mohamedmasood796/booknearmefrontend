@@ -7,6 +7,7 @@ import Reserve from '../reserve/Reserve';
 import Banner from '../../admin/banner/Banner';
 import { differenceInCalendarDays } from "date-fns";
 import axios from "axios";
+import { findHotel, getReview } from '../../../api/authReq';
 
 function HotelPage({ setCheckInglo }) {
     const location = useLocation()
@@ -41,7 +42,9 @@ function HotelPage({ setCheckInglo }) {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [redirect, setRedirect] = useState('');
-    console.log(checkIn, "checkIn")
+    const [data,setData] = useState([]);
+
+    console.log(data, "ccccccccccccccccccccccccccccccccccccheckIn")
 
     let numberOfNights = 0;
     if (checkIn && checkOut) {
@@ -59,7 +62,17 @@ function HotelPage({ setCheckInglo }) {
         // setRedirect(`/account/bookings/${bookingId}`);
     }
 
-    const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/find/${id}`)
+    // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/find/${id}`)
+///////////////////////////////////////start form/////////////////////////////////////////
+
+
+
+//////////////////////////////////////end here///////////////////////////
+    const fetchHotel=async()=>{
+        const hoteldata=await getReview(id)
+        setData(hoteldata.data)
+        console.log(hoteldata,"HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    }
 
     console.log(data, "3page dataUUUUUUUUUUUUUUUUUUUUUUUU")
     
@@ -101,6 +114,10 @@ function HotelPage({ setCheckInglo }) {
         }
         setSlideNumber(newSlideNumber)
     }
+    const selectRoom=(e)=>{
+
+        console.log(e.target.value,"????????????????????/////////////////////////////")
+    }
 
     const handleClick = () => {
         if (user) {
@@ -109,17 +126,13 @@ function HotelPage({ setCheckInglo }) {
             navigate("/login")
         }
     }
-    const fetchRoom=()=>{
-        
-    }
+    
     useEffect(() => {
-        fetchRoom()
+        fetchHotel()
     }, [])
     return (
         <div>
-            {loading ? (
-                "loading"
-            ) : (
+           
                 <>
                     <div className='hotelContainer flex items-center mt-5 flex-col px-2'>
                         {open && <div className="slider sticky top-0 left-0 w-full h-full bg-transparent z-50 flex items-center">
@@ -192,50 +205,7 @@ function HotelPage({ setCheckInglo }) {
 
                                 {/* //////////////////////////////// */}
 
-                                {/* <div className="bg-white shadow p-4 rounded-2xl">
-                                    <div className="text-2xl text-center">
-                                        Price: $778 / per night
-                                    </div>
-                                    <div className="border rounded-2xl mt-4">
-                                        <div className="flex">
-                                            <div className="py-3 px-4 ">
-                                                <label>Check in:</label>
-                                                <input type="date"
-                                                    value={checkIn}
-                                                    onChange={ev => setCheckIn(ev.target.value)} />
-                                            </div>
-                                            <div className="py-3 px-4 border-l">
-                                                <label>Check out:</label>
-                                                <input type="date" value={checkOut}
-                                                    onChange={ev => setCheckOut(ev.target.value)} />
-                                            </div>
-                                        </div>
-                                        <div className="py-3 px-4 border-t">
-                                            <label>Number of guests:</label>
-                                            <input type="number"
-                                                value={numberOfGuests}
-                                                onChange={ev => setNumberOfGuests(ev.target.value)} />
-                                        </div>
-                                        {numberOfNights > 0 && (
-                                            <div className="py-3 px-4 border-t">
-                                                <label>Your full name:</label>
-                                                <input type="text"
-                                                    value={name}
-                                                    onChange={ev => setName(ev.target.value)} />
-                                                <label>Phone number:</label>
-                                                <input type="tel"
-                                                    value={phone}
-                                                    onChange={ev => setPhone(ev.target.value)} />
-                                            </div>
-                                        )}
-                                    </div>
-                                    <button onClick={bookThisPlace} className="primary mt-4 border-none px-2 py-2 bg-[#0071c2] text-white font-bold cursor-pointer rounded">
-                                        Book this place
-                                        {numberOfNights > 0 && (
-                                            <span> $100</span>
-                                        )}
-                                    </button>
-                                </div> */}
+                                
 
                                 <div className="bg-white shadow p-4 rounded-2xl">
                                     <div className="text-2xl text-center">
@@ -273,13 +243,13 @@ function HotelPage({ setCheckInglo }) {
                                                     onChange={ev => setPhone(ev.target.value)} />
                                                 <label>select Room</label>
                                                 {/* <input type="tel" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                                                    value={phone}
-                                                    onChange={ev => setPhone(ev.target.value)} /> */}
-                                                {/* <select className="dropdown" name="hotel" placeholder='select your hotel...' onChange={handleChange} >
-                                                    {city.length > 0 && city.map((item) => (
-                                                        <option key={item._id}>{item.name}</option>
+                                                   
+                                                   /> */}
+                                                <select onClick={selectRoom} className="dropdown bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="hotel" placeholder='select your hotel...'  >
+                                                    {data.rooms.length > 0 && data.rooms.map((item) => (
+                                                        <option value={item.roomId._id} key={item.roomId._id}>{item.roomId.title}</option>
                                                     ))}
-                                                </select> */}
+                                                </select>
                                             </div>
                                         )}
                                     </div>
@@ -299,7 +269,7 @@ function HotelPage({ setCheckInglo }) {
 
                     </div>
                 </>
-            )}
+            
             {/* {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />} */}
         </div>
     )

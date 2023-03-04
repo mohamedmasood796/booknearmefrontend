@@ -28,4 +28,5 @@ export const getbookingsDates = () => API.get(`/book/bookingdates`)
 export const getHotel = () => API.get(`/hotels`)
 export const getHoteltype = () => API.get(`/hotels/countByType`)
 export const getCountByCity = () => API.get(`/hotels/countByCity`)
+// export const findHotel = () => API.get(`/hotels/find/${id}`)
 
