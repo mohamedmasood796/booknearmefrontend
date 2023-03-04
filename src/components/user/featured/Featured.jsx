@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { searchbarAction } from '../../../redux/Searchbar';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getCountByCity } from '../../../api/authReq';
 
 function Featured() {
   const [city, setCity] = useState([])
@@ -36,7 +37,7 @@ function Featured() {
 
   useEffect(() => {
     const fechData = async () => {
-      const { data } = await getCity()
+      const { data } = await getCountByCity()
       setCity(data.city)
       console.log(data.city, "eth fechData 243u899999999999999999999999999999999999999999")
     }
@@ -50,7 +51,7 @@ function Featured() {
       <>
         <div className='md:flex'>
 
-          {city.length > 0 && city.map((item) => (
+          {city?.length > 0 && city.map((item) => (
 
             <div onClick={() => searchHotel(item.name)} className='featured container flex flex-row gap-2 z-1'>
               <div className="featuredItem relative text-black rounded-xl overflow-hidden">
