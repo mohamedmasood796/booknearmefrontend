@@ -7,6 +7,7 @@ import AddProduct from '../page/adminPages/AddProduct'
 import AddRoomPage from '../page/adminPages/AddRoomPage'
 import Adminhomepage from '../page/adminPages/Adminhomepage'
 import AdminLogin from '../page/adminPages/AdminLogin'
+import BookingMgtPage from '../page/adminPages/BookingMgtPage'
 import HotelsPage from '../page/adminPages/HotelsPage'
 import User from '../page/adminPages/User'
 
@@ -19,6 +20,7 @@ function Admin() {
 
                 <Route exact path='/' element={<AdminProtectedRouter>    <Adminhomepage />  </AdminProtectedRouter>} />
                 <Route exact path='/users' element={ <AdminProtectedRouter> <User/>   </AdminProtectedRouter>} />
+                <Route exact path='/BookingManagement' element={ <AdminProtectedRouter> <BookingMgtPage/>   </AdminProtectedRouter>} />
                 <Route exact path='/city' element={ <AdminProtectedRouter> <City/>   </AdminProtectedRouter>} />
                 <Route exact path='/addhotels' element={ <AdminProtectedRouter> <AddProduct/>   </AdminProtectedRouter>} />
                 <Route exact path='/hotels' element={ <AdminProtectedRouter> <HotelsPage/>  </AdminProtectedRouter>} />

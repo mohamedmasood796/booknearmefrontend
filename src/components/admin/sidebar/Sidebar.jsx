@@ -27,6 +27,12 @@ function Sidebar() {
                             <span>Dashboard</span>
                         </li>
                     </Link>
+                    <Link to='/admin/BookingManagement' style={{ textDecoration: "none" }}>
+                        <li>
+                            <PersonIcon className='icon' />
+                            <span>Booking Management</span>
+                        </li>
+                    </Link>
                     <Link to='/admin/users' style={{ textDecoration: "none" }}>
                         <li>
                             <PersonIcon className='icon' />

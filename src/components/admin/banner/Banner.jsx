@@ -16,10 +16,11 @@ import { loadStripe } from "@stripe/stripe-js";
 
 import { getRoomDataById } from "../../../api/authReq";
 import DisplayReview from "../../user/displayReview/DisplayReview.jsx";
+import HotelRoom from "./HotelRoom.jsx";
 
 // function Banner({ checkInglo }) {//this is importent
 function Banner({ checkInglo }) {
-    
+
     const navigate = useNavigate();
     const location = useLocation()
     const data = location?.state?.hotelId;
@@ -40,11 +41,11 @@ function Banner({ checkInglo }) {
     const [disabledButton, setDisabledButton] = useState(false)
     console.log(room, "Rooms");
 
-    const { checkIn, checkOut, numberOfGuests, name, phone, numberOfNights } = checkInglo
+    const { checkIn, checkOut, numberOfGuests, name, phone, numberOfNights, roomId, availableStatus,alldates } = checkInglo
 
     console.log(checkIn, "checkin user date")
     useEffect(() => {
-        console.log(checkInglo, "masooooo po");
+        console.log(checkInglo, "masooooo poooyi");
     }, [checkInglo])
 
 
@@ -61,7 +62,7 @@ function Banner({ checkInglo }) {
             console.log(id, "Hotel Id in grid hamras");
             const { data } = await getRoomDataById(id);
             setRoom(data.rooms);
-            console.log(data.rooms, "pppppppppppPPPPPPPPPPPPPPPPPPPPPPP");
+            console.log(data.rooms, "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPppQQQQQQQQQQQQQQQQpppppppppppppppppppppppp");
         } catch (err) {
             console.log(err);
         }
@@ -86,34 +87,35 @@ function Banner({ checkInglo }) {
     }
 
 
-    // WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+    // WWWWWWWWWWWWWWWWWWWWWWWWWWW    veanam  WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
-    const getDatesInRange = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
+    // const getDatesInRange = (startDate, endDate) => {
+    //     const start = new Date(startDate);
+    //     const end = new Date(endDate);
 
-        const date = new Date(start.getTime());
+    //     const date = new Date(start.getTime());
 
-        const dates = [];
+    //     const dates = [];
 
-        while (date <= end) {
-            dates.push(new Date(date).getTime());
-            date.setDate(date.getDate() + 1);
-        }
+    //     while (date <= end) {
+    //         dates.push(new Date(date).getTime());
+    //         date.setDate(date.getDate() + 1);
+    //     }
 
-        return dates;
-    };
+    //     return dates;
+    // };
 
-    const alldates = getDatesInRange(checkIn, checkOut)
-    console.log(alldates, "1111111111111111111111111111111111111")
-    useEffect(() => {
+    // const alldates = getDatesInRange(checkIn, checkOut)
+    // console.log(alldates, "1111111111111111111111111111111111111")
+    // useEffect(() => {
 
-        console.log("lllllllllLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
-        bookingdata()
+    //     console.log("lllllllllLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+    //     bookingdata()
 
-        reviewfun()
-    }, [])
+    //     reviewfun()
+    // }, [])
 
+    //////////////////////////////////////   evidea verea veanam /////////////////////////////////
     console.log(bookedDates, "100000000011111111111111111111100000000000000000000011111111111111111111110000000000000")
     // const isAvailable = () => {
     // console.log(bookedDates.alldates,"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")
@@ -137,52 +139,38 @@ function Banner({ checkInglo }) {
 
 
 
-    // wanded code
-    // const foundDates = []
-    // for (const date1 of alldates) {
-    //     for (const date2 of bookedDates.date) {
-    //         if (date1 == date2) {
-    //             foundDates.push(date1);
-    //             setDisabledButton(true)
-    //             break; // break out of inner loop if a match is found
-    //         }
 
+
+    //////////////////////////////////////////////////payment
+    // async function handleClick(oneroom) {
+    //     setSelectedRoom(oneroom._id)
+
+    //     const newOrder = {
+    //         ...oneroom,
+    //         ...checkInglo,
+    //         alldates
     //     }
+    //     console.log(oneroom, 'onerooom');
+    //     console.log(checkInglo, 'chekcingooo');
+    //     console.log(newOrder, 'new ordererrrrersjdhhkfskjdfhajkhdfjkahkfhakjdhmashood kuattal');
+
+    //     const stripe = await loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
+    //     console.log(stripe, "stripe good")
+    //     const body = { newOrder };
+    //     console.log(body, "this is bbbbbbbbbbbbbbbbBbbbbbbbbbbbBBBBBBBBBBBB")
+    //     const headers = {
+    //         "Content-Type": "application/json",
+    //     };
+
+    //     const { data } = await booking(
+    //         body
+    //     );
+    //     if (data?.url) {
+    //         window.location.href = data.url
+    //     }
+    //     //////////////////////////////////////////////booking check work
     // }
-
-
-    async function handleClick(oneroom) {
-        setSelectedRoom(oneroom._id)
-
-        const newOrder = {
-            ...oneroom,
-            ...checkInglo,
-            alldates
-        }
-console.log(oneroom,'onerooom');
-console.log(checkInglo,'chekcingooo');
-        console.log(newOrder,'new ordererrrrersjdhhkfskjdfhajkhdfjkahkfhakjdhmashood kuattal');
-
-        const stripe = await loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
-        console.log(stripe, "stripe good")
-        const body = { newOrder };
-        console.log(body, "this is bbbbbbbbbbbbbbbbBbbbbbbbbbbbBBBBBBBBBBBB")
-        const headers = {
-            "Content-Type": "application/json",
-        };
-
-        const { data } = await booking(
-            body
-        );
-        if (data?.url) {
-            window.location.href = data.url
-        }
-        //////////////////////////////////////////////booking check work
-
-
-
-    }
-    console.log(selectedRoom, "it si sected troomssssssssssssssssssssssssssssssssss")
+    // console.log(selectedRoom, "it si sected troomssssssssssssssssssssssssssssssssss")
 
 
 
@@ -249,26 +237,7 @@ console.log(checkInglo,'chekcingooo');
 
 
 
-                        <div className="container  rounded-md mt-10 ">
-                            <div className="flex flex-col md:flex-row w-full rounded-lg bg-white shadow-lg">
-                                <img className="w-80 h-60  object-cover rounded-md m-3 " src={room?.roomId?.photos[0]} alt="" />
-
-                                <div className="p-6 flex flex-col ">
-                                    <h5 className="text-gray-900 text-xl font-medium mb-2">{room?.roomId?.title}</h5>
-                                    <p className="text-gray-700 text-base mb-4">
-                                        {room?.roomId?.desc}
-                                    </p>
-                                    <p className="text-gray-600 text-xs">Max people :  {room?.roomId?.maxPeople}</p>
-                                    <p className="text-gray-700 text-base mb-4">
-                                        &#8377;{room?.roomId?.price ? room?.roomId?.price : room?.roomId?.price * numberOfNights}
-                                    </p>
-                                </div>
-                                
-                                    <div className="items-center w-full px-3 flex justify-end ">
-                                        <button onClick={() => handleClick(room.roomId)} className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded">Book Now</button>
-                                    </div>
-                            </div>
-                        </div>
+                        <HotelRoom room={room} checkInglo={checkInglo}/>
                     ))}
                 </div>
 
