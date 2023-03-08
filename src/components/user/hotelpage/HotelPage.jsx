@@ -90,7 +90,7 @@ function HotelPage({ setCheckInglo }) {
         console.log('""""""""""""""""""""""""""""""""""""""""""""""""')
         // console.log(roomId)
         // console.log(alldates)
-        const { data } = await availability({ alldates, roomId })
+        // const { data } = await availability({ alldates, roomId })
         console.log(data,"wwwq;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;")
         console.log(data.status,";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;")
         setAvailableStatus(data)
@@ -241,11 +241,11 @@ function HotelPage({ setCheckInglo }) {
                                 </div> */}
 
 
-                            {/* //////////////////////////////// */}
+                            {/* ///////////// show Check your room availability  /////////////////// */}
 
 
 
-                            <div className="bg-white shadow p-4 rounded-2xl">
+                            {/* <div className="bg-white shadow p-4 rounded-2xl">
                                 <div className="text-2xl text-center">
                                     Check your room availability
                                 </div>
@@ -280,9 +280,7 @@ function HotelPage({ setCheckInglo }) {
                                                 value={phone}
                                                 onChange={ev => setPhone(ev.target.value)} />
                                             <label>select Room</label>
-                                            {/* <input type="tel" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                                                   
-                                                   /> */}
+                                           
                                             <select onChange={ev => selectRoomId(ev.target.value)} className="dropdown bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="hotel" placeholder='select your hotel...'  >
                                                 {data?.rooms?.length > 0 && data.rooms.map((item) => (
                                                     <option value={item.roomId._id} key={item.roomId._id}>{item.roomId.title}</option>
@@ -297,7 +295,7 @@ function HotelPage({ setCheckInglo }) {
                                         <span></span>
                                     )}
                                 </button>
-                            </div>
+                            </div> */}
 
 
 

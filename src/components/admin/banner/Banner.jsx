@@ -41,9 +41,9 @@ function Banner({ checkInglo }) {
     const [disabledButton, setDisabledButton] = useState(false)
     console.log(room, "Rooms");
 
-    const { checkIn, checkOut, numberOfGuests, name, phone, numberOfNights, roomId, availableStatus,alldates } = checkInglo
+    // const { checkIn, checkOut, numberOfGuests, name, phone, numberOfNights, roomId, availableStatus,alldates } = checkInglo
 
-    console.log(checkIn, "checkin user date")
+    // console.log(checkIn, "checkin user date")
     useEffect(() => {
         console.log(checkInglo, "masooooo poooyi");
     }, [checkInglo])
@@ -52,14 +52,14 @@ function Banner({ checkInglo }) {
 
     // const Id = data.hotel._id;
     // const Id = hotel._id;
-    // console.log(Id, "id of hotel in grid");
+    // console.log(Id, "id of hotel in DDDDDDDDDDDDDDDDDDDDDDDDDDD");
     // console.log(data.hotel.images[0],"lllllllllllllll")
 
     const getRooms = async (id) => {
-        console.log(id, "id of hotel in grid");
+        console.log(id, "id of hotel in gridDDDDDDDDDDDDDDDDDDDDDDDDDDD");
 
         try {
-            console.log(id, "Hotel Id in grid hamras");
+            console.log(id, "Hotel Id in hamras");
             const { data } = await getRoomDataById(id);
             setRoom(data.rooms);
             console.log(data.rooms, "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPppQQQQQQQQQQQQQQQQpppppppppppppppppppppppp");
@@ -116,7 +116,7 @@ function Banner({ checkInglo }) {
     // }, [])
 
     //////////////////////////////////////   evidea verea veanam /////////////////////////////////
-    console.log(bookedDates, "100000000011111111111111111111100000000000000000000011111111111111111111110000000000000")
+    // console.log(bookedDates, "100000000011111111111111111111100000000000000000000011111111111111111111110000000000000")
     // const isAvailable = () => {
     // console.log(bookedDates.alldates,"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")
     // const isFound = bookedDates.alldates.some((date) =>
@@ -237,7 +237,7 @@ function Banner({ checkInglo }) {
 
 
 
-                        <HotelRoom room={room} checkInglo={checkInglo}/>
+                        <HotelRoom room={room}/>
                     ))}
                 </div>
 
