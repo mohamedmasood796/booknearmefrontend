@@ -16,15 +16,54 @@ function Admin() {
         <>
             <Routes>
 
-                <Route exact path='/login' element={<PublicRoute>  <AdminLogin/> </PublicRoute> } />
+                <Route exact path='/login' element={
+                    <PublicRoute>
+                        <AdminLogin />
+                    </PublicRoute>
+                } />
 
-                <Route exact path='/' element={<AdminProtectedRouter>    <Adminhomepage />  </AdminProtectedRouter>} />
-                <Route exact path='/users' element={ <AdminProtectedRouter> <User/>   </AdminProtectedRouter>} />
-                <Route exact path='/BookingManagement' element={ <AdminProtectedRouter> <BookingMgtPage/>   </AdminProtectedRouter>} />
-                <Route exact path='/city' element={ <AdminProtectedRouter> <City/>   </AdminProtectedRouter>} />
-                <Route exact path='/addhotels' element={ <AdminProtectedRouter> <AddProduct/>   </AdminProtectedRouter>} />
-                <Route exact path='/hotels' element={ <AdminProtectedRouter> <HotelsPage/>  </AdminProtectedRouter>} />
-                <Route exact path='/addRoom/:id' element={ <AdminProtectedRouter> <AddRoomPage/>  </AdminProtectedRouter>} />
+                <Route exact path='/' element={
+                    <AdminProtectedRouter>
+                        <Adminhomepage />
+                    </AdminProtectedRouter>
+                } />
+
+                <Route exact path='/users' element={
+                    <AdminProtectedRouter>
+                        <User />
+                    </AdminProtectedRouter>
+                } />
+
+                <Route exact path='/BookingManagement' element={
+                    <AdminProtectedRouter>
+                        <BookingMgtPage />
+                    </AdminProtectedRouter>
+                } />
+
+                <Route exact path='/city' element={
+                    <AdminProtectedRouter>
+                        <City />
+                    </AdminProtectedRouter>
+                } />
+
+                <Route exact path='/addhotels' element={<
+                    AdminProtectedRouter>
+                    <AddProduct />
+                </AdminProtectedRouter>
+                } />
+
+                <Route exact path='/hotels' element={
+                    <AdminProtectedRouter>
+                        <HotelsPage />
+                    </AdminProtectedRouter>
+                } />
+
+                <Route exact path='/addRoom/:id' element={
+                    <AdminProtectedRouter>
+                        <AddRoomPage />
+                    </AdminProtectedRouter>
+                } />
+                
             </Routes>
         </>
     )

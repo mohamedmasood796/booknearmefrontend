@@ -11,6 +11,10 @@ import { Link } from "react-router-dom"
 
 
 function Sidebar() {
+
+    const logOut=()=>{
+        localStorage.removeItem("jwtadmin")
+    }
     return (
         <div className='sidebar'>
             <div className="top">
@@ -72,7 +76,7 @@ function Sidebar() {
                     </li>
                     <li>
                         <LogoutOutlinedIcon className='icon' />
-                        <span>Logout</span>
+                        <span onClick={logOut}>Logout</span>
                     </li>
 
                 </ul>

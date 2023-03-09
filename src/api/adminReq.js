@@ -19,4 +19,5 @@ export const getCity = () => API.post('/hotels/getcity')
 export const paymentChart = () => API.get('/admin/paymentChart')
 export const bookingChart = () => API.get('/admin/bookingChart')
 export const bookingDetails = () => API.get('/admin/bookingDetails')
+export const cancleBooking = (id) => API.get(`/admin/cancleBooking/${id}`)
 

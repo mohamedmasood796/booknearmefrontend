@@ -12,23 +12,106 @@ import Notfound from '../components/user/notfound/Notfound'
 import ProfilePage from '../page/userPage/ProfilePage'
 import Addreview from '../components/user/review/Addreview'
 import DisplayReview from '../components/user/displayReview/DisplayReview'
+import UserPublicRoute from '../components/user/PRRouter/UserPublicRoute'
+import UserProtectedRoute from '../components/user/PRRouter/UserProtectedRoute'
+
 
 function User() {
   return (
     <>
       <Routes>
-        <Route exact path='/signup' element={<Signup />} />
-        <Route exact path='/login' element={<Login />} />
-        <Route exact path='/' element={<Home />} />
-        <Route exact path='/hotels' element={<List />} />
-        <Route exact path='/newhotel' element={<Hotel />} />
-        <Route exact path='/verify' element={<Verifypage />} />
-        <Route exact path="/success" element={<Success />} />
-        <Route exact path="/cancel" element={<Cancel />} />
-        <Route exact path="/profile" element={<ProfilePage />} />
-        <Route exact path="/addreview" element={<Addreview />} />
-        <Route exact path="/displayReview" element={<DisplayReview />} />
-        <Route exact path="*" element={<Notfound />} />
+
+        <Route exact path='/signup' element={
+          <UserPublicRoute>
+
+            <Signup />
+          </UserPublicRoute>
+
+        } />
+
+        <Route exact path='/login' element={
+          <UserPublicRoute>
+
+            <Login />
+          </UserPublicRoute>
+
+        } />
+
+        <Route exact path='/' element={
+          <UserPublicRoute>
+
+            <Home />
+          </UserPublicRoute>
+
+        } />
+
+        <Route exact path='/hotels' element={
+          <UserPublicRoute>
+
+            <List />
+          </UserPublicRoute>
+
+        } />
+
+        <Route exact path='/newhotel' element={
+          <UserPublicRoute>
+
+            <Hotel />
+          </UserPublicRoute>
+
+        } />
+
+        <Route exact path='/verify' element={
+          <UserPublicRoute>
+
+            <Verifypage />
+          </UserPublicRoute>
+
+        } />
+
+        <Route exact path="/success" element={
+          <UserProtectedRoute>
+
+            <Success />
+          </UserProtectedRoute>
+
+        } />
+
+        <Route exact path="/cancel" element={
+          <UserProtectedRoute>
+
+            <Cancel />
+          </UserProtectedRoute>
+
+        } />
+
+        <Route exact path="/profile" element={
+          <UserProtectedRoute>
+
+            <ProfilePage />
+          </UserProtectedRoute>
+
+        } />
+
+        <Route exact path="/addreview" element={
+          <UserProtectedRoute>
+
+            <Addreview />
+          </UserProtectedRoute>
+
+        } />
+
+        <Route exact path="/displayReview" element={
+          <UserPublicRoute>
+
+            <DisplayReview />
+          </UserPublicRoute>
+
+        } />
+
+        <Route exact path="*" element={
+          <Notfound />
+        } />
       </Routes>
     </>
   )

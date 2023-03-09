@@ -30,4 +30,4 @@ export const getHoteltype = () => API.get(`/hotels/countByType`)
 export const getCountByCity = () => API.get(`/hotels/countByCity`)
 // export const findHotel = () => API.get(`/hotels/find/${id}`)
 export const availability = (dateAndId) => API.post(`/book/checkavailability`,dateAndId)
-
+export const getUsers=()=>API.get(`/user`)

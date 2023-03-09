@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { getBookings, getUser } from '../../../api/authReq'
+import { useNavigate } from 'react-router-dom'
 import moment from "moment";
 
 const Profile = () => {
     const [profile, setProfile] = useState(true)
+    const navigate = useNavigate()
     const [data, setData] = useState([])
     const [user, setUser] = useState()
 
     console.log(data, "momomommmommomomommm")
     console.log(user, "hohohohohohohhoohohohoho")
-    
+
     const bookings = async () => {
         if (profile) {
             const user = await getUser()
             setUser(user.data)
-        } else if(!profile) {
+        } else if (!profile) {
             const { data } = await getBookings()
             console.log(data, "eth or data")
             setData(data)
@@ -24,6 +26,22 @@ const Profile = () => {
     useEffect(() => {
         bookings()
     }, [profile])
+
+    function convertDate(date) {
+        const newDate = new Date(date);
+        const year = newDate.getFullYear();
+        const month = (newDate.getMonth() + 1).toString().padStart(2, '0');
+        const day = newDate.getDate().toString().padStart(2, '0');
+        const result = `${day}-${month}-${year}`;
+        return result;
+    }
+    const logOut=()=>{
+        localStorage.removeItem("jwt")
+        localStorage.removeItem("user")
+        navigate('/')
+        
+    }
+
     return (
         <>
             <div className="p-16">
@@ -61,12 +79,13 @@ const Profile = () => {
                     </div>
 
                         {/* <div className="mt-12 flex flex-col justify-center"> */}
-                            {/* <p className="text-gray-600 text-center font-light lg:px-16">An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p> */}
-                            <button
-                                className="text-white py-2 px-4  font-medium mt-4 w-32"
-                            >
-                                LogOut
-                            </button>
+                        {/* <p className="text-gray-600 text-center font-light lg:px-16">An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p> */}
+                        <button
+                            className="text-white py-2 px-4  font-medium mt-4 w-32"
+                            onClick={logOut}
+                        >
+                            LogOut
+                        </button>
                         {/* </div> */}
                     </>}
 
@@ -97,7 +116,8 @@ const Profile = () => {
                                             </p>
                                             <p className="text-gray-700 text-base mb-4">
 
-                                                {booking.checkIn} to {booking.checkOut}
+
+                                                {convertDate(booking.checkIn)} to  {convertDate(booking.checkOut)}
                                             </p>
                                             <p className="text-gray-600 text-xs">Number of Night :
                                                 {booking.numberOfNights}
@@ -106,7 +126,23 @@ const Profile = () => {
                                                 &#8377;{booking.price * booking.numberOfNights}
                                             </p>
                                         </div>
+                                        <div className='flex justify-center items-center p-5'>
 
+                                            {booking.statusChange === "Booked" ?
+                                                <p className="h-7 items-center px-4 py-1 text-sm text-green-600 font-semibold rounded-full border border-green-200 ">
+                                                    {booking.statusChange}
+                                                </p>
+                                                :
+                                                <p className="h-7 items-center px-4 py-1 text-sm text-red-600 font-semibold rounded-full border border-red-200 ">
+                                                    {booking.statusChange}
+                                                </p>
+
+                                            }
+
+                                            <div className='p-4'>
+                                                <button className='bg-transparent bg-red-500  font-semibold text-white py-2 px-4 border border-red-500 hover:border-transparent rounded'>Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
