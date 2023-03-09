@@ -143,7 +143,7 @@ const HotelRoom = ({ room }) => {
                                     onChange={ev => {
                                         setCheckIn(ev.target.value)
                                         setStatus(null)
-                                    }} />
+                                    }}required />
                             </div>
                             <div className="py-3 px-4 border-l">
                                 <label>Check out:</label>
@@ -151,7 +151,8 @@ const HotelRoom = ({ room }) => {
                                     onChange={ev => {
                                         setCheckOut(ev.target.value)
                                         setStatus(null)
-                                    }} />
+                                        
+                                    }}required />
                             </div>
                         </div>
 
@@ -163,7 +164,7 @@ const HotelRoom = ({ room }) => {
                         {status ?
                             
                             (<div className="items-center w-full px-3 flex justify-end ">
-                            <button onClick={() => paymentFunction(room.roomId)} className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded">Book Now </button>
+                            <button onClick={() => paymentFunction(room.roomId)} className="border-none px-2 py-2 bg-[#25d63d] text-white cursor-pointer rounded">Book Now </button>
                         </div>) 
                              : status===false ? 
                             (<div className="items-center w-full px-3 flex justify-end ">

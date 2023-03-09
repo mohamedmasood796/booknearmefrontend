@@ -76,7 +76,7 @@ function Banner({ checkInglo }) {
 
     const reviewfun = async () => {
         const { data } = await getReview(id)
-        console.log(data, "get reviewsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
+        console.log(data.review, "get reviewsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
         setComment(data.review)
     }
 
@@ -107,13 +107,13 @@ function Banner({ checkInglo }) {
 
     // const alldates = getDatesInRange(checkIn, checkOut)
     // console.log(alldates, "1111111111111111111111111111111111111")
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     console.log("lllllllllLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
-    //     bookingdata()
+        console.log("lllllllllLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+        // bookingdata()
 
-    //     reviewfun()
-    // }, [])
+        reviewfun()
+    }, [])
 
     //////////////////////////////////////   evidea verea veanam /////////////////////////////////
     // console.log(bookedDates, "100000000011111111111111111111100000000000000000000011111111111111111111110000000000000")
@@ -245,9 +245,9 @@ function Banner({ checkInglo }) {
                     <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={() => setOpen(true)}>Add Review</button>
                 </div>
                 <div className="flex gap-2 container overflow-x-scroll md:mx-20 mt-5">
-                    {/* {comment.map((item) => (
+                    {comment.map((item) => (
                         <DisplayReview item={item} />
-                    ))} */}
+                    ))}
                 </div>
             </div>
 

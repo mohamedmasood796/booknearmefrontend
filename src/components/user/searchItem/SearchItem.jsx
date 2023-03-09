@@ -34,7 +34,7 @@ function SearchItem({ item, destination, dates, options }) {
                     <button className='bg-[#003580] text-white p-2.5 font-bold'>{item.rating}</button>
                 </div>}
                 <div className="siDetailTexts text-right flex flex-col gap-2.5">
-                    <span className="siPrice text-2xl">${item.cheapestPrice}</span>
+                    <span className="siPrice text-2xl">&#8377;{item.cheapestPrice}</span>
                     <span className="siTaxOp text-xs text-gray-400">Includes taxes and fees</span>
                     <div onClick={() => newfunction(item._id)}>
 

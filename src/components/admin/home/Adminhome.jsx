@@ -12,12 +12,12 @@ function Adminhome() {
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
-        <div className="widgets">
+        {/* <div className="widgets">
           <Widget type="user" />
           <Widget type="order" />
           <Widget type="erarning" />
           <Widget type="profit" />
-        </div>
+        </div> */}
 
         <div className='chart'>
           <Payment />

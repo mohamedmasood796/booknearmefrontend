@@ -306,7 +306,6 @@ function HotelPage({ setCheckInglo }) {
                 </div>
             </>
 
-            {/* {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />} */}
         </div>
     )
 }

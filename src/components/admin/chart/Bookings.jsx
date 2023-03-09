@@ -1,10 +1,55 @@
 import React from 'react'
 
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Chart from "react-apexcharts";
+import { bookingChart } from '../../../api/adminReq';
 
 const Bookings = ({ postGraphCategories, postGraphData }) => {
+    // const [chart,setChart]=useState()
+
+    // const chartBooking=async()=>{
+    //     const {data}=await bookingChart()
+    //     console.log(data.total,"UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
+    //     setChart(data?.total)
+    // }
+
+    // useEffect(() => {
+    // chartBooking()
+    // }, [])
+    useEffect(()=>{
+        const fetchData =async () => {
+          try {
+            
+            const {data}=await bookingChart()
+            console.log(data,"rQQQQQQQQQQQQQQQQQQqqqes")
+          
+            // console.log(data,"getChartData")
+  
+            setState(prevState=>(
+              {...prevState,options:{
+                ...prevState.options,
+                xaxis: {categories: data.months},},
+              
+              series:[
+                {
+                  name:'Monthly Booking',
+                  data:data.booking
+                }
+              ]
+            }
+            ))
+          } catch (error) {
+            console.error(error);
+          }
+          
+          // setMonth(data.months)
+          // setBookings(data.bookings)
+          
+        };
+        fetchData()
+      }, []);
+
     const [state, setState] = useState({
         options: {
             chart: {

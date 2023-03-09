@@ -1,9 +1,23 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import BookingList from '../tableList/BookingList'
 import Navbar from '../navbar/Navbar'
+import { bookingDetails } from '../../../api/adminReq'
 
 const BookingMgt = () => {
+
+    const [bookingData, setBookingData] = useState([])
+
+    const myFuc = async () => {
+        const { data } = await bookingDetails()
+        setBookingData(data)
+        console.log(data, "datatableT T")
+
+    }
+    useEffect(() => {
+        myFuc()
+    }, [])
+
     return (
         <>
             <div className='home'>
@@ -18,15 +32,16 @@ const BookingMgt = () => {
                                 <li class="table-header">
                                     <div className="col col-1">Title</div>
                                     <div className="col col-2">Price</div>
-                                    <div className="col col-3">maxPeople</div>
-                                    <div className="col col-4">Description</div>
+                                    <div className="col col-3">checkIn</div>
+                                    <div className="col col-4">checkOut</div>
+                                    <div className="col col-4">Status</div>
                                     <div className="col col-4">Action</div>
                                 </li>
 
-                                <BookingList />
-                                {/* {roomData.map((room) => (
-                        <Roomlist room={room} hotelid={id}/>
-                    ))} */}
+                                {/* <BookingList /> */}
+                                {bookingData.map((hotel) => (
+                                    <BookingList hotel={hotel} />
+                                ))}
 
 
                             </ul>

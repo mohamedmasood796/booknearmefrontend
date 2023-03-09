@@ -16,3 +16,7 @@ export const deleteHotel = (id) => API.delete(`/hotels/${id}`)
 export const deleteRoom = (id,hotelid) => API.delete(`/rooms/${id}/${hotelid}`)
 export const addCity = (addcity) => API.post('/hotels/city',addcity)
 export const getCity = () => API.post('/hotels/getcity')
+export const paymentChart = () => API.get('/admin/paymentChart')
+export const bookingChart = () => API.get('/admin/bookingChart')
+export const bookingDetails = () => API.get('/admin/bookingDetails')
+

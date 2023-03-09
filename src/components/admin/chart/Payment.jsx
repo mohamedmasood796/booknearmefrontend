@@ -1,10 +1,48 @@
 import React from 'react'
 
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
+import { paymentChart } from '../../../api/adminReq';
 
 const Payment = ({ postGraphCategories, postGraphData }) => {
+    // const chartPayment=async()=>{
+    //     const data=await paymentChart()
+    //     console.log(data)
+    // }
+
+    // useEffect(() => {
+    // chartPayment()
+    // }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await paymentChart()
+                const data = res.data;
+                console.log(data, "'monthly revenue")
+
+                setState(prevState => (
+                    {
+                        ...prevState, options: {
+                            ...prevState.options,
+                            xaxis: { categories: data.months, },
+                        },
+                        series: [
+                            {
+                                name: 'Monthly Revenue',
+                                data: data.revenue,
+                            },
+                        ],
+                    }));
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     const [state, setState] = useState({
         options: {
             chart: {
@@ -21,6 +59,7 @@ const Payment = ({ postGraphCategories, postGraphData }) => {
             },
         ],
     });
+
     return (
 
         <>
