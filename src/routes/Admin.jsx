@@ -46,8 +46,8 @@ function Admin() {
                     </AdminProtectedRouter>
                 } />
 
-                <Route exact path='/addhotels' element={<
-                    AdminProtectedRouter>
+                <Route exact path='/addhotels' element={
+                    <AdminProtectedRouter>
                     <AddProduct />
                 </AdminProtectedRouter>
                 } />

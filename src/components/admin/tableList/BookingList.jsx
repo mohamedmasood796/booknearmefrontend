@@ -21,13 +21,14 @@ const BookingList = ({ hotel }) => {
   return (
     <>
       <li className="table-row">
+        <div className="hotelcol1 col col-1" data-label="Job Id">{hotel.userId.username}</div>
         <div className="hotelcol1 col col-1" data-label="Job Id">{hotel.title}</div>
         <div className="hotelcol2 col col-4" data-label="Payment Status">{hotel.price * hotel.numberOfNights}</div>
         <div className="hotelcol3 col col-2" data-label="Customer Name"> {convertDate(hotel.checkIn)} to  {convertDate(hotel.checkOut)} </div>
-        <div className="hotelcol4 col col-3" data-label="Amount">{hotel.desc}</div>
+        {/* <div className="hotelcol4 col col-3" data-label="Amount">{hotel.desc}</div> */}
         
         {hotel.statusChange==="Booked" ? 
-        <p className="h-7 items-center px-4 py-1 text-sm text-green-600 font-semibold rounded-full border border-green-200 ">
+        <p className=" h-7 items-center px-4 py-1 text-sm text-green-600 font-semibold rounded-full border border-green-200 ">
           {hotel.statusChange}
         </p> 
         :

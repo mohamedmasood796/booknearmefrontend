@@ -26,14 +26,15 @@ const BookingMgt = () => {
                     <Navbar />
                     <div className="">
                         <div class="container">
-                            <h2>Room List</h2>
+                            <h2>Booking List</h2>
                             <ul class="responsive-table">
 
                                 <li class="table-header">
-                                    <div className="col col-1">Title</div>
+                                    <div className="col col-1">user</div>
+                                    <div className="col col-1">Room</div>
                                     <div className="col col-2">Price</div>
-                                    <div className="col col-3">checkIn</div>
-                                    <div className="col col-4">checkOut</div>
+                                    <div className="col col-3">checkIn / checkOut</div>
+                                    {/* <div className="col col-4">Description</div> */}
                                     <div className="col col-4">Status</div>
                                     <div className="col col-4">Action</div>
                                 </li>

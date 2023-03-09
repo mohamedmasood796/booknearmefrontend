@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import "./sidebar.scss"
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
@@ -11,19 +12,24 @@ import { Link } from "react-router-dom"
 
 
 function Sidebar() {
+    const navigate = useNavigate()
 
     const logOut=()=>{
         localStorage.removeItem("jwtadmin")
+        navigate('/admin/login')
     }
     return (
-        <div className='sidebar'>
+        <div className="w-2/12">
+
+      
+        <div className='sidebar fixed left-0 w-2/12'>
             <div className="top">
                 <Link to='/admin' style={{ textDecoration: "none" }}>
                     <span className="logo">BookNearMe</span>
                 </Link>
             </div>
             <hr />
-            <div className="center">
+            <div className="center font-bold text-2xl">
                 <ul>
                     <Link to="/admin"style={{ textDecoration: "none" }} >
                         <li>
@@ -57,15 +63,15 @@ function Sidebar() {
                     </Link>
                     <Link to='/admin/hotels' style={{ textDecoration: "none" }}>
                         <li>
-                            <Inventory2OutlinedIcon className='icon' />
+                            <StorefrontOutlinedIcon className='icon' />
                             <span>Hotels</span>
                         </li>
                     </Link>
-                    <li>
+                    {/* <li>
                         <StorefrontOutlinedIcon className='icon' />
                         <span>Booking</span>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <NotificationsOutlinedIcon className='icon' />
                         <span>Notifications</span>
                     </li>
@@ -73,7 +79,7 @@ function Sidebar() {
                     <li>
                         <PersonOutlinedIcon className='icon' />
                         <span>Profile</span>
-                    </li>
+                    </li> */}
                     <li>
                         <LogoutOutlinedIcon className='icon' />
                         <span onClick={logOut}>Logout</span>
@@ -81,10 +87,11 @@ function Sidebar() {
 
                 </ul>
             </div>
-            <div className="bottom">
+            {/* <div className="bottom">
                 <div className="colorOption"></div>
                 <div className="colorOption"></div>
-            </div>
+            </div> */}
+        </div>
         </div>
     )
 }

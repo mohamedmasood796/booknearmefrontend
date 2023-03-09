@@ -23,7 +23,6 @@ function User() {
 
         <Route exact path='/signup' element={
           <UserPublicRoute>
-
             <Signup />
           </UserPublicRoute>
 
@@ -54,16 +53,15 @@ function User() {
         } />
 
         <Route exact path='/newhotel' element={
-          <UserPublicRoute>
+           <UserProtectedRoute>
 
             <Hotel />
-          </UserPublicRoute>
+           </UserProtectedRoute>
 
         } />
 
         <Route exact path='/verify' element={
           <UserPublicRoute>
-
             <Verifypage />
           </UserPublicRoute>
 

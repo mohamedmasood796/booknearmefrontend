@@ -13,7 +13,7 @@ function UserProtectedRoute(props) {
 
   useEffect(() => {
     const routerFunction = async () => {
-      if (localStorage.getItem("token")) {
+      if (localStorage.getItem("jwt")) {
         let userData = await getUsers();
         if (userData) {
           dispatch(
@@ -27,7 +27,7 @@ function UserProtectedRoute(props) {
     routerFunction()
   }, [])
 
-  if (!localStorage.getItem("token")) {
+  if (!localStorage.getItem("jwt")) {
     return <Navigate to="/login" />;
   }
   return props.children;
