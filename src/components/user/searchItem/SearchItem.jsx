@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 
 function SearchItem({ item, destination, dates, options }) {
     const navigate = useNavigate()
-    console.log(item)
     const newfunction = (id) => {
 
         navigate('/newhotel', { state: { id, destination, dates, options } })

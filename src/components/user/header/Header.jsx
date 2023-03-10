@@ -15,7 +15,6 @@ function Header({ type }) {
     const [destination, setDestination] = useState('')
     const [openDate, setOpenDate] = useState(false)
     const [city, setCity] = useState([])
-    console.log(city,"it si ciykoo4444444444444444444444444444444444444444444444444444444")
     const [dates, setDates] = useState([
         {
             startDate: new Date(),
@@ -28,7 +27,6 @@ function Header({ type }) {
         const fechData = async () => {
             const { data } = await getCountByCity()
             setCity(data)
-            console.log(data, "eth fechDataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         }
         fechData()
     }, [])

@@ -48,13 +48,9 @@ const HotelRoom = ({ room }) => {
             numberOfNights
         }
 
-        console.log(oneroom, 'onerooomMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM');
-        // console.log(newOrder, 'chekcingooo))))))))))))))))))))))))))00000000000000000000000');
-        console.log(newOrder, 'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQnew ordererrrrersjdhhkfskjdfhajkhdfjkahkfhakjdhmashood kuattal');
 
         const stripe = await loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
         const body = { newOrder };
-        console.log(body, "this is bbbbbbbbbbbbbbbbBbbbbbbbbbbbBBBBBBBBBBBB")
         const headers = {
             "Content-Type": "application/json",
         };
@@ -71,7 +67,6 @@ const HotelRoom = ({ room }) => {
 
 
 
-    console.log(selectedRoom, "it si sected troomssssssssssssssssssssssssssssssssss")
     let numberOfNights = 0;
     if (checkIn && checkOut) {
         numberOfNights = differenceInCalendarDays(new Date(checkOut), new Date(checkIn));
@@ -80,7 +75,6 @@ const HotelRoom = ({ room }) => {
 
 
     // const { numberOfGuests, name, phone, numberOfNights, roomId, availableStatus, alldates } = checkInglo
-    // console.log(availableStatus, "nnnnnnLLLLLLLLLLLLLLLLLLLLL")
 
     return (
         <>

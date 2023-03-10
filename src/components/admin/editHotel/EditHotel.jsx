@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom';
 
 const EditHotel = () => {
 
-    console.log("kkok");
     let params = useParams()
     const [formData, setFormData] = useState([])
     const [image, setImage] = useState([]);
@@ -23,16 +22,13 @@ const EditHotel = () => {
         const fechData = async () => {
             const { data } = await getCity()
             setCity(data.city)
-            console.log(data, "eth fechData")
         }
         fechData()
     }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        console.log(value, name)
         setHoteldata({ ...hoteldata, [name]: value })
-        console.log(hoteldata, "hoooi")
     }
 
     const cloudAPI = process.env.REACT_APP_CLOUD_NAME
@@ -42,15 +38,10 @@ const EditHotel = () => {
         const result = new FormData()
         let photos = []
         for (let i = 0; i < image.length; i++) {
-            console.log(image[i])
             result.append('file', image[i]);
             result.append('upload_preset', "booknearme");
-            console.log(result);
             const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudAPI}/image/upload`, result)
-            console.log(response, "haid amir")
             const imageUrl = response.data.url
-            console.log(imageUrl,)
-            photos.push(imageUrl)
         }
         if (photos.length) {
             // const contents = {
@@ -58,7 +49,6 @@ const EditHotel = () => {
             //     photos
             // }
             hoteldata.photos = photos
-            console.log(formData, "hai hotel full datas")
             const response = await updateHotel(hoteldata, params.id)
             if (response.data.message) {
                 toast.success(response.data.message)
@@ -74,7 +64,6 @@ const EditHotel = () => {
     useEffect(() => {
         const fechHotel = async () => {
             const { data } = await getHotel(params.id)
-            console.log(data, "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLleth fechData")
             setHoteldata(data)
         }
         fechHotel()
@@ -122,7 +111,6 @@ const EditHotel = () => {
 
                                         {image && image.length > 0
                                             ? image.map((file, key) => {
-                                                console.log(file, "filesssss");
                                                 return (
                                                     <div className="left flex justify-end ">
                                                         <i

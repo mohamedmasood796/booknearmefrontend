@@ -16,10 +16,7 @@ function RoomTable() {
     const [roomData, setRoomData] = useState([])
     const {id} = useParams()
     const myFuc = async () => {
-        console.log(id,"id");
         const { data } = await getRoomAPI(id)
-        setRoomData(data.rooms)
-        console.log(data.rooms, "datatablemasoodddddddddddddddDDDDDDDDDDDDDDDDDDDD")
 
     }
     useEffect(() => {

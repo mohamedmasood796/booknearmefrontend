@@ -9,7 +9,6 @@ function Verifypage() {
 
     const [ErrMessage, setErrMessage] = useState('');
     const submitVerify = async (event) => {
-        console.log(userId,"usaerId");
         event.preventDefault();
  
         const {data} = await verifySignUp(userId);

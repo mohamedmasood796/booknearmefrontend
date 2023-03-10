@@ -13,9 +13,7 @@ const BookingList = ({ hotel }) => {
   }
 
   const cancleOrder = async (id) => {
-    console.log(id)
     const data = await cancleBooking(id)
-    console.log(data)
   }
 
   return (

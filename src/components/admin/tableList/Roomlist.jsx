@@ -6,15 +6,9 @@ import { deleteRoom } from '../../../api/adminReq';
 function Roomlist({ room ,hotelid}) {
 
     const navigate = useNavigate();
-    console.log(hotelid,"hai this is params in readt thats all thansAAAAAAAAAAAAA")
-    console.log(room,"hai this is params in readt thats all thans")
     
-    // const addRoom = (e) => {
-    //     console.log(e, "userid and hotel id")
-    //     navigate(`/admin/addRoom/${e}`)
-    // }
+  
     const deleteRoomById=async(id)=>{
-        console.log(id,"hai this is room id thats all ")
         const response = await deleteRoom(id,hotelid)
     }
     return (

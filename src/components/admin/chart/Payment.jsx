@@ -6,21 +6,13 @@ import Chart from "react-apexcharts";
 import { paymentChart } from '../../../api/adminReq';
 
 const Payment = ({ postGraphCategories, postGraphData }) => {
-    // const chartPayment=async()=>{
-    //     const data=await paymentChart()
-    //     console.log(data)
-    // }
 
-    // useEffect(() => {
-    // chartPayment()
-    // }, [])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await paymentChart()
                 const data = res.data;
-                console.log(data, "'monthly revenue")
 
                 setState(prevState => (
                     {

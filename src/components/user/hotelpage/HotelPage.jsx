@@ -12,8 +12,6 @@ import { availability, findHotel, getReview } from '../../../api/authReq';
 function HotelPage({ setCheckInglo }) {
     const location = useLocation()
     const [id, setId] = useState(location?.state?.id)
-    console.log(id, "it id 44443333333333334444444444443333333")
-    console.log(location, "location it id 44443333333333334444444444443333333")
 
     // or
     // const fulllocation = document.location + '';
@@ -45,7 +43,6 @@ function HotelPage({ setCheckInglo }) {
     const [availableStatus, setAvailableStatus] = useState({});
     const [data, setData] = useState([]);
 
-    console.log(data, "ccccccccccccccccccccccccccccccccccccheckIn")
 
     let numberOfNights = 0;
     if (checkIn && checkOut) {
@@ -72,7 +69,6 @@ function HotelPage({ setCheckInglo }) {
     };
 
     const alldates = getDatesInRange(checkIn, checkOut)
-    console.log(alldates, "1111111111111111111111111111111111111")
 
 
     //////////////////////////////////////end here///////////////////////////
@@ -86,15 +82,10 @@ function HotelPage({ setCheckInglo }) {
         //     // place: place._id,
         //     // price: numberOfNights * place.price,
         // });
-        console.log(roomId)
-        console.log('""""""""""""""""""""""""""""""""""""""""""""""""')
         // console.log(roomId)
         // console.log(alldates)
         // const { data } = await availability({ alldates, roomId })
-        console.log(data,"wwwq;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;")
-        console.log(data.status,";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;")
         setAvailableStatus(data)
-        console.log(availableStatus,":::::::::::::::::::::::::::::::::::::")
         // if (data.status) {
 
             setCheckInglo({ checkIn, checkOut, numberOfGuests, name, phone, numberOfNights, roomId,availableStatus,alldates })
@@ -109,18 +100,14 @@ function HotelPage({ setCheckInglo }) {
     const fetchHotel = async () => {
         const hoteldata = await getReview(id)
         setData(hoteldata.data)
-        console.log(hoteldata, "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     }
 
-    console.log(data, "3page dataUUUUUUUUUUUUUUUUUUUUUUUU")
 
     const user = useSelector((state) => state.userAuth)
-    console.log("user2345t", user)
     const navigate = useNavigate()
     // const property = useSelector((state) => state.searchresult)
 
     // console.log("dddddddddddddddddddddd77777777777777777777777777777777", property)
-    console.log("dddddddddddddddddddddd777777777777777777777777777777788888888888888887", user)
 
 
     // const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -152,10 +139,7 @@ function HotelPage({ setCheckInglo }) {
         }
         setSlideNumber(newSlideNumber)
     }
-    // const selectRoom=(e)=>{
-
-    //     console.log(e.target.value,"????????????????????/////////////////////////////")
-    // }
+   
 
     const handleClick = () => {
         if (user) {

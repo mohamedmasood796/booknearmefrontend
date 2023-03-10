@@ -62,8 +62,6 @@ function Signup() {
 
       setEmailMessage(true)
         setMsg(data.message)
-        // navigate('/verifypage')
-        // console.log(res.message,'hai res')  
       } else {
         setExistError(data.message)
       }

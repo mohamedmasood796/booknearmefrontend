@@ -5,13 +5,11 @@ const useFetch = (url) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
-    console.log(url)
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true)
             try {
                 const res = await axios.get(url)
-                console.log(res.data,'mashoooo9dddd');
                 setData(res.data)
             } catch (err) {
                 setError(err)

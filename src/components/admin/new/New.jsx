@@ -13,7 +13,6 @@ import City from '../city/City';
 
 
 function New() {
-    console.log("kkok");
 
     const [formData, setFormData] = useState([])
     const [image, setImage] = useState([]);
@@ -25,16 +24,13 @@ function New() {
         const fechData = async () => {
             const { data } = await getCity()
             setCity(data.city)
-            console.log(data, "eth fechData")
         }
         fechData()
     }, [])
 
     const handleChange = (e) => {
         const { value, name } = e.target
-        console.log(value, name)
         setFormData({ ...formData, [name]: value })
-        console.log(formData, "hoooi")
     }
     const handleFile = (e) => {
 
@@ -44,28 +40,14 @@ function New() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // toast.success('Hotel added!', {
-        //     position: "top-right",
-        //     autoClose: 5000,
-        //     hideProgressBar: false,
-        //     closeOnClick: true,
-        //     pauseOnHover: true,
-        //     draggable: true,
-        //     progress: undefined,
-        //     theme: "colored",
-        // });
 
         const result = new FormData()
         let photos = []
         for (let i = 0; i < image.length; i++) {
-            console.log(image[i])
             result.append('file', image[i]);
             result.append('upload_preset', "booknearme");
-            console.log(result);
             const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudAPI}/image/upload`, result)
-            console.log(response, "haid amir")
             const imageUrl = response.data.url
-            console.log(imageUrl,)
             photos.push(imageUrl)
         }
         if (photos.length) {
@@ -74,14 +56,11 @@ function New() {
             //     photos
             // }
             formData.photos = photos
-            console.log(formData, "hai hotel full datas")
             const response = await addHotel(formData)
             if (response.data.message) {
                 toast.success(response.data.message)
             }
-
         }
-
     }
     const removeImage = (i) => {
         setImage(image.filter((x) => x.name !== i));

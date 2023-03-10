@@ -14,11 +14,9 @@ const CityTable = () => {
     const myFuc = async () => {
         const  {data} = await getCity()
         setCity(data.city)
-        console.log(data, "datatable")
 
     }
 
-    console.log(city,"eth city addn")
   return (
     <>
       <div className="container">

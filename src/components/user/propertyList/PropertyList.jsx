@@ -26,7 +26,6 @@ function PropertyList() {
 
     const [data,setData]= useState([])
     // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels`)
-    console.log(data,"chepest priceeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     // const newfunction = (id) => {
 
     //     navigate('/newhotel', { state: { id } })
@@ -44,7 +43,6 @@ function PropertyList() {
     useEffect(() => {
     const getHot=async()=>{
         const {data}=await getHoteltype()
-        console.log(data,'dataaaaaaaaadfFFFFFFFFFFFFFFF');
         setData(data)
     }
     getHot()

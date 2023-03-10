@@ -12,23 +12,8 @@ function Featured() {
   const [city, setCity] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
-//   const [dates, setDates] = useState([
-//     {
-//         startDate: new Date(),
-//         endDate: new Date(),
-//         key: 'selection',
-//     }
-// ]);
-// const [options, setOptions] = useState({
-//   adult: 1,
-//   children: 0,
-//   room: 1
-// })
-  // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/countByCity?cities=dubai,munnar,london,maldives`)
-  // console.log("masood kooi", data, loading, error)
 
   const searchHotel = (name) => {
-    console.log(name);
    
     dispatch(searchbarAction.newSearch({ city: name }))
     navigate('/hotels', { state: { destination: name} })
@@ -39,7 +24,6 @@ function Featured() {
     const fechData = async () => {
       const { data } = await getCountByCity()
       setCity(data)
-      console.log(data, "eth fechData 243u899999999999999999999999999999999999999999")
     }
     fechData()
   }, [])

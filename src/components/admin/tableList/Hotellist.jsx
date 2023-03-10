@@ -20,11 +20,9 @@ function Hotellist({ hotel }) {
     }
 
     const addRoom = (e) => {
-        console.log(e, "userid and hotel id")
         navigate(`/admin/addRoom/${e}`)
     }
     const deleteRoombyid =async(id)=>{
-        console.log(id,"it is hotel id")
         const response = await deleteHotel(id)
     }
     return (

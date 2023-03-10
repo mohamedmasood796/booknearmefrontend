@@ -11,7 +11,6 @@ const Authuser=createSlice({
     reducers:{
         loginSuccess(state,actions){
              const newItem=actions.payload;
-             console.log("redux console",newItem)
              state.user=newItem.username
             //  state.userToken=newItem.token
              state.loading=false

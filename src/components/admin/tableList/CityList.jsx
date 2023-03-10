@@ -2,10 +2,8 @@ import React from 'react'
 
 
 const CityList = ({citydata}) => {
-    console.log(citydata,"it is city data table")
 
     const deleteRoomById=async(id)=>{
-        console.log(id,"hai this is room id thats all ")
         // const response = await deleteRoom()
     }
 

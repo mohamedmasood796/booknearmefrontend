@@ -12,8 +12,6 @@ const Profile = () => {
     const [data, setData] = useState([])
     const [user, setUser] = useState()
 
-    console.log(data, "momomommmommomomommm")
-    console.log(user, "hohohohohohohhoohohohoho")
 
     const bookings = async () => {
         if (profile) {
@@ -21,7 +19,6 @@ const Profile = () => {
             setUser(user.data)
         } else if (!profile) {
             const { data } = await getBookings()
-            console.log(data, "eth or data")
             setData(data)
 
         }
@@ -62,9 +59,7 @@ const Profile = () => {
       };
 
       const cancleOrder = async (id) => {
-        console.log(id)
         const data = await cancleBooking(id)
-        console.log(data)
       }
 
 

@@ -19,33 +19,24 @@ const City = () => {
         //file upload to cloudnery
         const cloudAPI = process.env.REACT_APP_CLOUD_NAME
         const result = new FormData()
-        console.log(result, "it is goggogo")
 
         result.append('file', selectedFile);
         result.append('upload_preset', "booknearme");
-        console.log(result, "lit is result");
         const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudAPI}/image/upload`, result)
-        console.log(response, "haid amir")
         const imageUrl = response.data.secure_url
-        console.log(imageUrl, "it is image url")
 
 
         const data = {
             imageUrl,
             name
         }
-        console.log(data, "it si full data like url sn dndamd")
         const cityadded = await addCity(data)
-        console.log(cityadded, "hai respose")
 
         if (cityadded.data.status) {
             toast.success(cityadded.data.message)
         } else {
             toast.error(cityadded.data.message)
         }
-
-
-
     }
 
 

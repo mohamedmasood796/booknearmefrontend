@@ -1,77 +1,3 @@
-// // import React from 'react'
-// // import './login.css'
-
-// // function Login() {
-// //   return (
-// //     <div>
-// //       <form className='box' method='post' action="">
-// //             <h1>Login</h1>
-// //             <input type="text" className='loginname' name='name' placeholder='Username' />       
-// //             <input type="password" name='password' placeholder='Password' />       
-// //             <input type="submit" name='' value="Login" />       
-// //         </form>
-// //     </div>
-// //   )
-// // }
-
-// // export default Login
-//==============================================================================================================
-
-// import React, { useState } from 'react'
-// import {useSelector} from "react-redux"
-// import { userActions } from '../../../redux/Authuser'
-// import {useDispatch} from "react-redux"
-
-// import './login.css'
-// import axios from 'axios'
-
-// function Login() {
-//   const dispatch=useDispatch()
-//   const [credentials,setCredentials]=useState({
-//     username:undefined,
-//     password:undefined
-//   })
-
-
-//   const Authdata=useSelector((state)=>state.userAuth)
-//   console.log("authhhhhhhhhhh",Authdata)
-
-//   const handleChange=(e)=>{
-//     setCredentials((prev)=>({...prev,[e.target.id]:e.target.value}))
-//   }
-
-//   const handleClick=async e=>{
-//     e.preventDefault()
-//     // dispatch(userActions.loginStart())
-
-
-//     try{
-//       const res=await axios.get('http://localhost:5000/api/auth/login',credentials)
-//       console.log('rrrrrrrrrrressssssssssssssss',res)
-//       dispatch(userActions.loginSuccess({actions:res.data}))
-//     }catch(err){
-//       dispatch(userActions.loginFailure({actions:err}))
-//     }
-
-//   }
-
-
-//   return (
-//     <div className='login'>
-//       <div className="lContainer">
-// <input type="text" placeholder='username' id='username' onChange={handleChange} className="lInput" />
-// <input type="password" placeholder='password' id='password' onChange={handleChange} className="lInput" />
-// <button onClick={handleClick} className="lButton">Login</button>
-//         {/* {error && <span>{error.message}</span>} */}
-//       </div>
-
-//     </div>
-//   )
-// }
-
-// export default Login
-
-//==============================================================================================================================
 
 import React from 'react'
 import { useState } from 'react'
@@ -100,28 +26,20 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        console.log("hai hamras")
         setSubmit(true)
         if (username && password) {
             const { data } = await loginUser({ username, password })
-            console.log(data, 998)
             if (data.status) {
-                console.log("first");
-                console.log(data)
                 dispatch(loginSuccess(data))
-                console.log("seo");
                 localStorage.setItem("user", data.username)
                 localStorage.setItem("jwt", data.token)
 
                 navigate('/')
             } else {
-                console.log(data.message, " 099");
                 setErrMess(data.message)
-                console.log("error")
             }
         }
     }
-    console.log(errMess, 'jjjj');
 
     return (
         <div className="login">

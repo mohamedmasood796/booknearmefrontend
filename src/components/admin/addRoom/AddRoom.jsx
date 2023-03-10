@@ -22,7 +22,6 @@ function AddRoom() {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData, "formdataan")
         setFormData(formData)
         
 
@@ -32,23 +31,17 @@ function AddRoom() {
 
         let photos = []
         for (let i = 0; i < image.length; i++) {
-            console.log(image[i])
             result.append('file', image[i]);
             result.append('upload_preset', "booknearme");
-            console.log(result);
             const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudAPI}/image/upload`, result)
-            console.log(response, "haid amir")
             const imageUrl = response.data.url
-            console.log(imageUrl,)
             photos.push(imageUrl)
         }
         if (photos.length) {
 
             formData.photos = photos
-            console.log(formData, "hai hotel full datas")
             // const response = await addHotel(formData)
             const response = await addRoom(formData, params.id)
-            console.log(response,"hai resposeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
 
             if(response.data.message){
                 toast.success(response.data.message)

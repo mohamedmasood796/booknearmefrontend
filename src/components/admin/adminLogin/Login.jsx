@@ -29,24 +29,17 @@ function Login() {
         setSubmit(true)
         if (username && password) {
             const { data } = await loginAdmin({ email:username, password })
-            console.log(data, 998)
             if (data.status) {
-                console.log("first");
-                console.log(data)
                 dispatch(loginSuccess(data))
-                console.log("seo");
                 // localStorage.setItem("user", data)
                 localStorage.setItem("jwtadmin", data.token)
 
                 navigate('/admin')
             } else {
-                console.log(data.message, " 099");
                 setErrMess(data.message)
-                console.log("error")
             }
         }
     }
-    console.log(errMess, 'jjjj');
 
     return (
         <div className="login">

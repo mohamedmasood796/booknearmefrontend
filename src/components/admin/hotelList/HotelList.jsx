@@ -14,7 +14,6 @@ function HotelList() {
     const myFuc = async () => {
         const { data } = await getAllHotelAPI()
         setHotelData(data)
-        console.log(data, "datatableT T")
 
     }
     useEffect(() => {

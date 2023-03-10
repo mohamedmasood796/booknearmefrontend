@@ -11,7 +11,6 @@ const BookingMgt = () => {
     const myFuc = async () => {
         const { data } = await bookingDetails()
         setBookingData(data)
-        console.log(data, "datatableT T")
 
     }
     useEffect(() => {

@@ -7,7 +7,6 @@ function FeaturedProperts() {
     const [data,setData]= useState([])
     const navigate = useNavigate()
     // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels`)
-    console.log(data,"PPPPPPPPPPPPPPchepest priceeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     // const newfunction = (id) => {
 
     //     navigate('/newhotel', { state: { id } })
@@ -25,7 +24,6 @@ function FeaturedProperts() {
     useEffect(() => {
     const getHot=async()=>{
         const {data}=await getHotel()
-        console.log(data,'dataaaaaaaaadf');
         setData(data)
     }
     getHot()
