@@ -38,7 +38,6 @@ function User() {
 
         <Route exact path='/' element={
           <UserPublicRoute>
-
             <Home />
           </UserPublicRoute>
 
@@ -46,17 +45,15 @@ function User() {
 
         <Route exact path='/hotels' element={
           <UserPublicRoute>
-
             <List />
           </UserPublicRoute>
 
         } />
 
         <Route exact path='/newhotel' element={
-           <UserProtectedRoute>
-
+           <UserPublicRoute>
             <Hotel />
-           </UserProtectedRoute>
+           </UserPublicRoute>
 
         } />
 
@@ -69,7 +66,6 @@ function User() {
 
         <Route exact path="/success" element={
           <UserProtectedRoute>
-
             <Success />
           </UserProtectedRoute>
 
@@ -77,7 +73,6 @@ function User() {
 
         <Route exact path="/cancel" element={
           <UserProtectedRoute>
-
             <Cancel />
           </UserProtectedRoute>
 

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { getBookings, getUser } from '../../../api/authReq'
 import { useNavigate } from 'react-router-dom'
 import moment from "moment";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { cancleBooking } from '../../../api/adminReq';
 
 const Profile = () => {
     const [profile, setProfile] = useState(true)
@@ -41,6 +44,46 @@ const Profile = () => {
         navigate('/')
         
     }
+
+    const submit = (userId) => {
+        confirmAlert({
+          title: 'Confirm to ',
+          message: 'Are you want to logout ?',
+          buttons: [
+            { 
+              label: 'Yes',
+              onClick: () => { logOut()}
+            },
+            {
+              label: 'No',
+            }
+          ]
+        });
+      };
+
+      const cancleOrder = async (id) => {
+        console.log(id)
+        const data = await cancleBooking(id)
+        console.log(data)
+      }
+
+
+      const chageStatus = (id) => {
+        confirmAlert({
+          title: 'Confirm to ',
+          message: 'Are you want to cancel Order ?',
+          buttons: [
+            { 
+              label: 'Yes',
+              onClick: () => { cancleOrder(id)}
+            },
+            {
+              label: 'No',
+            }
+          ]
+        });
+      };
+
 
     return (
         <>
@@ -82,7 +125,7 @@ const Profile = () => {
                         {/* <p className="text-gray-600 text-center font-light lg:px-16">An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p> */}
                         <button
                             className="text-white py-2 px-4  font-medium mt-4 w-32"
-                            onClick={logOut}
+                            onClick={submit}
                         >
                             LogOut
                         </button>
@@ -140,7 +183,7 @@ const Profile = () => {
                                             }
 
                                             <div className='p-4'>
-                                                <button className='bg-transparent bg-red-500  font-semibold text-white py-2 px-4 border border-red-500 hover:border-transparent rounded'>Cancel</button>
+                                                <button onClick={()=>chageStatus(booking._id)} className='bg-transparent bg-red-500  font-semibold text-white py-2 px-4 border border-red-500 hover:border-transparent rounded'>Cancel</button>
                                             </div>
                                         </div>
                                     </div>

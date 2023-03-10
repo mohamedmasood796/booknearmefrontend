@@ -18,6 +18,7 @@ import { getRoomDataById } from "../../../api/authReq";
 import DisplayReview from "../../user/displayReview/DisplayReview.jsx";
 import HotelRoom from "./HotelRoom.jsx";
 
+
 // function Banner({ checkInglo }) {//this is importent
 function Banner({ checkInglo }) {
 

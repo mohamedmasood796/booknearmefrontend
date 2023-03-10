@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import { loadStripe } from "@stripe/stripe-js";
 import { differenceInCalendarDays } from "date-fns";
 import { availability, booking } from '../../../api/authReq';
-
+import { useNavigate } from 'react-router-dom'
 const HotelRoom = ({ room }) => {
 
+    const navigate = useNavigate();
     const [selectedRoom, setSelectedRoom] = useState()
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [status, setStatus] = useState(null);
     const [roomId, setRoomId] = useState(room.roomId._id)
-    console.log(roomId, "this is roo00000000000000000000000000000000000000")
-    console.log(room, "this iWWWWWWs roo00000000000000000000000000000000000000")
 
     const getDatesInRange = (startDate, endDate) => {
 
@@ -31,48 +30,16 @@ const HotelRoom = ({ room }) => {
     };
 
     async function handleClick(oneroom) {
-        // const { data } = await availability({ alldates, roomId })
-        const { data } = await availability({ alldates, roomId })
-        console.log(data, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        setStatus(data.status)
-        console.log(oneroom, "><<<<<<<<<<<<<<<<<<<<<<<<<<<,")
+        if (localStorage.getItem("jwt")) {
+            const { data } = await availability({ alldates, roomId })
+            setStatus(data.status)
 
-        // if (!status?.status) {
-
-        //     paymentFunction(oneroom)
-            // setSelectedRoom(oneroom._id)
-
-            // const newOrder = {
-            //     oneroom,
-            //     alldates,
-            //     checkIn,
-            //     checkOut,
-            //     numberOfNights
-            // }
-
-            // console.log(oneroom, 'onerooomMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM');
-            // // console.log(newOrder, 'chekcingooo))))))))))))))))))))))))))00000000000000000000000');
-            // console.log(newOrder, 'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQnew ordererrrrersjdhhkfskjdfhajkhdfjkahkfhakjdhmashood kuattal');
-
-            // const stripe = await loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
-            // const body = { newOrder };
-            // console.log(body, "this is bbbbbbbbbbbbbbbbBbbbbbbbbbbbBBBBBBBBBBBB")
-            // const headers = {
-            //     "Content-Type": "application/json",
-            // };
-
-            // const { data } = await booking(
-            //     body
-            // );
-            // if (data?.url) {
-            //     window.location.href = data.url
-            // }
-            //////////////////////////////////////////////booking check work
-        // }
-
+        } else {
+            navigate('/login')
+        }
     }
 
-    const paymentFunction=async(oneroom)=>{
+    const paymentFunction = async (oneroom) => {
         const newOrder = {
             oneroom,
             alldates,
@@ -143,7 +110,7 @@ const HotelRoom = ({ room }) => {
                                     onChange={ev => {
                                         setCheckIn(ev.target.value)
                                         setStatus(null)
-                                    }}required />
+                                    }} required />
                             </div>
                             <div className="py-3 px-4 border-l">
                                 <label>Check out:</label>
@@ -151,25 +118,25 @@ const HotelRoom = ({ room }) => {
                                     onChange={ev => {
                                         setCheckOut(ev.target.value)
                                         setStatus(null)
-                                        
-                                    }}required />
+
+                                    }} required />
                             </div>
                         </div>
 
-                       { <div className="items-center w-full px-3 flex justify-end " >
+                        {<div className="items-center w-full px-3 flex justify-end " >
                             <button onClick={() => handleClick(room.roomId)} className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded">Check Availability </button>
                         </div>}
 
 
                         {status ?
-                            
+
                             (<div className="items-center w-full px-3 flex justify-end ">
-                            <button onClick={() => paymentFunction(room.roomId)} className="border-none px-2 py-2 bg-[#25d63d] text-white cursor-pointer rounded">Book Now </button>
-                        </div>) 
-                             : status===false ? 
-                            (<div className="items-center w-full px-3 flex justify-end ">
-                                <button className="border-none px-2 py-2 bg-[#ff0202] text-white cursor-pointer rounded">This Room already Booked</button>
-                            </div>) : <></> 
+                                <button onClick={() => paymentFunction(room.roomId)} className="border-none px-2 py-2 bg-[#25d63d] text-white cursor-pointer rounded">Book Now </button>
+                            </div>)
+                            : status === false ?
+                                (<div className="items-center w-full px-3 flex justify-end ">
+                                    <button className="border-none px-2 py-2 bg-[#ff0202] text-white cursor-pointer rounded">This Room already Booked</button>
+                                </div>) : <></>
                         }
 
                         {/* if (condition) {
