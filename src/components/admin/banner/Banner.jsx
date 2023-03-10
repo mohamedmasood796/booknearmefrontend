@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { useParams, useNavigate } from 'react-router-dom';
-import { booking, getbookingsDates, getReview, submintId, submintReview } from "../../../api/authReq.js"
+import { booking, checkHotel, getbookingsDates, getReview, submintId, submintReview } from "../../../api/authReq.js"
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import "./review.css"
@@ -17,7 +17,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getRoomDataById } from "../../../api/authReq";
 import DisplayReview from "../../user/displayReview/DisplayReview.jsx";
 import HotelRoom from "./HotelRoom.jsx";
-
+import toast from 'react-hot-toast';
 
 // function Banner({ checkInglo }) {//this is importent
 function Banner({ checkInglo }) {
@@ -84,25 +84,51 @@ console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
         setBookingId(e.target.value)
     }
 
-    const handleSubmit = async () => {
-        const returndata = await submintId({ bookingId })
-        setStatus(returndata.data.bookingid)
-        setOpen(false)
-        // error()
-    }
+    // const handleSubmit = async () => {
+    //     const returndata = await submintId({ bookingId })
+    //     setStatus(returndata.data.bookingid)
+    //     setOpen(false)
+    //     // error()
+    // }
 
 
-    const handleComment = (e) => {
-        setReview(e.target.value)
-    }
-    const handleReviewSubmit = async () => {
-        const reviewData = await submintReview({ id, number, review })
-        if (reviewData.data.status) {
-            setStatus(false)
+    // const handleComment = (e) => {
+    //     setReview(e.target.value)
+    // }
+    // const handleReviewSubmit = async () => {
+    //     const reviewData = await submintReview({ id, number, review })
+    //     if (reviewData.data.status) {
+    //         setStatus(false)
+    //     }
+    // }
+
+    const checkHotelId=async()=>{
+        const {data}=await checkHotel({hotelId})
+        console.log(data,":::::::::::")
+        if(data.status){
+            setOpen(true)
+            console.log("))))))))))))))))))))))))")
+            const {data} = await submintReview({ hotelId, review })
+            if (data.status) {
+                setStatus(false)
+            }
+
+        }else{
+            toast.success(data.message)
         }
     }
 
 
+    const handleComment = (e) => {
+        console.log(e.target.value)
+        setReview(e.target.value)
+    }
+    const handleReviewSubmit = async () => {
+        const reviewData = await submintReview({ hotelId, review })
+        if (reviewData.data.status) {
+            setOpen(false)
+        }
+    }
 
     return (
         <>
@@ -113,10 +139,15 @@ console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
                     ))}
                 </div>
 
-                <div className="items-center  container w-80 px-3 flex justify-end  md:mx-20">
+                {/* <div className="items-center  container w-80 px-3 flex justify-end  md:mx-20">
                     <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={() => setOpen(true)}>Add Review</button>
-                </div>
+                </div> */}
                 
+
+                <div className="items-center  container w-80 px-3 flex justify-end  md:mx-20">
+                    <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={checkHotelId}>Add Review</button>
+                </div>
+
                 <div className="flex gap-2 container overflow-x-scroll md:mx-20 mt-5">
                     {comment.map((item) => (
                         <DisplayReview item={item} />
@@ -129,7 +160,7 @@ console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
 
 
 
-            {open && <div className="App">
+            {/* {open && <div className="App">
                 <div className="popup">
                     <div className="content ">
                         <div className="flex">
@@ -142,22 +173,20 @@ console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
                         <button onClick={handleSubmit}>submit</button>
                     </div>
                 </div>
-            </div>}
+            </div>} */}
 
 
 
 
-            {status && <div className="App">
+            {/* {status && <div className="App">
                 <div className="popup">
-                    <div className="content ">
+                    <div className="content "> */}
 
                         {/* <div className="product">
                             <img style={{ width: 60, heigh: 60, objectFit: 'cover' }} src="" alt="image" />
                             <h1>hai Hotel</h1> */}
                         {/* </div> */}
-                        <div className='flex mb-3 mt-3 justify-between '>
-                            {/* <h1>{handleText()}</h1> */}
-
+                        {/* <div className='flex mb-3 mt-3 justify-between '> */}
 
 
                             {/* star raiting */}
@@ -172,7 +201,40 @@ console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
                                 ))}
                             </div> */}
 
-                            <h1 className="cursor-pointer " onClick={() => { setStatus(false) }}>X</h1>
+                            {/* <h1 className="cursor-pointer " onClick={() => { setStatus(false) }}>X</h1>
+                        </div>
+                        <textarea className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="comment here... " onChange={handleComment}></textarea >
+                        <button onClick={handleReviewSubmit}>submit</button>
+                    </div>
+                </div>
+            </div>} */}
+
+
+
+            {open && <div className="App">
+                <div className="popup">
+                    <div className="content ">
+
+                        {/* <div className="product">
+                            <img style={{ width: 60, heigh: 60, objectFit: 'cover' }} src="" alt="image" />
+                            <h1>hai Hotel</h1> */}
+                        {/* </div> */}
+                        <div className='flex mb-3 mt-3 justify-between '>
+
+
+                            {/* star raiting */}
+                            {/* <div className=" flex">
+
+                                {Array(5).fill().map((_, index) => (
+                                    number >= index + 1 ? (
+                                        <AiFillStar style={{ color: "orange" }} onClick={() => setNumber(index + 1)} />
+                                    ) : (
+                                        <AiOutlineStar style={{ color: "orange" }} onClick={() => setNumber(index + 1)} />
+                                    )
+                                ))}
+                            </div> */}
+
+                            <h1 className="cursor-pointer " onClick={() => setOpen(false)}>X</h1>
                         </div>
                         <textarea className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="comment here... " onChange={handleComment}></textarea >
                         <button onClick={handleReviewSubmit}>submit</button>

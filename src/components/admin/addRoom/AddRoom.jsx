@@ -44,7 +44,7 @@ function AddRoom() {
             const response = await addRoom(formData, params.id)
 
             if(response.data.message){
-                toast.success(response.data.message)
+                toast.error(response.data.message)
             }
 
         }
