@@ -20,4 +20,7 @@ export const paymentChart = () => API.get('/admin/paymentChart')
 export const bookingChart = () => API.get('/admin/bookingChart')
 export const bookingDetails = () => API.get('/admin/bookingDetails')
 export const cancleBooking = (id) => API.get(`/admin/cancleBooking/${id}`)
+export const getHotel=(id)=>API.get(`hotels/find/${id}`)
+export const updateHotel=(id,hoteldata)=>API.post(`hotels/updateHotel`,id,hoteldata)
+
 

@@ -10,6 +10,7 @@ import AdminLogin from '../page/adminPages/AdminLogin'
 import BookingMgtPage from '../page/adminPages/BookingMgtPage'
 import HotelsPage from '../page/adminPages/HotelsPage'
 import User from '../page/adminPages/User'
+import EditHotel from '../components/admin/editHotel/EditHotel'
 
 function Admin() {
     return (
@@ -64,6 +65,14 @@ function Admin() {
                     </AdminProtectedRouter>
                 } />
                 
+                <Route exact path='/editHotel/:id' element={
+                    <AdminProtectedRouter>
+                        <EditHotel />
+                    </AdminProtectedRouter>
+                } />
+
+
+
             </Routes>
         </>
     )

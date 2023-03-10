@@ -14,6 +14,11 @@ function Hotellist({ hotel }) {
     //     setIsBlock(false)
     //     await blockUser({ Status: false,e});
     // }
+
+    const editHotel=(id)=>{
+        navigate(`/admin/editHotel/${id}`)
+    }
+
     const addRoom = (e) => {
         console.log(e, "userid and hotel id")
         navigate(`/admin/addRoom/${e}`)
@@ -31,14 +36,17 @@ function Hotellist({ hotel }) {
                 <div className="hotelcol4 col col-3" data-label="Amount">{hotel.desc}</div>
                 <div className="hotelcol5 col col-3" data-label="Amount">{hotel.cheapestPrice}</div>
 
-<div className="p-3 items-center">
+                <div className="p-3 items-center">
+                    <div className="h-10 w-36 hotelcol6 editButton " onClick={() => editHotel(hotel._id)} >Edit Hotel</div>
+                </div>
 
-                <div className="h-10 w-36 hotelcol6 unblockButton" onClick={() => addRoom(hotel._id)} >Add Room</div>
-</div>
-<div className="p-3">
-    
-                <div className="h-10  blockButton" onClick={()=>deleteRoombyid(hotel._id)} >Delete</div>
-    </div>
+                <div className="p-3 items-center">
+                    <div className="h-10 w-36 hotelcol6 unblockButton" onClick={() => addRoom(hotel._id)} >Add Room</div>
+                </div>
+
+                <div className="p-3">
+                    <div className="h-10  blockButton" onClick={()=>deleteRoombyid(hotel._id)} >Delete</div>
+                </div>
 
             </li>
         </div>
