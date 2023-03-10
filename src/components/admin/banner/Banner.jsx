@@ -28,6 +28,7 @@ function Banner({ checkInglo }) {
     const id = location?.state?.id
     let params = useParams()
     // export default function Gridcards({ hotel }) {
+    const [hotelId,setHotelId]=useState(id)
     const [room, setRoom] = useState([]);
     const [open, setOpen] = useState(false)
     const [reviewopen, setReviewOpen] = useState(false)
@@ -41,7 +42,8 @@ function Banner({ checkInglo }) {
     const [disabledButton, setDisabledButton] = useState(false)
 
     // const { checkIn, checkOut, numberOfGuests, name, phone, numberOfNights, roomId, availableStatus,alldates } = checkInglo
-
+console.log(data,"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
     useEffect(() => {
     }, [checkInglo])
 
@@ -107,13 +109,14 @@ function Banner({ checkInglo }) {
             <div className=" w-full flex flex-col items-center justify-center ">
                 <div className=" items-start  w-10/12  ">
                     {room?.map((room) => (
-                        <HotelRoom room={room}/>
+                        <HotelRoom room={room} hotelId={hotelId}/>
                     ))}
                 </div>
 
                 <div className="items-center  container w-80 px-3 flex justify-end  md:mx-20">
                     <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={() => setOpen(true)}>Add Review</button>
                 </div>
+                
                 <div className="flex gap-2 container overflow-x-scroll md:mx-20 mt-5">
                     {comment.map((item) => (
                         <DisplayReview item={item} />
@@ -154,7 +157,11 @@ function Banner({ checkInglo }) {
                         {/* </div> */}
                         <div className='flex mb-3 mt-3 justify-between '>
                             {/* <h1>{handleText()}</h1> */}
-                            <div className=" flex">
+
+
+
+                            {/* star raiting */}
+                            {/* <div className=" flex">
 
                                 {Array(5).fill().map((_, index) => (
                                     number >= index + 1 ? (
@@ -163,7 +170,7 @@ function Banner({ checkInglo }) {
                                         <AiOutlineStar style={{ color: "orange" }} onClick={() => setNumber(index + 1)} />
                                     )
                                 ))}
-                            </div>
+                            </div> */}
 
                             <h1 className="cursor-pointer " onClick={() => { setStatus(false) }}>X</h1>
                         </div>

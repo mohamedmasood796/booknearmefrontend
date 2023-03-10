@@ -3,7 +3,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { differenceInCalendarDays } from "date-fns";
 import { availability, booking } from '../../../api/authReq';
 import { useNavigate } from 'react-router-dom'
-const HotelRoom = ({ room }) => {
+const HotelRoom = ({ room ,hotelId}) => {
+    console.log(hotelId,"it is last page ")
 
     const navigate = useNavigate();
     const [selectedRoom, setSelectedRoom] = useState()
@@ -45,7 +46,8 @@ const HotelRoom = ({ room }) => {
             alldates,
             checkIn,
             checkOut,
-            numberOfNights
+            numberOfNights,
+            hotelId
         }
 
 
@@ -133,11 +135,6 @@ const HotelRoom = ({ room }) => {
                                 </div>) : <></>
                         }
 
-                        {/* if (condition) {
-                            
-                        }else if (condition) {
-                            
-                        }else */}
                     </div>
 
                 </div>
