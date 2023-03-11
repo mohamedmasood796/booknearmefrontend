@@ -43,87 +43,18 @@ function HotelPage({ setCheckInglo }) {
     const [availableStatus, setAvailableStatus] = useState({});
     const [data, setData] = useState([]);
 
-
-    let numberOfNights = 0;
-    if (checkIn && checkOut) {
-        numberOfNights = differenceInCalendarDays(new Date(checkOut), new Date(checkIn));
-    }
-
-
-    ///////////////////////////////////////start form/////////////////////////////////////////
-
-    const getDatesInRange = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-
-        const date = new Date(start.getTime());
-
-        const dates = [];
-
-        while (date <= end) {
-            dates.push(new Date(date).getTime());
-            date.setDate(date.getDate() + 1);
-        }
-
-        return dates;
-    };
-
-    const alldates = getDatesInRange(checkIn, checkOut)
-
-
-    //////////////////////////////////////end here///////////////////////////
-
-
-
-    // async function bookThisPlace() {
-    const bookThisPlace = async () => {
-        // const response = await axios.post('/bookings', {
-        //     checkIn, checkOut, numberOfGuests, name, phone,
-        //     // place: place._id,
-        //     // price: numberOfNights * place.price,
-        // });
-        // console.log(roomId)
-        // console.log(alldates)
-        // const { data } = await availability({ alldates, roomId })
-        setAvailableStatus(data)
-        // if (data.status) {
-
-            setCheckInglo({ checkIn, checkOut, numberOfGuests, name, phone, numberOfNights, roomId,availableStatus,alldates })
-        // }
-        // const bookingId = response.data._id;
-        // setRedirect(`/account/bookings/${bookingId}`);
-    }
-
-    // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/find/${id}`)
-
+   
 
     const fetchHotel = async () => {
-        const hoteldata = await getReview(id)
-        setData(hoteldata.data)
+    const {data} = await getReview(id)
+        setData(data)
+        console.log(data,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
 
     const user = useSelector((state) => state.userAuth)
     const navigate = useNavigate()
-    // const property = useSelector((state) => state.searchresult)
-
-    // console.log("dddddddddddddddddddddd77777777777777777777777777777777", property)
-
-
-    // const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-    // function dayDifference(date1, date2) {
-    //     console.log("kkkkkkkkkkkkkkkkk", date1, date2)
-    //     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
-    //     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY)
-    //     return diffDays;
-    // }
-
-    // if (dates.length>0) {
-
-    //     const days = dayDifference(dates?.endDate, dates?.startDate)
-    // }
-
-
+  
     const handleOpen = (i) => {
         setSlideNumber(i)
         setOpen(true)
@@ -138,15 +69,6 @@ function HotelPage({ setCheckInglo }) {
 
         }
         setSlideNumber(newSlideNumber)
-    }
-   
-
-    const handleClick = () => {
-        if (user) {
-            setOpenModal(true)
-        } else {
-            navigate("/login")
-        }
     }
 
     useEffect(() => {
@@ -195,7 +117,7 @@ function HotelPage({ setCheckInglo }) {
                             Excellent location - {data.distance}m from center
                         </span>
                         <span className="hotelPrceHighlight text-[#008009] font-medium">
-                            Book a stay over ${data.cheapestPrice} at this property and get a free airport taxi
+                            Book a stay over &#8377;{data.cheapestPrice} at this property and get a free airport taxi
                         </span>
                         <div className="hotelImages flex flex-wrap justify-between	">
                             {data.photos?.map((photos, i) => (

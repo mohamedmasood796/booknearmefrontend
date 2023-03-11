@@ -13,10 +13,10 @@ function Navbar() {
 
     const userlocal = localStorage.getItem("user")//local store 
     return (
-        <div className='navbar h-12  bg-[#003580] flex justify-center'>
+        <div className='navbar h-20  bg-[#003580] flex justify-center'>
             <div className="navContainer w-full container text-white flex items-center justify-between">
                 <Link to='/'>
-                    <div className="logo  font-medium">BookNearMe</div>
+                    <div className="logo text-xl font-medium">BookNearMe</div>
                 </Link>
                 <div className="navItems flex ">
                     {/* <button className="hidden md:block py-1 px-4 border-2 border-white text-white">List Your Property</button> */}

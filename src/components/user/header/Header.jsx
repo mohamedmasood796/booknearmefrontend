@@ -49,12 +49,15 @@ function Header({ type }) {
     }
 
     const handleSearch = () => {
-
+          if(!destination){
+            navigate('/hotels', { state: { destination:city[0].name, dates, options } })
+          }else{
+            navigate('/hotels', { state: { destination, dates, options } })
+          }
         // dispatch(searchbarAction.newSearch({ city: destination, options: options, dates: dates[0] }))  //update to redex
         // localStorage.setItem("city",destination)
         // localStorage.setItem("options",options)
         // localStorage.setItem("dates",dates[0])
-        navigate('/hotels', { state: { destination, dates, options } })
     }
     return (
         <div className='header bg-[#003580] text-white flex justify-center relative'>
@@ -110,7 +113,7 @@ function Header({ type }) {
                                     <ion-icon className='headerIcon' name="person-circle-outline"></ion-icon>
                                     <span onClick={() => setOpenOptions(!openOptions)} className='headerSearchText'> {`${options.adult}adult · ${options.children} children · ${options.room} room`} </span>
 
-                                    {openOptions && <div className="options">
+                                    {openOptions && <div className="options z-50">
                                         <div className="optionItem">
                                             <span className="optionText">Adult</span>
                                             <div className="optionCounter">

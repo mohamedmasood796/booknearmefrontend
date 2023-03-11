@@ -6,18 +6,22 @@ const DisplayReview = ({ item }) => {
     const [user, setUser] = useState()
     const [userFetch, setUserFetch] = useState()
     const [reviewItem, setReviewItem] = useState(item)
+    console.log(item,"it si items")
+    console.log(reviewItem," review item it si items")
 
 
-    const getuser = async () => {
+    // const getuser = async () => {
+    //     const userId = reviewItem.userId
+    //     const { data } = await getUserpro(userId)
 
-        const userId = reviewItem.userId
-        const { data } = await getUserpro(userId)
-        setUserFetch(data)
-    }
+    //     setUserFetch(data)
+    // }
+    // console.log( userFetch,"ai all")
+   
 
-    useEffect(() => {
-        getuser()
-    }, [])
+    // useEffect(() => {
+    //     getuser()
+    // }, [])
 
     return (
         <>
@@ -29,7 +33,7 @@ const DisplayReview = ({ item }) => {
                             <img src="https://i.imgur.com/hczKIze.jpg" width="" className='h-10' />
                         </div> */}
                         <div className='flex p-4 font-bold'>
-                        {userFetch?.username}
+                        {reviewItem?.userId?.username}
                         </div>
                     </div>
                     <div className=''>

@@ -20,15 +20,15 @@ import HotelRoom from "./HotelRoom.jsx";
 import toast from 'react-hot-toast';
 
 // function Banner({ checkInglo }) {//this is importent
-function Banner({ checkInglo }) {
+function Banner() {
 
     const navigate = useNavigate();
     const location = useLocation()
     const data = location?.state?.hotelId;
-    const id = location?.state?.id
     let params = useParams()
     // export default function Gridcards({ hotel }) {
-    const [hotelId,setHotelId]=useState(id)
+    const [id, setId] = useState(location?.state?.id)
+    const [hotelId, setHotelId] = useState(id)
     const [room, setRoom] = useState([]);
     const [open, setOpen] = useState(false)
     const [reviewopen, setReviewOpen] = useState(false)
@@ -42,43 +42,32 @@ function Banner({ checkInglo }) {
     const [disabledButton, setDisabledButton] = useState(false)
 
     // const { checkIn, checkOut, numberOfGuests, name, phone, numberOfNights, roomId, availableStatus,alldates } = checkInglo
-console.log(data,"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
-console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
     useEffect(() => {
-    }, [checkInglo])
 
+        // bookingdata()
+        getRooms(id);
+        // reviewfun()
+    }, [id])
 
     const getRooms = async (id) => {
 
         try {
             const { data } = await getRoomDataById(id);
+            console.log(data, "HHHHHHHHHHHHHHHHHHHHHH")
             setRoom(data.rooms);
+            setComment(data.review)
         } catch (err) {
         }
     };
-    useEffect(() => {
-        getRooms(location?.state?.id);
-    }, []);
 
 
 
-    const reviewfun = async () => {
-        const { data } = await getReview(id)
-        setComment(data.review)
-    }
-
-    const bookingdata = async () => {
-        const { data } = await getbookingsDates()
-        setBookedDates(data)
-    }
+    // const reviewfun = async () => {
+    //     const { data } = await getReview(id)
+    //     setComment(data.review)
+    // }
 
 
-    useEffect(() => {
-
-        // bookingdata()
-
-        reviewfun()
-    }, [])
 
     const handleChange = (e) => {
         setBookingId(e.target.value)
@@ -102,20 +91,26 @@ console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
     //     }
     // }
 
-    const checkHotelId=async()=>{
-        const {data}=await checkHotel({hotelId})
-        console.log(data,":::::::::::")
-        if(data.status){
-            setOpen(true)
-            console.log("))))))))))))))))))))))))")
-            const {data} = await submintReview({ hotelId, review })
+    const checkHotelId = async () => {
+        if (localStorage.getItem("jwt")) {
+            const { data } = await checkHotel({ hotelId })
+            console.log(data, "::::::::::::::::::::::")
             if (data.status) {
-                setStatus(false)
-            }
+                setOpen(true)
+                console.log("))))))))))))))))))))))))")
+                const { data } = await submintReview({ hotelId, review })
 
-        }else{
-            toast.success(data.message)
+                if (data.status) {
+                    setStatus(false)
+                }
+
+            } else {
+                toast.success(data.message)
+            }
+        } else {
+            navigate('/login')
         }
+
     }
 
 
@@ -130,26 +125,27 @@ console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
         }
     }
 
+
     return (
         <>
             <div className=" w-full flex flex-col items-center justify-center ">
                 <div className=" items-start  w-10/12  ">
-                    {room?.map((room) => (
-                        <HotelRoom room={room} hotelId={hotelId}/>
+                    {room.length > 0 && room?.map((room) => (
+                        <HotelRoom room={room} hotelId={hotelId} />
                     ))}
                 </div>
 
                 {/* <div className="items-center  container w-80 px-3 flex justify-end  md:mx-20">
                     <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={() => setOpen(true)}>Add Review</button>
                 </div> */}
-                
+
 
                 <div className="items-center  container w-80 px-3 flex justify-end  md:mx-20">
                     <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={checkHotelId}>Add Review</button>
                 </div>
 
                 <div className="flex gap-2 container overflow-x-scroll md:mx-20 mt-5">
-                    {comment.map((item) => (
+                    {comment.length > 0 && comment.map((item) => (
                         <DisplayReview item={item} />
                     ))}
                 </div>
@@ -182,15 +178,15 @@ console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
                 <div className="popup">
                     <div className="content "> */}
 
-                        {/* <div className="product">
+            {/* <div className="product">
                             <img style={{ width: 60, heigh: 60, objectFit: 'cover' }} src="" alt="image" />
                             <h1>hai Hotel</h1> */}
-                        {/* </div> */}
-                        {/* <div className='flex mb-3 mt-3 justify-between '> */}
+            {/* </div> */}
+            {/* <div className='flex mb-3 mt-3 justify-between '> */}
 
 
-                            {/* star raiting */}
-                            {/* <div className=" flex">
+            {/* star raiting */}
+            {/* <div className=" flex">
 
                                 {Array(5).fill().map((_, index) => (
                                     number >= index + 1 ? (
@@ -201,7 +197,7 @@ console.log(id,"KKKKKKKKKKKKKLLLLLLLLLLLL")
                                 ))}
                             </div> */}
 
-                            {/* <h1 className="cursor-pointer " onClick={() => { setStatus(false) }}>X</h1>
+            {/* <h1 className="cursor-pointer " onClick={() => { setStatus(false) }}>X</h1>
                         </div>
                         <textarea className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="comment here... " onChange={handleComment}></textarea >
                         <button onClick={handleReviewSubmit}>submit</button>

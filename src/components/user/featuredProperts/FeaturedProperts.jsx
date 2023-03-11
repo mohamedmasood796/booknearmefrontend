@@ -38,7 +38,7 @@ function FeaturedProperts() {
                         <img src={item?.photos[0]} alt="" className='fpImg w-80 ' />
                         <span className="fpName font-bold  ">{item?.name}</span>
                         <span className="fpCity font-light">{item?.city}</span>
-                        <span className="fpPrice font-medium">Starting from ${item?.cheapestPrice}</span>
+                        <span className="fpPrice font-medium">Starting from &#8377;{item?.cheapestPrice}</span>
                         {item?.rating && <div className="fpRating">
                             <button className='bg-[#003580] text-white p-1 font-semibold' >{item?.rating}</button>
                             <span>Excellent</span>
