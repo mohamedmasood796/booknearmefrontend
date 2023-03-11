@@ -3,6 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { differenceInCalendarDays } from "date-fns";
 import { availability, booking } from '../../../api/authReq';
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast';
 const HotelRoom = ({ room ,hotelId}) => {
     console.log(hotelId,"it is last page ")
 
@@ -14,6 +15,9 @@ const HotelRoom = ({ room ,hotelId}) => {
     const [roomId, setRoomId] = useState(room.roomId._id)
 
     const getDatesInRange = (startDate, endDate) => {
+
+
+
 
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -32,8 +36,12 @@ const HotelRoom = ({ room ,hotelId}) => {
 
     async function handleClick(oneroom) {
         if (localStorage.getItem("jwt")) {
-            const { data } = await availability({ alldates, roomId })
-            setStatus(data.status)
+            if(checkIn && checkOut ){
+                const { data } = await availability({ alldates, roomId })
+                setStatus(data.status)
+            }else{
+                toast.error("please select date")
+            }
 
         } else {
             navigate('/login')
@@ -64,8 +72,6 @@ const HotelRoom = ({ room ,hotelId}) => {
             window.location.href = data.url
         }
     }
-
-
 
 
 
