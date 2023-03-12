@@ -1,8 +1,10 @@
 import React from 'react'
 import { cancleBooking } from '../../../api/adminReq';
+import { useNavigate } from 'react-router-dom'
 
 const BookingList = ({ hotel }) => {
 
+  const navigate = useNavigate();
   function convertDate(date) {
     const newDate = new Date(date);
     const year = newDate.getFullYear();
@@ -14,6 +16,10 @@ const BookingList = ({ hotel }) => {
 
   const cancleOrder = async (id) => {
     const data = await cancleBooking(id)
+  }
+
+  const showBookings=(id)=>{
+    navigate(`/admin/showBookings/${id}`)
   }
 
   return (
@@ -35,6 +41,7 @@ const BookingList = ({ hotel }) => {
         </p> 
 
         }
+        <div onClick={() => showBookings(hotel._id)} className=" bg-transparent bg-blue-500  font-semibold text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded h-10"  >view</div>
 
         <div onClick={() => cancleOrder(hotel._id)} className=" bg-transparent bg-red-500  font-semibold text-white py-2 px-4 border border-red-500 hover:border-transparent rounded h-10"  >Cancel</div>
         {/* <div className="hotelcol6 unblockButton" onClick={() => addRoom(hotel._id)} >Add Room</div>

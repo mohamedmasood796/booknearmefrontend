@@ -11,6 +11,7 @@ import BookingMgtPage from '../page/adminPages/BookingMgtPage'
 import HotelsPage from '../page/adminPages/HotelsPage'
 import User from '../page/adminPages/User'
 import EditHotel from '../components/admin/editHotel/EditHotel'
+import ShowBookings from '../page/adminPages/ShowBookings'
 
 function Admin() {
     return (
@@ -68,6 +69,11 @@ function Admin() {
                 <Route exact path='/editHotel/:id' element={
                     <AdminProtectedRouter>
                         <EditHotel />
+                    </AdminProtectedRouter>
+                } />
+                <Route exact path='/showBookings/:id' element={
+                    <AdminProtectedRouter>
+                        <ShowBookings />
                     </AdminProtectedRouter>
                 } />
 

@@ -22,5 +22,7 @@ export const bookingDetails = () => API.get('/admin/bookingDetails')
 export const cancleBooking = (id) => API.get(`/admin/cancleBooking/${id}`)
 export const getHotel=(id)=>API.get(`hotels/find/${id}`)
 export const updateHotel=(id,hoteldata)=>API.post(`hotels/updateHotel`,id,hoteldata)
+export const getBookingData=(id)=>API.get(`admin/bookingdetailsadmin/${id}`)
+export const getFullData=(id)=>API.get(`admin/getFullData`)
 
 
