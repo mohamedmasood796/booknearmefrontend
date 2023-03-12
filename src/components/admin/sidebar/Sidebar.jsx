@@ -9,7 +9,8 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link } from "react-router-dom"
-
+import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 function Sidebar() {
     const navigate = useNavigate()
@@ -39,7 +40,7 @@ function Sidebar() {
                     </Link>
                     <Link to='/admin/BookingManagement' style={{ textDecoration: "none" }}>
                         <li>
-                            <PersonIcon className='icon' />
+                            <ManageSearchIcon className='icon' />
                             <span>Booking Management</span>
                         </li>
                     </Link>
@@ -51,7 +52,7 @@ function Sidebar() {
                     </Link>
                     <Link to='/admin/city' style={{ textDecoration: "none" }}>
                         <li>
-                            <PersonIcon className='icon' />
+                            <AddLocationAltIcon className='icon' />
                             <span>Add City</span>
                         </li>
                     </Link>

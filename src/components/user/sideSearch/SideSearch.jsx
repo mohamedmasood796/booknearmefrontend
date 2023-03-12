@@ -48,7 +48,7 @@ function SideSearch() {
     return (
         <div className='listContainer '>
             <div className='listWrapper md:flex md:gap-5'>
-                {dates?.length > 0 && <div className="listSearch md:sticky md:top-5">
+                {/* {dates?.length > 0 && <div className="listSearch md:sticky md:top-5">
                     <h1 className="lsTitle ">Search</h1>
                     <div className="lsItem">
                         <label htmlFor="">Destination</label>
@@ -91,7 +91,7 @@ function SideSearch() {
                         </div>
                     </div>
                     <button onClick={handleClick}>Search</button>
-                </div>}
+                </div>} */}
                 <div className="listResult ">
 
                     {data.length > 0 && data?.map(item => (

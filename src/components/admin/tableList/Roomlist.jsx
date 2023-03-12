@@ -6,10 +6,12 @@ import { deleteRoom } from '../../../api/adminReq';
 function Roomlist({ room ,hotelid}) {
 
     const navigate = useNavigate();
+    console.log(room,hotelid,"its room")
     
   
     const deleteRoomById=async(id)=>{
         const response = await deleteRoom(id,hotelid)
+        console.log(response,"respons")
     }
     return (
         <div>

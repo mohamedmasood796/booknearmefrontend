@@ -7,11 +7,11 @@ function Navbar() {
   return (
     <div className='navbar'>
       <div className="wrapper">
-        <div className="search">
+        {/* <div className="search">
           <input type="text" placeholder="Search..." />
           <SearchRoundedIcon />
-        </div>
-        <div className="items">
+        </div> */}
+        {/* <div className="items">
           <div className="item">
             <NotificationsNoneRoundedIcon className='icon' />
             <div className="counter">1</div>
@@ -19,7 +19,7 @@ function Navbar() {
           <div className="item">
             <NotificationsNoneRoundedIcon  className='icon'/>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
