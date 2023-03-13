@@ -28,8 +28,9 @@ const BookingFullview = () => {
         <>
             <div className='pl-96 pr-96 '>
                 <div className=" max-w rounded overflow-hidden shadow-lg ">
-                    {/* <img className="w-full" src={bookingdata?.photos[0]} alt="Sunset in the mountains " /> */}
-
+                    {Object.keys(bookingdata).length > 0 &&
+                        <img className="w-full" src={bookingdata?.photos[0]} alt="Sunset in the mountains " />
+                    }
                     <div className="px-6 py-4">
                         <div className="font-bold text-3xl mb-2">{bookingdata?.title}</div>
                         <p className="text-gray-700 font-semibold text-base flex mb-6">Status:<p className=' text-base flex'> {bookingdata?.statusChange}</p> </p>
@@ -44,6 +45,7 @@ const BookingFullview = () => {
                             Hotel Details
                         </p>
                         <p className="text-gray-700 font-semibold text-base flex">Room  :<p className=' text-base flex'> {bookingdata?.title}</p> </p>
+                        <p className="text-gray-700 font-semibold text-base flex">Price  :<p className=' text-base flex'> {bookingdata?.price * bookingdata?.numberOfNights}</p> </p>
                         <p className="text-gray-700 0.. font-semibold text-base flex">Description:<p className=' text-base flex'> {bookingdata?.desc}</p> </p>
                         <p className="text-gray-700 0.. font-semibold text-base flex">checkIn:<p className=' text-base flex'> {convertDate(bookingdata?.checkIn)}</p> </p>
                         <p className="text-gray-700 0.. font-semibold text-base flex">checkOut:<p className=' text-base flex'> {convertDate(bookingdata?.checkOut)}</p> </p>

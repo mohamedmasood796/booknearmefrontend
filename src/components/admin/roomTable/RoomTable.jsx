@@ -13,7 +13,7 @@ import Roomlist from '../tableList/Roomlist';
 
 function RoomTable() {
 
-    const [roomData, setRoomData] = useState({})
+    const [roomData, setRoomData] = useState([])
     const {id} = useParams()
     const myFuc = async () => {
         const { data } = await getRoomAPI(id)
@@ -42,7 +42,7 @@ function RoomTable() {
                     </li>
 
 
-                    {roomData>0 && roomData.map((room) => (
+                    {roomData.length >0 && roomData.map((room) => (
                         <Roomlist room={room} hotelid={id}/>
                     ))}
 
