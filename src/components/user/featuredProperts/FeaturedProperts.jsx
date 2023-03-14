@@ -12,9 +12,15 @@ function FeaturedProperts() {
         navigate('/newhotel', { state: { id } })
     }
     useEffect(() => {
+
         const getHot = async () => {
-            const { data } = await getHotel()
-            setData(data)
+            try {
+                const { data } = await getHotel()
+                setData(data)
+
+            } catch (error) {
+                navigate("/newhot")
+            }
         }
         getHot()
     }, [])

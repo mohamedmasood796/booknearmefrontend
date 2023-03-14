@@ -6,15 +6,20 @@ import { getAllUserAPI, blockUser } from '../../../api/adminReq';
 
 import "./users.scss"
 import Userlist from '../tableList/Userlist';
+import { useNavigate } from 'react-router-dom';
 
 
 function Users() {
-
+const navigate=useNavigate()
     const [usersData, setUsersData] = useState([])
 
     const myFuc = async () => {
-        const { data } = await getAllUserAPI()
-        setUsersData(data)
+        try {
+            const { data } = await getAllUserAPI()
+            setUsersData(data)
+        } catch (error) {
+            navigate("/newhot")
+        }
 
     }
     useEffect(() => {

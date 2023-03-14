@@ -4,9 +4,10 @@ import useFetch from '../../../hooks/useFetch'
 import { useState } from 'react'
 import { useSelector } from "react-redux"
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function Reserve({ setOpen, hotelId }) {
-    
+    const navigate=useNavigate()
     const [roomId, setRoomId] = useState('')
     const [selectedRooms, setSelectedRooms] = useState([])
     const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels/room/${hotelId}`)
@@ -47,7 +48,7 @@ function Reserve({ setOpen, hotelId }) {
                 return res.data
             }))
         } catch (error) {
-
+            navigate("/newhot")
         }
     }
     return (

@@ -1,74 +1,77 @@
 import React from 'react'
 
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import { bookingChart } from '../../../api/adminReq';
+import { useNavigate } from 'react-router-dom';
 
 const Bookings = ({ postGraphCategories, postGraphData }) => {
+  const navigate=useNavigate()
 
-    useEffect(()=>{
-        const fetchData =async () => {
-          try {
-            
-            const {data}=await bookingChart()
-          
-  
-            setState(prevState=>(
-              {...prevState,options:{
-                ...prevState.options,
-                xaxis: {categories: data.months},},
-              
-              series:[
-                {
-                  name:'Monthly Booking',
-                  data:data.booking
-                }
-              ]
-            }
-            ))
-          } catch (error) {
-            console.error(error);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await bookingChart()
+        setState(prevState => (
+          {
+            ...prevState, options: {
+              ...prevState.options,
+              xaxis: { categories: data.months },
+            },
+
+            series: [
+              {
+                name: 'Monthly Booking',
+                data: data.booking
+              }
+            ]
           }
-          
-          // setMonth(data.months)
-          // setBookings(data.bookings)
-          
-        };
-        fetchData()
-      }, []);
+        ))
+      } catch (error) {
+        navigate('/newhot')
+      }
 
-    const [state, setState] = useState({
-        options: {
-            chart: {
-                id: "basic-bar",
-            },
-            xaxis: {
-                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-            },
-        },
-        series: [
-            {
-                name: "series-1",
-                data: [1991, 1992, 1993, 1994, 1995, 1996],
-            },
-        ],
-    });
-    return (
-        <>
-            <div className="flex flex-col w-full  content-center justify-center p-5 gap-y-5">
-                <h1 className="text-center text-2xl font-bold">Monthly Booking </h1>
-                <div className="mx-auto">
-                    <Chart
-                        options={state.options}
-                        series={state.series}
-                        type="area"
-                        width="600"
-                    />
-                </div>
-            </div>
-        </>
-    )
+      // setMonth(data.months)
+      // setBookings(data.bookings)
+
+    };
+
+
+    fetchData()
+  }, []);
+
+  const [state, setState] = useState({
+    options: {
+      chart: {
+        id: "basic-bar",
+      },
+      xaxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      },
+    },
+    series: [
+      {
+        name: "series-1",
+        data: [1991, 1992, 1993, 1994, 1995, 1996],
+      },
+    ],
+  });
+  return (
+    <>
+      <div className="flex flex-col w-full  content-center justify-center p-5 gap-y-5">
+        <h1 className="text-center text-2xl font-bold">Monthly Booking </h1>
+        <div className="mx-auto">
+          <Chart
+            options={state.options}
+            series={state.series}
+            type="area"
+            width="600"
+          />
+        </div>
+      </div>
+    </>
+  )
 }
 
 export default Bookings

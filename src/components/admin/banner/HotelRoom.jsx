@@ -4,8 +4,8 @@ import { differenceInCalendarDays } from "date-fns";
 import { availability, booking } from '../../../api/authReq';
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
-const HotelRoom = ({ room ,hotelId}) => {
-    console.log(hotelId,"it is last page ")
+const HotelRoom = ({ room, hotelId }) => {
+    console.log(hotelId, "it is last page ")
 
     const navigate = useNavigate();
     const [selectedRoom, setSelectedRoom] = useState()
@@ -15,10 +15,6 @@ const HotelRoom = ({ room ,hotelId}) => {
     const [roomId, setRoomId] = useState(room.roomId._id)
 
     const getDatesInRange = (startDate, endDate) => {
-
-
-
-
         const start = new Date(startDate);
         const end = new Date(endDate);
 
@@ -35,41 +31,48 @@ const HotelRoom = ({ room ,hotelId}) => {
     };
 
     async function handleClick(oneroom) {
-        if (localStorage.getItem("jwt")) {
-            if(checkIn && checkOut ){
-                const { data } = await availability({ alldates, roomId })
-                setStatus(data.status)
-            }else{
-                toast.error("please select date")
-            }
+        try {
+            if (localStorage.getItem("jwt")) {
+                if (checkIn && checkOut) {
+                    const { data } = await availability({ alldates, roomId })
+                    setStatus(data.status)
+                } else {
+                    toast.error("please select date")
+                }
 
-        } else {
-            navigate('/login')
+            } else {
+                navigate('/login')
+            }
+        } catch (error) {
+            navigate("/newhot")
         }
     }
 
     const paymentFunction = async (oneroom) => {
-        const newOrder = {
-            oneroom,
-            alldates,
-            checkIn,
-            checkOut,
-            numberOfNights,
-            hotelId
-        }
-
-
-        const stripe = await loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
-        const body = { newOrder };
-        const headers = {
-            "Content-Type": "application/json",
-        };
-
-        const { data } = await booking(
-            body
-        );
-        if (data?.url) {
-            window.location.href = data.url
+        try {
+            
+            const newOrder = {
+                oneroom,
+                alldates,
+                checkIn,
+                checkOut,
+                numberOfNights,
+                hotelId
+            }
+            const stripe = await loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
+            const body = { newOrder };
+            const headers = {
+                "Content-Type": "application/json",
+            };
+    
+            const { data } = await booking(
+                body
+            );
+            if (data?.url) {
+                window.location.href = data.url
+            }
+        } catch (error) {
+            navigate("/newhot")
         }
     }
 

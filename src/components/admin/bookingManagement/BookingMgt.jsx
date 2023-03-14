@@ -1,16 +1,21 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import BookingList from '../tableList/BookingList'
 import Navbar from '../navbar/Navbar'
 import { bookingDetails } from '../../../api/adminReq'
+import { useNavigate } from 'react-router-dom'
 
 const BookingMgt = () => {
-
+    const navigate=useNavigate()
     const [bookingData, setBookingData] = useState([])
 
     const myFuc = async () => {
-        const { data } = await bookingDetails()
-        setBookingData(data)
+        try {
+            const { data } = await bookingDetails()
+            setBookingData(data)
+        } catch (error) {
+            navigate("/newhot")
+        }
 
     }
     useEffect(() => {

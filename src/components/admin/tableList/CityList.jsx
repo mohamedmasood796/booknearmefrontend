@@ -2,11 +2,17 @@ import React from 'react'
 import { deleteCity, deleteRoom } from '../../../api/adminReq'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { useNavigate } from 'react-router-dom';
 
 const CityList = ({citydata}) => {
-
+const navigate=useNavigate()
     const deleteRoomById=async(id)=>{
+      try {
+            
         const response = await deleteCity(id)
+      } catch (error) {
+          navigate("/newhot")
+      }
     }
     const submit = (userId) => {
         confirmAlert({

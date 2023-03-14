@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { getBookingData } from '../../../api/adminReq'
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const BookingFullview = () => {
     const { id } = useParams()
     const [bookingdata, setBookingdata] = useState({})
-
+    const navigate = useNavigate()
 
     function convertDate(date) {
         const newDate = new Date(date);
@@ -17,12 +18,16 @@ const BookingFullview = () => {
     }
 
     useEffect(() => {
-        async function getdata() {
-            const { data } = await getBookingData(id)
-            setBookingdata(data)
-            console.log(data, "HHHDHHHDHHDHHDHDHDHDHD")
+        try {
+            async function getdata() {
+                const { data } = await getBookingData(id)
+                setBookingdata(data)
+                console.log(data, "HHHDHHHDHHDHHDHDHDHDHD")
+            }
+            getdata()
+        } catch (error) {
+            navigate("/newhot")
         }
-        getdata()
     }, [])
     return (
         <>

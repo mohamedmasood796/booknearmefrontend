@@ -6,10 +6,10 @@ import toast from 'react-hot-toast';
 import Sidebar from '../sidebar/Sidebar'
 import Navbar from '../navbar/Navbar'
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const EditHotel = () => {
-
+const navigate=useNavigate()
     let params = useParams()
     const [formData, setFormData] = useState([])
     const [image, setImage] = useState([]);
@@ -19,11 +19,15 @@ const EditHotel = () => {
     // const [imageLinks, setImageLinks] = useState([])
 
     useEffect(() => {
-        const fechData = async () => {
-            const { data } = await getCity()
-            setCity(data.city)
+        try {
+            const fechData = async () => {
+                const { data } = await getCity()
+                setCity(data.city)
+            }
+            fechData()
+        } catch (error) {
+            navigate("/newhot")
         }
-        fechData()
     }, [])
 
     const handleChange = (e) => {
@@ -125,13 +129,13 @@ const EditHotel = () => {
                                                                 })}
                                                             </div>
                                                         </i>
-                                                        
+
                                                         <img src={URL.createObjectURL(file)} alt="" />
                                                     </div>
                                                 );
                                             })
                                             : hoteldata
-                                                ? hoteldata?.photos.map((img,key) => (
+                                                ? hoteldata?.photos.map((img, key) => (
                                                     <div className="left flex justify-end ">
                                                         <i
                                                             onClick={() => {

@@ -22,8 +22,13 @@ function Featured() {
 
   useEffect(() => {
     const fechData = async () => {
-      const { data } = await getCountByCity()
-      setCity(data)
+      try {
+        const { data } = await getCountByCity()
+        setCity(data)
+            
+      } catch (error) {
+          navigate("/newhot")
+      }
     }
     fechData()
   }, [])

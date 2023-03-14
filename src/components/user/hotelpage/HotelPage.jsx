@@ -43,17 +43,21 @@ function HotelPage({ setCheckInglo }) {
     const [availableStatus, setAvailableStatus] = useState({});
     const [data, setData] = useState([]);
 
-   
+
 
     const fetchHotel = async () => {
-    const {data} = await getReview(id)
-        setData(data)
+        try {
+            const { data } = await getReview(id)
+            setData(data)
+        } catch (error) {
+            navigate("/newhot")
+        }
     }
 
 
     const user = useSelector((state) => state.userAuth)
     const navigate = useNavigate()
-  
+
     const handleOpen = (i) => {
         setSlideNumber(i)
         setOpen(true)

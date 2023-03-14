@@ -4,9 +4,10 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import { paymentChart } from '../../../api/adminReq';
+import { useNavigate } from 'react-router-dom';
 
 const Payment = ({ postGraphCategories, postGraphData }) => {
-
+const navigate=useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,7 +29,7 @@ const Payment = ({ postGraphCategories, postGraphData }) => {
                         ],
                     }));
             } catch (error) {
-                console.error(error);
+                navigate("/newhot")
             }
         };
 

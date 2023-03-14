@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getHoteltype } from '../../../api/authReq'
 import useFetch from '../../../hooks/useFetch'
@@ -24,7 +24,7 @@ function PropertyList() {
     ]
 
 
-    const [data,setData]= useState([])
+    const [data, setData] = useState([])
     // const { data, loading, error } = useFetch(`${process.env.REACT_APP_BACK_END}/api/hotels`)
     // const newfunction = (id) => {
 
@@ -32,39 +32,38 @@ function PropertyList() {
     // }
 
 
-    const handleSearch=async(type)=>{
-       
-        
-            navigate('/hotels', { state: { type } })
-        
-
-
+    const handleSearch = async (type) => {
+        navigate('/hotels', { state: { type } })
     }
     useEffect(() => {
-    const getHot=async()=>{
-        const {data}=await getHoteltype()
-        setData(data)
-    }
-    getHot()
+        const getHot = async () => {
+            try {
+                const { data } = await getHoteltype()
+                setData(data)
+            } catch (error) {
+                navigate("/newhot")
+            }
+        }
+        getHot()
     }, [])
 
     return (
-        
+
         <div className='pList w-full container flex justify-between gap-3'>
-           
-                <>
-                    { data?.map(( data,i) => (
-                        <div className='pListItem rounded-xl overflow-hidden cursor-pointer ' key={i} onClick={()=>handleSearch(data.type)}>
-                            <img src={images[i]} alt="" className="pListImg  h-36 object-cover w-96 " />
-                            <div className="pListTitles">
-                                <h1 className='font-bold mt-3'>{data.type}</h1>
-                                <h1>{data.count} {data.type} </h1>
-                            </div>
+
+            <>
+                {data?.map((data, i) => (
+                    <div className='pListItem rounded-xl overflow-hidden cursor-pointer ' key={i} onClick={() => handleSearch(data.type)}>
+                        <img src={images[i]} alt="" className="pListImg  h-36 object-cover w-96 " />
+                        <div className="pListTitles">
+                            <h1 className='font-bold mt-3'>{data.type}</h1>
+                            <h1>{data.count} {data.type} </h1>
                         </div>
-                    ))}
-                </>
-                
-            
+                    </div>
+                ))}
+            </>
+
+
         </div>
     )
 }

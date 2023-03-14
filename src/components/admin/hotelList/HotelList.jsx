@@ -5,16 +5,20 @@ import { getAllHotelAPI } from '../../../api/adminReq';
 import "./hotelList.scss"
 import Userlist from '../tableList/Userlist';
 import Hotellist from '../tableList/Hotellist';
+import { useNavigate } from 'react-router-dom';
 
 
 function HotelList() {
-
+    const navigate = useNavigate()
     const [hotelData, setHotelData] = useState([])
 
     const myFuc = async () => {
-        const { data } = await getAllHotelAPI()
-        setHotelData(data)
-
+        try {
+            const { data } = await getAllHotelAPI()
+            setHotelData(data)
+        } catch (error) {
+            navigate("/newhot")
+        }
     }
     useEffect(() => {
         myFuc()
@@ -39,10 +43,10 @@ function HotelList() {
 
 
                     {hotelData.map((hotel) => (
-                        <Hotellist hotel={hotel}/>
+                        <Hotellist hotel={hotel} />
                     ))}
 
-                   
+
                 </ul>
             </div>
 

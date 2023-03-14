@@ -6,9 +6,10 @@ import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import CurrencyRupeeRoundedIcon from '@mui/icons-material/CurrencyRupeeRounded';
 import HomeRepairServiceRoundedIcon from '@mui/icons-material/HomeRepairServiceRounded';
 import { getFullData } from '../../../api/adminReq';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Widget() {
+    const navigate=useNavigate()
     const [cardData, setCardData] = useState({})
     // let data;
 
@@ -63,8 +64,13 @@ function Widget() {
 
     useEffect(() => {
         async function getData() {
-            const { data } = await getFullData()
-            setCardData(data)
+            try {
+                const { data } = await getFullData()
+                setCardData(data)
+            }
+            catch (error) {
+                navigate("/newhot")
+            }
         }
         getData()
     }, [])

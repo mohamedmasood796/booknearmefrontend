@@ -25,7 +25,11 @@ function Hotellist({ hotel }) {
         navigate(`/admin/addRoom/${e}`)
     }
     const deleteRoombyid =async(id)=>{
-        const response = await deleteHotel(id)
+        try {
+            const response = await deleteHotel(id)
+        } catch (error) {
+            navigate("/newhot")
+        }
     }
 
     const submit = (userId) => {

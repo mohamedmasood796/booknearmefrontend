@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import { getRoomAPI, blockUser } from '../../../api/adminReq';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import "./roomTable.scss"
 
 // import "./users.scss"
@@ -12,15 +12,19 @@ import Roomlist from '../tableList/Roomlist';
 
 
 function RoomTable() {
-
+    const navigate=useNavigate()
     const [roomData, setRoomData] = useState([])
-    const {id} = useParams()
+    const { id } = useParams()
+
     const myFuc = async () => {
-        const { data } = await getRoomAPI(id)
-        console.log(data,"RRRRRRRRRRRR")
-        setRoomData(data.rooms)
+        try {
+            const { data } = await getRoomAPI(id)
+            setRoomData(data.rooms)
+        } catch (error) {
+            navigate("/newhot")
+        }
     }
-    console.log(roomData,"roomdata")
+
     useEffect(() => {
         myFuc()
     }, [])
@@ -42,11 +46,11 @@ function RoomTable() {
                     </li>
 
 
-                    {roomData.length >0 && roomData.map((room) => (
-                        <Roomlist room={room} hotelid={id}/>
+                    {roomData.length > 0 && roomData.map((room) => (
+                        <Roomlist room={room} hotelid={id} />
                     ))}
 
-                   
+
                 </ul>
             </div>
 

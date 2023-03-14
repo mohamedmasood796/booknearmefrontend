@@ -18,7 +18,11 @@ const BookingList = ({ hotel }) => {
   }
 
   const cancleOrder = async (id) => {
-    const data = await cancleBooking(id)
+    try {     
+      const data = await cancleBooking(id)
+    } catch (error) {
+        navigate("/newhot")
+    }
   }
 
   const showBookings = (id) => {
@@ -42,7 +46,6 @@ const BookingList = ({ hotel }) => {
     });
   };
 
-console.log(hotel,"KKKKKKKKKKKKKKKKKHHHHHHHHHHHHHHHHHHHHHHHHHH")
   return (
     <>
       <li className="table-row">

@@ -53,7 +53,6 @@ function Banner() {
 
         try {
             const { data } = await getRoomDataById(id);
-            console.log(data, "HHHHHHHHHHHHHHHHHHHHHH")
             setRoom(data.rooms);
             setComment(data.review)
         } catch (err) {
@@ -92,36 +91,44 @@ function Banner() {
     // }
 
     const checkHotelId = async () => {
-        if (localStorage.getItem("jwt")) {
-            const { data } = await checkHotel({ hotelId })
-            console.log(data, "::::::::::::::::::::::")
-            if (data.status) {
-                setOpen(true)
-                console.log("))))))))))))))))))))))))")
-                const { data } = await submintReview({ hotelId, review })
-
+        try {
+            if (localStorage.getItem("jwt")) {
+                const { data } = await checkHotel({ hotelId })
                 if (data.status) {
-                    setStatus(false)
+                    setOpen(true)
+                    if (review.length > 0) {
+                        const { data } = await submintReview({ hotelId, review })
+                    } else {
+                        toast.error("please add review")
+                    }
+
+                    if (data.status) {
+                        setStatus(false)
+                    }
+
+                } else {
+                    toast.success(data.message)
                 }
-
             } else {
-                toast.success(data.message)
+                navigate('/login')
             }
-        } else {
-            navigate('/login')
+        } catch (error) {
+            navigate("/newhot")
         }
-
     }
 
 
     const handleComment = (e) => {
-        console.log(e.target.value)
         setReview(e.target.value)
     }
     const handleReviewSubmit = async () => {
-        const reviewData = await submintReview({ hotelId, review })
-        if (reviewData.data.status) {
-            setOpen(false)
+        try {
+            const reviewData = await submintReview({ hotelId, review })
+            if (reviewData.data.status) {
+                setOpen(false)
+            }
+        } catch (error) {
+            navigate("/newhot")
         }
     }
 
@@ -141,7 +148,7 @@ function Banner() {
 
 
                 <div className="items-center  container w-80 px-3 flex justify-end  md:mx-20">
-                    <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={checkHotelId}>Add Review</button>
+                    <button className="border-none px-2 py-2 bg-[#0071c2] text-white cursor-pointer rounded" onClick={checkHotelId}>Add Review </button>
                 </div>
 
                 <div className="flex gap-2 container overflow-x-scroll md:mx-20 mt-5">

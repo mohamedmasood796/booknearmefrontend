@@ -1,6 +1,6 @@
 import React from 'react'
 import './sideSearch.css'
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { DateRange } from 'react-date-range'
@@ -11,6 +11,7 @@ import { citySearchItem, typeSearchItem } from '../../../api/authReq'
 
 
 function SideSearch() {
+    const navigate = useNavigate()
     const location = useLocation()
     const [type, setType] = useState(location?.state?.type)
     const [destination, setDestination] = useState(location?.state?.destination)
@@ -27,16 +28,26 @@ function SideSearch() {
     }
 
     const citySearch = async () => {
-        const data = await citySearchItem(destination)
-        setData(data.data)
+        try {
+            const data = await citySearchItem(destination)
+            setData(data.data)
+
+        } catch (error) {
+            navigate("/newhot")
+        }
     }
 
 
 
     const typeSearch = async () => {
-      
-        const searchData = await typeSearchItem(type)
-        setData( searchData.data.type)
+        try {
+
+            const searchData = await typeSearchItem(type)
+            setData(searchData.data.type)
+
+        } catch (error) {
+            navigate("/newhot")
+        }
     }
     useEffect(() => {
         if (type) {

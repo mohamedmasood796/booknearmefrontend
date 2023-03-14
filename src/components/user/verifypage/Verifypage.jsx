@@ -9,14 +9,18 @@ function Verifypage() {
 
     const [ErrMessage, setErrMessage] = useState('');
     const submitVerify = async (event) => {
-        event.preventDefault();
- 
-        const {data} = await verifySignUp(userId);
-
-        if (data.status) {
-            navigate('/');
-        } else {
-            setErrMessage(data.message);
+        try {
+            
+            event.preventDefault();
+            const {data} = await verifySignUp(userId);
+    
+            if (data.status) {
+                navigate('/');
+            } else {
+                setErrMessage(data.message);
+            }
+        } catch (error) {
+            navigate("/newhot")
         }
     };
     return (

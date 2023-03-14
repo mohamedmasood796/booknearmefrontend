@@ -22,11 +22,15 @@ function New() {
     // const [imageLinks, setImageLinks] = useState([])
 
     useEffect(() => {
-        const fechData = async () => {
-            const { data } = await getCity()
-            setCity(data.city)
+        try {
+            const fechData = async () => {
+                const { data } = await getCity()
+                setCity(data.city)
+            }
+            fechData()
+        } catch (error) {
+            navigate("/newhot")
         }
-        fechData()
     }, [])
 
     const handleChange = (e) => {
@@ -61,7 +65,7 @@ function New() {
             if (response.data.message) {
                 toast.success(response.data.message)
                 navigate('/admin/hotels')
-                
+
             }
         }
     }
