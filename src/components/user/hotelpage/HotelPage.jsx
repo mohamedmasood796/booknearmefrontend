@@ -48,7 +48,6 @@ function HotelPage({ setCheckInglo }) {
     const fetchHotel = async () => {
     const {data} = await getReview(id)
         setData(data)
-        console.log(data,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
 

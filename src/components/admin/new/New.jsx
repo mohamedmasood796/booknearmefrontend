@@ -9,11 +9,12 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 // import { AddHomeOutlined } from '@mui/icons-material';
 import { addHotel, getCity } from '../../../api/adminReq.js'
 import City from '../city/City';
-
+import { useNavigate } from 'react-router-dom'
 
 
 function New() {
 
+    const navigate = useNavigate();
     const [formData, setFormData] = useState([])
     const [image, setImage] = useState([]);
     const [message, setMessage] = useState()
@@ -59,6 +60,8 @@ function New() {
             const response = await addHotel(formData)
             if (response.data.message) {
                 toast.success(response.data.message)
+                navigate('/admin/hotels')
+                
             }
         }
     }

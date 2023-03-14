@@ -12,6 +12,7 @@ import HotelsPage from '../page/adminPages/HotelsPage'
 import User from '../page/adminPages/User'
 import EditHotel from '../components/admin/editHotel/EditHotel'
 import ShowBookings from '../page/adminPages/ShowBookings'
+import Notfound from '../components/user/notfound/Notfound'
 
 function Admin() {
     return (
@@ -50,8 +51,8 @@ function Admin() {
 
                 <Route exact path='/addhotels' element={
                     <AdminProtectedRouter>
-                    <AddProduct />
-                </AdminProtectedRouter>
+                        <AddProduct />
+                    </AdminProtectedRouter>
                 } />
 
                 <Route exact path='/hotels' element={
@@ -65,7 +66,7 @@ function Admin() {
                         <AddRoomPage />
                     </AdminProtectedRouter>
                 } />
-                
+
                 <Route exact path='/editHotel/:id' element={
                     <AdminProtectedRouter>
                         <EditHotel />
@@ -77,7 +78,9 @@ function Admin() {
                     </AdminProtectedRouter>
                 } />
 
-
+                <Route exact path="*" element={
+                    <Notfound />
+                } />
 
             </Routes>
         </>

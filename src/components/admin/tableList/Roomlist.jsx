@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { getAllHotelAPI } from '../../../api/adminReq';
 import { useNavigate } from "react-router-dom"
 import { deleteRoom } from '../../../api/adminReq';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 function Roomlist({ room ,hotelid}) {
 
@@ -13,6 +15,21 @@ function Roomlist({ room ,hotelid}) {
         const response = await deleteRoom(id,hotelid)
         console.log(response,"respons")
     }
+    const submit = (userId) => {
+        confirmAlert({
+          title: 'Confirm to ',
+          message: 'Are you block your user.',
+          buttons: [
+            { 
+              label: 'Yes',
+              onClick: () => { deleteRoomById(userId)}
+            },
+            {
+              label: 'No',
+            }
+          ]
+        });
+      };
     return (
         <div>
             <li className="table-row">
@@ -23,8 +40,9 @@ function Roomlist({ room ,hotelid}) {
                 {/* <div className="col col-3" data-label="Amount">{room.cheapestPrice}</div> */}
 
 
-                {/* <div className="unblockButton" onClick={() => addRoom(hotel._id)} >Add Room</div> */}
-                <div className="blockButton" onClick={()=>deleteRoomById(room?.roomId._id)}  >Delete</div>
+                
+                {/* <div className="blockButton" onClick={()=>deleteRoomById(room?.roomId._id)}  >Delete</div> */}
+                <div className="blockButton" onClick={()=>submit(room?.roomId._id)}  >Delete</div>
 
             </li>
         </div>

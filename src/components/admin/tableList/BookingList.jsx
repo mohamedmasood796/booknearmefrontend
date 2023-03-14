@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { cancleBooking } from '../../../api/adminReq';
 import { useNavigate } from 'react-router-dom'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const BookingList = ({ hotel }) => {
+  
   const [cancel, setCancel] = useState(hotel.statusChange === "Booked" && new Date(new Date().toDateString()) <= new Date(hotel.checkIn.toString()) || new Date(new Date().toDateString()) >= new Date(hotel.checkIn.toString()) && new Date(new Date().toDateString()) <= new Date(hotel.checkOut.toString()))
   const navigate = useNavigate();
   function convertDate(date) {
@@ -21,12 +24,25 @@ const BookingList = ({ hotel }) => {
   const showBookings = (id) => {
     navigate(`/admin/showBookings/${id}`)
   }
-  if (new Date() === hotel.checkIn) {
-    console.log("masoood")
-  } else {
-    console.log("hamras")
-  }
 
+
+  const submit = (userId) => {
+    confirmAlert({
+      title: 'Confirm to ',
+      message: 'Are you block your user.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => { cancleOrder(userId) }
+        },
+        {
+          label: 'No',
+        }
+      ]
+    });
+  };
+
+console.log(hotel,"KKKKKKKKKKKKKKKKKHHHHHHHHHHHHHHHHHHHHHHHHHH")
   return (
     <>
       <li className="table-row">
@@ -70,14 +86,11 @@ const BookingList = ({ hotel }) => {
 
         <div onClick={() => showBookings(hotel._id)} className=" bg-transparent bg-blue-500  font-semibold text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded h-10"  >view</div>
 
-        {/* { cancel === ""?
-:null
-        } */}
         {hotel.statusChange === "Canceled" || !cancel ?
 
           < div className=" cursor-not-allowed  py-2 px-4 text-white bg-gray-300 rounded focus:outline-none" disabled  >Cancel</div>
           :
-          < div onClick={() => cancleOrder(hotel._id)} className=" cursor-pointer bg-transparent bg-red-500  font-semibold text-white py-2 px-4 border border-red-500 hover:border-transparent rounded h-10 "  >Cancel</div>
+          < div onClick={() => submit(hotel._id)} className=" cursor-pointer bg-transparent bg-red-500  font-semibold text-white py-2 px-4 border border-red-500 hover:border-transparent rounded h-10 "  >Cancel</div>
         }
 
         {/* <div className="hotelcol6 unblockButton" onClick={() => addRoom(hotel._id)} >Add Room</div>

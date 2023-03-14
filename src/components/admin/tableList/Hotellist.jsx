@@ -3,6 +3,8 @@ import { getAllHotelAPI } from '../../../api/adminReq';
 import { useNavigate } from "react-router-dom"
 import { deleteHotel } from '../../../api/adminReq';
 import './userlist.scss'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 
 function Hotellist({ hotel }) {
@@ -25,6 +27,23 @@ function Hotellist({ hotel }) {
     const deleteRoombyid =async(id)=>{
         const response = await deleteHotel(id)
     }
+
+    const submit = (userId) => {
+        confirmAlert({
+          title: 'Confirm to ',
+          message: 'Are you block your user.',
+          buttons: [
+            { 
+              label: 'Yes',
+              onClick: () => { deleteRoombyid(userId)}
+            },
+            {
+              label: 'No',
+            }
+          ]
+        });
+      };
+    
     return (
         <div>
             <li className="table-row">
@@ -43,7 +62,7 @@ function Hotellist({ hotel }) {
                 </div>
 
                 <div className="p-3">
-                    <div className="h-10  blockButton" onClick={()=>deleteRoombyid(hotel._id)} >Delete</div>
+                    <div className="h-10  blockButton" onClick={()=>submit(hotel._id)} >Delete</div>
                 </div>
 
             </li>

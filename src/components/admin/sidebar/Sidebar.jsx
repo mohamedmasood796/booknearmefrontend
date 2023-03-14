@@ -11,6 +11,8 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link } from "react-router-dom"
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 function Sidebar() {
     const navigate = useNavigate()
@@ -19,6 +21,21 @@ function Sidebar() {
         localStorage.removeItem("jwtadmin")
         navigate('/admin/login')
     }
+    const submit = (userId) => {
+        confirmAlert({
+          title: 'Confirm to ',
+          message: 'Are you block your user.',
+          buttons: [
+            { 
+              label: 'Yes',
+              onClick: () => { logOut(userId)}
+            },
+            {
+              label: 'No',
+            }
+          ]
+        });
+      };
     return (
         <div className="w-2/12">
 
@@ -83,7 +100,7 @@ function Sidebar() {
                     </li> */}
                     <li>
                         <LogoutOutlinedIcon className='icon' />
-                        <span onClick={logOut}>Logout</span>
+                        <span onClick={submit}>Logout</span>
                     </li>
 
                 </ul>
