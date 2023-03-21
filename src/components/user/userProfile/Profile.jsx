@@ -119,8 +119,6 @@ const Profile = () => {
                     {!profile && <div className=" w-full flex items-center justify-center ">
                         <div className="  w-10/12  ">
                             {data?.length > 0 && data?.map((booking) => (
-
-            
                                 <BookingUserSide booking={booking} key={booking._id}  />
                             ))}
                         </div>

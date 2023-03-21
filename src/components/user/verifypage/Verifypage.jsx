@@ -26,7 +26,7 @@ function Verifypage() {
     return (
         <div className="flex items-center justify-center min-h-screen p-5 bg-white min-w-screen">
             <div className="max-w-xl p-8 text-center text-gray-800 bg-slate-50 shadow-xl lg:max-w-3xl rounded-3xl lg:p-12">
-                <h3 className="text-2xl">Thanks for signing up for Website name!</h3>
+                <h3 className="text-2xl">Thanks for signing up !</h3>
                 <div className="flex justify-center">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

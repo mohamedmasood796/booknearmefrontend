@@ -122,14 +122,12 @@ function Banner() {
         setReview(e.target.value)
     }
     const handleReviewSubmit = async () => {
-        try {
+
             const reviewData = await submintReview({ hotelId, review })
             if (reviewData.data.status) {
                 setOpen(false)
             }
-        } catch (error) {
-            navigate("/newhot")
-        }
+      
     }
 
 
