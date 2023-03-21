@@ -18,7 +18,7 @@ function Navbar() {
                 <Link to='/'>
                     <div className="logo text-xl font-medium">BookNearMe</div>
                 </Link>
-                <div className="navItems flex ">
+                <div className="navItems flex  mr-7 gap-2">
                     {/* <button className="hidden md:block py-1 px-4 border-2 border-white text-white">List Your Property</button> */}
 
                     {userlocal ?

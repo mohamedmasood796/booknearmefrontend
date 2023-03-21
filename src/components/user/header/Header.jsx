@@ -1,104 +1,120 @@
-import React from 'react'
-import "./header.css"
-import { useState,useEffect } from 'react';
-import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { format } from 'date-fns'
-import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import { searchbarAction } from '../../../redux/Searchbar';
-import { getCountByCity } from '../../../api/authReq';
+import React from "react";
+import "./header.css";
+import { useState, useEffect } from "react";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { searchbarAction } from "../../../redux/Searchbar";
+import { getCountByCity } from "../../../api/authReq";
 
 function Header({ type }) {
-    const dispatch = useDispatch()
-    const [destination, setDestination] = useState('')
-    const [openDate, setOpenDate] = useState(false)
-    const [city, setCity] = useState([])
-    const [dates, setDates] = useState([
-        {
-            startDate: new Date(),
-            endDate: new Date(),
-            key: 'selection',
-        }
-    ]);
+  const dispatch = useDispatch();
+  const [destination, setDestination] = useState("");
+  const [openDate, setOpenDate] = useState(false);
+  const [city, setCity] = useState([]);
+  const [dates, setDates] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
 
-    useEffect(() => {
-        const fechData = async () => {
-            try {
-                const { data } = await getCountByCity()
-                setCity(data)
-            } catch (error) {
-                navigate("/newhot")
-            }
-        }
-        fechData()
-    }, [])
+  useEffect(() => {
+    const fechData = async () => {
+      try {
+        const { data } = await getCountByCity();
+        setCity(data);
+      } catch (error) {
+        navigate("/newhot");
+      }
+    };
+    fechData();
+  }, []);
 
-    const [openOptions, setOpenOptions] = useState(false)
-    const [options, setOptions] = useState({
-        adult: 1,
-        children: 0,
-        room: 1
-    })
+  const [openOptions, setOpenOptions] = useState(false);
+  const [options, setOptions] = useState({
+    adult: 1,
+    children: 0,
+    room: 1,
+  });
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const handleOption = (name, operation) => {
-        setOptions(prev => {
-            return {
-                ...prev, [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
-            }
-        })
+  const handleOption = (name, operation) => {
+    setOptions((prev) => {
+      return {
+        ...prev,
+        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+      };
+    });
+  };
+
+  const handleSearch = () => {
+    if (!destination) {
+      navigate("/hotels", {
+        state: { destination: city[0].name, dates, options },
+      });
+    } else {
+      navigate("/hotels", { state: { destination, dates, options } });
     }
+    // dispatch(searchbarAction.newSearch({ city: destination, options: options, dates: dates[0] }))  //update to redex
+    // localStorage.setItem("city",destination)
+    // localStorage.setItem("options",options)
+    // localStorage.setItem("dates",dates[0])
+  };
+  return (
+    <div className="header bg-[#003580] text-white flex justify-center relative">
+      <div
+        className={
+          type
+            ? "headerContainer w-full container mt-5  max-sm:mb-1"
+            : "headerContainer w-full container mt-5 mb-24 max-sm:mb-1"
+        }
+      >
+        <div className="headerList flex gap-10 mb-12 ">
+          <div className="headerListItem flex items-center gap-2 hover:bg-white rounded-3xl px-5 py-2 hover:bg-opacity-20 active:bg-white active:bg-opacity-20 active:border-white">
+            <ion-icon name="bed"></ion-icon>
+            <span>Stays</span>
+          </div>
 
-    const handleSearch = () => {
-          if(!destination){
-            navigate('/hotels', { state: { destination:city[0].name, dates, options } })
-          }else{
-            navigate('/hotels', { state: { destination, dates, options } })
-          }
-        // dispatch(searchbarAction.newSearch({ city: destination, options: options, dates: dates[0] }))  //update to redex
-        // localStorage.setItem("city",destination)
-        // localStorage.setItem("options",options)
-        // localStorage.setItem("dates",dates[0])
-    }
-    return (
-        <div className='header bg-[#003580] text-white flex justify-center relative'>
-            <div className={type ? "headerContainer w-full container mt-5  max-sm:mb-1" : "headerContainer w-full container mt-5 mb-24 max-sm:mb-1"}>
-                <div className="headerList flex gap-10 mb-12 ">
-                    <div className="headerListItem flex items-center gap-2 hover:bg-white rounded-3xl px-5 py-2 hover:bg-opacity-20 active:bg-white active:bg-opacity-20 active:border-white">
-                        <ion-icon name="bed"></ion-icon>
-                        <span >Stays</span>
-                    </div>
+          <div className="headerListItem flex items-center gap-2 hover:bg-white rounded-3xl px-5 py-2 hover:bg-opacity-20 active:bg-white active:bg-opacity-20 active:border-white">
+            <ion-icon name="book"></ion-icon>
+            <span>Stays</span>
+          </div>
+        </div>
 
-                    <div className="headerListItem flex items-center gap-2 hover:bg-white rounded-3xl px-5 py-2 hover:bg-opacity-20 active:bg-white active:bg-opacity-20 active:border-white">
-                        <ion-icon name="book"></ion-icon>
-                        <span>Stays</span>
-                    </div>
+        {type !== "list" && (
+          <>
+            <div className="hidden md:inline">
+              <h1 className=" headerTitle text-4xl">Find your next stay</h1>
+              <p className="headerDesc mt-8 mb-8 text-xl">
+                Search low prices on hotels, homes and much more...
+              </p>
+            </div>
+            <div className="max-md:hidden">
+              <div className="headerSearch ">
+                <div className="headerSearchItem w-full p-4">
+                  <ion-icon className="headerIcon w-full" name="bed"></ion-icon>
+                  {/* <input type="text" placeholder='Where are you going?' className='headerSearchInput' onChange={e => setDestination(e.target.value)} /> */}
+
+                  <select
+                    className="dropdown headerSearchInput w-full "
+                    name="city"
+                    placeholder="City"
+                    onChange={(e) => setDestination(e.target.value)}
+                  >
+                    {city?.length > 0 &&
+                      city.map((item) => (
+                        <option key={item?._id}>{item.name}</option>
+                      ))}
+                  </select>
                 </div>
 
-                {type !== "list" &&
-                    <>
-                        <div className='hidden md:inline'>
-                            <h1 className=" headerTitle text-4xl">Find your next stay</h1>
-                            <p className='headerDesc mt-8 mb-8 text-xl'>Search low prices on hotels, homes and much more...</p>
-                        </div>
-                        <div className='max-md:hidden'>
-                            <div className="headerSearch ">
-                                <div className="headerSearchItem">
-                                    <ion-icon className='headerIcon' name="bed"></ion-icon>
-                                    {/* <input type="text" placeholder='Where are you going?' className='headerSearchInput' onChange={e => setDestination(e.target.value)} /> */}
-
-                                    <select className="dropdown headerSearchInput w-48" name="city" placeholder='City' onChange={e => setDestination(e.target.value)}  >
-                                        {city?.length > 0 && city.map((item) => (
-                                            <option key={item?._id} >{item.name}</option>
-                                        ))}
-                                    </select>
-
-                                </div>
-
-                                <div className="headerSearchItem">
+                {/* <div className="headerSearchItem">
                                     <ion-icon className='headerIcon' name="calendar-number-outline"></ion-icon>
                                     <span onClick={() => setOpenDate(!openDate)} className='headerSearchText'> {`${format(dates[0]?.startDate, 'MM/dd/yyyy')} to ${format(dates[0]?.endDate, 'MM/dd/yyyy')} `} </span>
 
@@ -110,10 +126,9 @@ function Header({ type }) {
                                         className='date'
                                         minDate={new Date()}
                                     />}
-                                </div>
+                                </div> */}
 
-
-                                <div className="headerSearchItem">
+                {/* <div className="headerSearchItem">
                                     <ion-icon className='headerIcon' name="person-circle-outline"></ion-icon>
                                     <span onClick={() => setOpenOptions(!openOptions)} className='headerSearchText'> {`${options.adult}adult · ${options.children} children · ${options.room} room`} </span>
 
@@ -144,44 +159,84 @@ function Header({ type }) {
                                             </div>
                                         </div>
                                     </div>}
-                                </div>
+                                </div> */}
 
-                                <div className="headerSearchItem">
-                                    <button className='headerBtn bg-[#003580] text-white px-5 py-2 ' onClick={handleSearch}>Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </>}
+                <div className="headerSearchItem">
+                  <button
+                    className="headerBtn bg-[#003580] text-white px-5 py-2 "
+                    onClick={handleSearch}
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
 
-                {/* small screen view */}
-                <div className="md:hidden">
-                    <div className="py-5 px-2 bg-white text-black">
-                        <h3 className="text-xl font-bold">Search</h3>
-                        <p>Destination,properties,even an address</p>
+        {/* small screen view */}
+        <div className="md:hidden">
+          <div className="py-5 px-2 bg-white text-black">
+            <h3 className="text-xl font-bold">Search</h3>
+            <p>Destination,properties,even an address</p>
+          </div>
+          <div className=" bg-orange-400 m-5">
+            <div className="py-1 px-1">
+              <div className="grid gap-1">
+                <div className="rounded-sm  bg-white py-3">
+                  <div className="flex justify-between px-4">
+                    <div className="flex gap-2 w-full h-full ">
+                      <span className="">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6 text-black font-bold"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                          />
+                        </svg>
+                      </span>
+
+                      {/* <input type="text" className=" w-full h-9 outline-none text-gray-500  " placeholder="Malappuram" />
+                       */}
+                      <select
+                        className="dropdown headerSearchInput w-full "
+                        name="city"
+                        placeholder="City"
+                        onChange={(e) => setDestination(e.target.value)}
+                      >
+                        {city?.length > 0 &&
+                          city.map((item) => (
+                            <option key={item?._id}>{item.name}</option>
+                          ))}
+                      </select>
+                      <span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="w-6 h-6 text-black"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </span>
                     </div>
-                    <div className=" bg-orange-400 m-5">
-                        <div className="py-1 px-1">
-                            <div className="grid gap-1">
-                                <div className="rounded-sm  bg-white py-3">
-                                    <div className="flex justify-between px-4">
-                                        <div className="flex gap-2 w-full h-full ">
-                                            <span className=''>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-black font-bold">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                                                </svg>
-                                            </span>
-
-                                            <input type="text" className=" w-full h-9 outline-none text-gray-500  " placeholder="Malappuram" />
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-black">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex gap-1">
-                                    {/* <div className="rounded-sm bg-white p-2 w-2/4">
+                  </div>
+                </div>
+                <div className="flex gap-1">
+                  {/* <div className="rounded-sm bg-white p-2 w-2/4">
                                         <div className="flex justify-between px-4">
                                             <div className="grid">
                                                 <ion-icon className='headerIcon' name="calendar-number-outline"></ion-icon>
@@ -189,7 +244,7 @@ function Header({ type }) {
                                             </div>
                                         </div>
                                     </div> */}
-                                    <div className="rounded-sm bg-white p-3  w-full  ">
+                  {/* <div className="rounded-sm bg-white p-3  w-full  ">
                                         <div className="flex justify-between px-4">
                                             <div className="grid">
                                                 <ion-icon className='headerIcon' name="calendar-number-outline"></ion-icon>
@@ -205,11 +260,11 @@ function Header({ type }) {
                                                 />}
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="rounded-sm  bg-white">
-                                    <div className="flex justify-around px-4">
-                                        {/* <div className="border-r-gray-600 border-r-2 w-2/6 px-1 py-2">
+                                    </div> */}
+                </div>
+                <div className="rounded-sm  bg-white">
+                  <div className="flex justify-around px-4">
+                    {/* <div className="border-r-gray-600 border-r-2 w-2/6 px-1 py-2">
                                             <p>Adualts</p>
                                             <div className="">
                                                 <input placeholder="1" type="number" className="w-14 outline-none" />
@@ -228,7 +283,7 @@ function Header({ type }) {
                                             </div>
                                         </div> */}
 
-                                        <div className='px-3 py-4'>
+                    {/* <div className='px-3 py-4'>
                                             <span onClick={() => setOpenOptions(!openOptions)} className='headerSearchText'> {`${options.adult}adult · ${options.children} children · ${options.room} room`} </span>
                                             {openOptions && <div className="optionsmobaile">
                                                 <div className="optionItem">
@@ -257,25 +312,23 @@ function Header({ type }) {
                                                     </div>
                                                 </div>
                                             </div>}
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div className="rounded-sm  bg-blue-500 py-4">
-                                    <div className="flex justify-center px-4 text-xl">
-                                        <div className="flex gap-2">
-                                            <p>Search</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                        </div> */}
+                  </div>
                 </div>
-
+                <div className="rounded-sm  bg-blue-500 py-4">
+                  <div className="flex justify-center px-4 text-xl">
+                    <div className="flex gap-2" onClick={handleSearch}>
+                      <p>Search</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default Header
+export default Header;
